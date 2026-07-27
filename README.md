@@ -8,7 +8,7 @@ Typefaces used across the projects, with their documentation and tooling.
 
 ## ⚠️ This repository uses Git LFS
 
-The font files (`*.ttf`, `*.woff2` — 638 files, ~2 GB) are stored with
+The font files (`*.ttf`, `*.woff2` — 642 files, ~2 GB) are stored with
 [Git LFS](https://git-lfs.com). **Install Git LFS before cloning.** Cloning without it succeeds
 without any error, but every font arrives as a ~130-byte text file like this:
 
@@ -58,7 +58,7 @@ Downloads ~2 GB. To avoid that, see *Clone without downloading everything* below
 ### 4. Check it worked
 
 ```bash
-git lfs ls-files | wc -l     # expected: 638
+git lfs ls-files | wc -l     # expected: 642
 git lfs fsck                 # expected: "Git LFS fsck OK"
 ```
 
@@ -109,6 +109,7 @@ Anything not pulled stays a pointer, and you can pull it later at any time.
 |---|---|---|
 | **Noctua Iosevka** — monospaced, for terminals and code | [`noctua-iosevka/`](noctua-iosevka/) | [EN](noctua-iosevka-en.md) · [pt-BR](noctua-iosevka-pt-BR.md) |
 | **Noctua Noto** — text and UI, with Nerd Fonts icons | [`noctua-noto/`](noctua-noto/) | [EN](noctua-noto-en.md) · [pt-BR](noctua-noto-pt-BR.md) |
+| **Symbols Nerd Font** — icons only, as a fallback for any text font | [`symbols-nerd-font/`](symbols-nerd-font/) | [EN](symbols-nerd-font-en.md) · [pt-BR](symbols-nerd-font-pt-BR.md) |
 
 ## Tools
 

@@ -64,8 +64,9 @@ Black w=210 var=False
 
 </details>
 
-[`noctua-noto/licenses/`](noctua-noto/licenses/) holds the 20 licenses (SIL OFL per family + MIT for
-Symbols). **Redistribution requires shipping them alongside the fonts.**
+[`noctua-noto/licenses/`](noctua-noto/licenses/) holds the 20 licenses: SIL OFL per family, plus the
+MIT of [Nerd Fonts](symbols-nerd-font-en.md) — the 27 patched files embed its glyphs.
+**Redistribution requires shipping them alongside the fonts.**
 
 ---
 
