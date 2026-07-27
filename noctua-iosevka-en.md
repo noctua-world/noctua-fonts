@@ -378,3 +378,20 @@ the power button" into "process killed, message in the log". For containers of u
 machine survives.
 
 </details>
+
+---
+
+## 6. License
+
+**SIL OFL 1.1** — [`noctua-iosevka/licenses/`](noctua-iosevka/licenses/), © 2015-2026 Renzhi Li.
+**Redistribution requires shipping it alongside the fonts**, and that includes serving them from a
+website.
+
+Two consequences worth knowing:
+
+- **Iosevka's OFL reserves no font name.** The copyright line carries no *"with Reserved Font Name"*
+  clause, which is precisely what makes it legitimate for this custom build to ship under its own
+  name. Had upstream reserved the name, a renamed derivative would need written permission.
+- **This build is a Modified Version**, so OFL §5 applies: it must stay under the OFL and cannot be
+  relicensed. That obligation does **not** reach documents or sites that merely *use* the font — only
+  redistribution of the font software itself.

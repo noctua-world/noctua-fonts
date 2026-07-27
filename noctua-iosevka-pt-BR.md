@@ -382,3 +382,20 @@ de força" em "processo morto, mensagem no log". Para containers de apetite desc
 sobrevive.
 
 </details>
+
+---
+
+## 6. Licença
+
+**SIL OFL 1.1** — [`noctua-iosevka/licenses/`](noctua-iosevka/licenses/), © 2015-2026 Renzhi Li.
+**Redistribuir exige enviá-la junto** — e servir a fonte a partir de um site é redistribuir.
+
+Duas consequências que vale conhecer:
+
+- **A OFL da Iosevka não reserva nome algum.** A linha de copyright não traz a cláusula *"with
+  Reserved Font Name"*, e é justamente isso que torna legítimo esta build customizada circular com
+  nome próprio. Se o upstream tivesse reservado o nome, um derivado renomeado precisaria de permissão
+  por escrito.
+- **Esta build é uma Modified Version**, então vale a §5 da OFL: tem de permanecer sob a OFL e não
+  pode ser relicenciada. Essa obrigação **não** alcança documentos ou sites que apenas *usam* a fonte
+  — só a redistribuição do font software em si.
