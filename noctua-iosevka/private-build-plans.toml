@@ -1,0 +1,86 @@
+[buildPlans.NoctuaIosevka]
+family = "Noctua Iosevka"
+spacing = "term"
+serifs = "sans"
+noCvSs = false
+exportGlyphNames = true
+
+[buildPlans.NoctuaIosevka.variants.design]
+one = "base-long-top-serif"
+three = "flat-top-serifless"
+five = "upright-flat-serifless"
+seven = "bend-serifless"
+eight = "crossing"
+zero = "oval-long-dotted"
+capital-a = "curly-serifless"
+capital-b = "standard-bilateral-serifed"
+capital-c = "unilateral-inward-serifed"
+capital-d = "standard-unilateral-serifed"
+capital-e = "top-left-serifed"
+capital-f = "top-left-serifed"
+capital-h = "top-left-serifed"
+capital-k = "straight-top-left-serifed"
+capital-l = "motion-serifed"
+capital-m = "hanging-motion-serifed"
+capital-n = "standard-motion-serifed"
+capital-p = "closed-motion-serifed"
+capital-q = "crossing-curly-tailed"
+capital-r = "straight-top-left-serifed"
+capital-s = "unilateral-serifed"
+capital-t = "motion-serifed"
+capital-u = "toothless-rounded-bilateral-motion-serifed"
+capital-v = "straight-motion-serifed"
+capital-w = "curly-motion-serifed"
+capital-x = "straight-bilateral-motion-serifed"
+capital-y = "straight-serifless"
+capital-z = "straight-serifless-with-horizontal-crossbar"
+a = "double-storey-serifed"
+b = "bottom-cut-serifed"
+c = "serifless"
+d = "toothless-corner-serifed"
+e = "rounded"
+f = "narrow-tailed"
+g = "single-storey-flat-hook-serifed"
+h = "tailed-motion-serifed"
+k = "straight-serifless"
+l = "serifed-flat-tailed"
+m = "earless-rounded-double-arch-tailed-serifed"
+n = "straight-top-left-serifed"
+p = "eared-motion-serifed"
+q = "tailed-serifless"
+r = "serifless"
+t = "bent-hook"
+u = "toothed-serifless"
+v = "straight-motion-serifed"
+w = "straight-motion-serifed"
+x = "straight-serifless"
+y = "straight-motion-serifed"
+z = "straight-serifless"
+paren = "large-contour"
+brace = "curly"
+dollar = "slanted-through"
+
+[buildPlans.NoctuaIosevka.widths.Condensed]
+shape = 456
+menu = 3
+css = "condensed"
+
+[buildPlans.NoctuaIosevka.widths.Normal]
+shape = 600
+menu = 5
+css = "normal"
+
+[buildPlans.NoctuaIosevka.widths.SemiCondensed]
+shape = 548
+menu = 4
+css = "semi-condensed"
+
+[buildPlans.NoctuaIosevka.widths.SemiExtended]
+shape = 658
+menu = 6
+css = "semi-expanded"
+
+[buildPlans.NoctuaIosevka.widths.Extended]
+shape = 720
+menu = 7
+css = "expanded"

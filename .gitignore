@@ -1,0 +1,11 @@
+# script output
+static/
+*/static/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS cruft
+.DS_Store
+Thumbs.db
