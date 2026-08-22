@@ -4,11 +4,21 @@
 
 Tipografias usadas nos projetos, com documentação e ferramentas.
 
+> **Onde colocá-lo, e onde iniciar um agente.** Este repositório pertence a um
+> workspace: clone-o apenas dentro de `noctua-workspace/repos/`, e inicie seus
+> agentes apenas a partir da raiz do workspace — nunca de dentro deste diretório.
+> Um agente iniciado aqui não enxerga os repositórios irmãos nem os documentos
+> compartilhados, então ele adivinha.
+>
+> Nada aqui é construído ou consumido pelos outros projetos; as fontes que eles
+> distribuem foram copiadas à mão. Leia o documento da fonte antes de usar
+> qualquer coisa dela.
+
 ---
 
 ## ⚠️ Este repositório usa Git LFS
 
-Os arquivos de fonte (`*.ttf`, `*.woff2` — 642 arquivos, ~2 GB) estão armazenados com
+Os arquivos de fonte (`*.ttf`, `*.woff2` — 642 arquivos, 4,3 GB) estão armazenados com
 [Git LFS](https://git-lfs.com). **Instale o Git LFS antes de clonar.** Clonar sem ele funciona **sem
 erro nenhum**, mas cada fonte chega como um arquivo de texto de ~130 bytes, assim:
 
@@ -54,7 +64,7 @@ git clone <url-do-repositório> noctua-fonts
 cd noctua-fonts
 ```
 
-Baixa ~2 GB. Para evitar, ver *Clonar sem baixar tudo* abaixo.
+Baixa 4,3 GB. Para evitar, ver *Clonar sem baixar tudo* abaixo.
 
 ### 4. Conferir
 
@@ -85,7 +95,7 @@ O `git status` deve voltar limpo e as fontes chegam no tamanho real.
 </details>
 
 <details>
-<summary><b>Clonar sem baixar tudo</b> (2 GB)</summary>
+<summary><b>Clonar sem baixar tudo</b> (4,3 GB)</summary>
 
 Pule o download das fontes e busque só a pasta que você precisa:
 
@@ -94,7 +104,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone <url-do-repositório> noctua-fonts   # ~700 KB
 cd noctua-fonts
 git lfs install --local
 
-git lfs pull --include="noctua-noto/**"            # ~144 MB
+git lfs pull --include="noctua-noto/**"            # ~208 MB
 git lfs pull --include="noctua-iosevka/WOFF2/**"   # ~218 MB, só web
 ```
 

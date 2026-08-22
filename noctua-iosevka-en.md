@@ -173,7 +173,7 @@ il1I|   0O8B   5SZ2   3 5 S   g q 9
 **Icons** — in a terminal using the font, each symbol must render and occupy exactly **one** cell:
 
 ```bash
-printf '  \n'
+printf '  \n'
 ```
 
 **Italic** — confirm cursive shapes, clearly distinct from both roman and oblique. Code comments are
