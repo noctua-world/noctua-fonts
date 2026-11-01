@@ -13,7 +13,7 @@ specific set instead; every axis you do not name stays at its default.
 values add up); one file is written per combination of the values given.
 
     ./instantiate-variable-font.py FONT.ttf --list
-    ./instantiate-variable-font.py FONT.ttf                       # all named instances
+    ./instantiate-variable-font.py FONT.ttf
     ./instantiate-variable-font.py FONT.ttf --weights 400 700 --woff2
     ./instantiate-variable-font.py FONT.ttf --weights 400 --widths 62.5 100
     ./instantiate-variable-font.py FONT.ttf --axis opsz=14 --weights 400
