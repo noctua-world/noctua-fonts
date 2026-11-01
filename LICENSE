@@ -1,0 +1,49 @@
+noctua-fonts is dual-licensed, at your option, under either of:
+
+  * Apache License, Version 2.0 — see LICENSE-APACHE
+  * MIT license                 — see LICENSE-MIT
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this project by you shall be dual licensed as above, without any
+additional terms or conditions.
+
+This file exists so that automated licence detection has a single conventional
+name to find. The two files it points at are the actual licence texts; if they
+ever disagree with this summary, they win.
+
+That dual licence covers the repository's own content and nothing else: the
+scripts and their tests, the documentation, the Noctua Iosevka build plan
+(noctua-iosevka/private-build-plans.toml), and the source of the GitHub Pages
+site together with the pages generated from it.
+
+The fonts are NOT covered by it. Every font file here (*.ttf, *.woff2) stays
+under the licence of its own family, shipped beside it in its folder's
+licenses/ directory. Those terms apply to those files rather than to this
+project, and each of them requires its text to travel with the fonts.
+
+  * Noctua Iosevka (noctua-iosevka/), a custom build of Iosevka by Renzhi Li
+    — SIL Open Font License 1.1, in noctua-iosevka/licenses/OFL-Iosevka.txt.
+
+  * Noctua Noto (noctua-noto/), the Noto families — SIL Open Font License
+    1.1, one licence file per family in noctua-noto/licenses/.
+
+  * Symbols Nerd Font (symbols-nerd-font/), and the Nerd Fonts icons inside
+    the patched faces — the Nerd Font builds of Noctua Iosevka and of Noto.
+    The Nerd Fonts project ships them with its MIT license, kept in
+    symbols-nerd-font/licenses/LICENSE-NerdFontsSymbolsOnly.txt and, byte
+    for byte, in noctua-iosevka/licenses/ and noctua-noto/licenses/.
+    The icon sets that Nerd Fonts gathers keep their own upstream licences,
+    and not all of them are MIT: Codicons and Font Awesome are under CC BY
+    4.0, Material Design Icons under Apache 2.0, Pomicons and Weather Icons
+    under the SIL Open Font License 1.1, and Font Logos under the Unlicense.
+    The Nerd Fonts repository, https://github.com/ryanoasis/nerd-fonts,
+    lists every set with its source and licence in license-audit.md and in
+    src/glyphs/README.md. The rest of each patched face stays under its
+    family's OFL.
+
+The release archives carry the licence files kept here: an archive holds,
+beside its fonts, the licence of every family those fonts come from, and the
+Nerd Fonts MIT license whenever it holds a Nerd Fonts face. Nerd Fonts' own
+Symbols Only release does the same: that MIT file is its only licence text.
+No archive carries a separate text for each icon set; for those terms, see
+the Nerd Fonts lists named above.

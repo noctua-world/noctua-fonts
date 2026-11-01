@@ -1,3 +1,27 @@
+# Noctua Iosevka build plan. Iosevka's build reads this file, so notes stay TOML comments.
+#
+# Pinned toolchain. The recipe is this plan plus these exact versions, and changing any pin
+# means rebuilding every face: all 135 plain and all 135 Nerd Font ones, TTF and WOFF2.
+#
+#   Iosevka             git tag v34.7.0 of https://github.com/be5invis/Iosevka
+#                       = commit 6828cb0bd569992bb19565a5e448540de3b50541
+#   Nerd Fonts patcher  Docker image nerdfonts/patcher:4.26.0, which stamps "Nerd Fonts 3.4.0".
+#                       Pull it by digest: this tag has been re-pushed once already.
+#                       = sha256:d18c1bd44f4577bf359f5cc0b61767bbda2658c6680ff9255cd770e630527efb
+#   ttfautohint         1.8.4, for Iosevka's own hinting and for the re-hint after the patch
+#
+# Read back from the fonts and checked online on 2026-11-01. Name ID 5 reads "Version 34.7.0;
+# ttfautohint (v1.8.4)" on the plain faces and "Version 34.7.0;Nerd Fonts 3.4.0" on the
+# patched ones. Patcher images are tagged with font-patcher's own version (4.x), never 3.4.0.
+# The faces, re-hinted on 2026-07-23, were patched by the first 4.26.0 build (nerd-fonts
+# 64b7726c2f, pushed 2026-07-22 21:03 UTC), whose digest the tag no longer resolves. The
+# digest above is the 2026-07-31 rebuild (320e84b159), whose source differs only in a naming
+# rule for another family. Patching one face of each width with it reproduces the Material
+# Design icons of all 135 shipped faces, and, re-hinted with ttfautohint 1.8.4 --no-info,
+# every table of two of them except head and name (the test fed the hinted face, not
+# TTF-Unhinted). 4.25.0 does not: it predates the Material Design ScaleGroups, and 132 of
+# those icons come out different.
+
 [buildPlans.NoctuaIosevka]
 family = "Noctua Iosevka"
 spacing = "term"
