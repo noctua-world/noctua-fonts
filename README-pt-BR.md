@@ -2,25 +2,26 @@
 
 *[English version](README.md)*
 
-Tipografias usadas nos projetos, com documentação e ferramentas.
+Onde as tipografias do Noctua foram feitas: o plano de build da Noctua Iosevka, as famílias Noto
+com os ícones do Nerd Fonts embutidos, a Symbols Nerd Font só de ícones, as notas para converter
+fontes para WOFF2, duas ferramentas em Python e todas as fontes geradas, armazenadas com Git LFS.
+Fica guardado como registro de como cada fonte foi feita, e para refazer qualquer uma delas.
 
-> **Onde colocá-lo, e onde iniciar um agente.** Este repositório pertence a um
-> workspace: clone-o apenas dentro de `noctua-workspace/repos/`, e inicie seus
-> agentes apenas a partir da raiz do workspace — nunca de dentro deste diretório.
-> Um agente iniciado aqui não enxerga os repositórios irmãos nem os documentos
-> compartilhados, então ele adivinha.
+> **Onde colocá-lo, e onde iniciar um agente.** Este repositório pertence a um workspace: clone-o
+> apenas dentro de `noctua-workspace/repos/`, e inicie seus agentes apenas a partir da raiz do
+> workspace — nunca de dentro deste diretório. Um agente iniciado aqui não enxerga os repositórios
+> irmãos nem os documentos compartilhados, então ele adivinha.
 >
-> Nada aqui é construído ou consumido pelos outros projetos; as fontes que eles
-> distribuem foram copiadas à mão. Leia o documento da fonte antes de usar
-> qualquer coisa dela.
+> Nada aqui é construído ou consumido pelos outros projetos; as fontes que eles distribuem foram
+> copiadas à mão. Leia o documento da fonte antes de usar qualquer coisa dela.
 
 ---
 
 ## ⚠️ Este repositório usa Git LFS
 
-Os arquivos de fonte (`*.ttf`, `*.woff2` — 642 arquivos, 4,3 GB) estão armazenados com
-[Git LFS](https://git-lfs.com). **Instale o Git LFS antes de clonar.** Clonar sem ele funciona **sem
-erro nenhum**, mas cada fonte chega como um arquivo de texto de ~130 bytes, assim:
+Os arquivos de fonte (`*.ttf` e `*.woff2`, cerca de 4 GB no total) estão armazenados com
+[Git LFS](https://git-lfs.com). **Instale o Git LFS antes de clonar.** Clonar sem ele funciona
+**sem erro nenhum**, mas cada fonte chega como um ponteiro de texto de cerca de 130 bytes, assim:
 
 ```
 version https://git-lfs.github.com/spec/v1
@@ -42,9 +43,9 @@ brew install git-lfs               # macOS (Homebrew)
 winget install GitHub.GitLFS       # Windows
 ```
 
-No **NixOS**, declare `git-lfs` em `environment.systemPackages` e faça o rebuild. **Não** use
-`nix-shell -p git-lfs`: os filtros clean/smudge ficam gravados na config do repositório, então todo
-`git add` e `git checkout` falha assim que o binário sai do `$PATH`.
+No **NixOS**, declare `git-lfs` em `environment.systemPackages` e faça o rebuild. **Não** conte
+com `nix-shell -p git-lfs`: os filtros clean e smudge ficam gravados na config do repositório,
+então todo `git add` e `git checkout` falha assim que o binário sai do `$PATH`.
 
 </details>
 
@@ -54,61 +55,65 @@ No **NixOS**, declare `git-lfs` em `environment.systemPackages` e faça o rebuil
 git lfs install
 ```
 
-Grava os filtros `lfs` no `~/.gitconfig`. Sem este passo, o passo 3 ainda entrega arquivos de
+Isso grava os filtros `lfs` no `~/.gitconfig`. Sem este passo, o passo 3 ainda entrega arquivos de
 ponteiro.
 
-### 3. Clonar
+### 3. Clonar, dentro do workspace
 
 ```bash
+cd noctua-workspace/repos
 git clone <url-do-repositório> noctua-fonts
 cd noctua-fonts
 ```
 
-Baixa 4,3 GB. Para evitar, ver *Clonar sem baixar tudo* abaixo.
+Isso baixa todas as fontes. Para evitar, veja *Clonar sem baixar tudo* abaixo.
 
 ### 4. Conferir
 
 ```bash
-git lfs ls-files | wc -l     # esperado: 642
-git lfs fsck                 # esperado: "Git LFS fsck OK"
+git lfs fsck                                  # esperado: "Git LFS fsck OK"
+git lfs ls-files | awk '$2 == "-"' | wc -l    # fontes ainda ponteiro; esperado: 0
 ```
 
-Uma fonte real tem centenas de kilobytes; um ponteiro tem ~130 bytes:
+No `git lfs ls-files`, `*` marca uma fonte cujo conteúdo está presente e `-` uma que ainda é
+ponteiro; `git lfs ls-files --size` acrescenta o tamanho de cada fonte. Uma fonte real tem centenas
+de kilobytes, um ponteiro cerca de 130 bytes:
 
 ```bash
-ls -l noctua-noto/NotoSansMath-Regular.ttf     # ~1,0 MB = correto
+ls -l noctua-noto/NotoSansMath-Regular.ttf     # cerca de 1 MB = correto
 ```
 
 <details>
-<summary><b>Já clonou e recebeu arquivos de texto de ~130 bytes?</b></summary>
+<summary><b>Já clonou e recebeu arquivos de texto de cerca de 130 bytes?</b></summary>
 
 Nada se perdeu — os ponteiros sabem o que buscar. Instale o Git LFS (passo 1) e:
 
 ```bash
 cd noctua-fonts
-git lfs install --local      # --local: só neste repo, não mexe no ~/.gitconfig
+git lfs install --local      # --local: só neste repositório; o ~/.gitconfig fica intacto
 git lfs pull
 ```
 
-O `git status` deve voltar limpo e as fontes chegam no tamanho real.
+O `git status` volta limpo, e as fontes chegam no tamanho real.
 
 </details>
 
 <details>
-<summary><b>Clonar sem baixar tudo</b> (4,3 GB)</summary>
+<summary><b>Clonar sem baixar tudo</b></summary>
 
-Pule o download das fontes e busque só a pasta que você precisa:
+Pule o download das fontes e busque só as pastas de que você precisa:
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone <url-do-repositório> noctua-fonts   # ~700 KB
+cd noctua-workspace/repos
+GIT_LFS_SKIP_SMUDGE=1 git clone <url-do-repositório> noctua-fonts   # só ponteiros, menos de 1 MB
 cd noctua-fonts
 git lfs install --local
 
-git lfs pull --include="noctua-noto/**"            # ~208 MB
-git lfs pull --include="noctua-iosevka/WOFF2/**"   # ~218 MB, só web
+git lfs pull --include="noctua-noto/**"            # cerca de 200 MB
+git lfs pull --include="noctua-iosevka/WOFF2/**"   # cerca de 220 MB, só web
 ```
 
-O que não for puxado continua ponteiro, e pode ser puxado depois a qualquer momento.
+O que não for puxado continua ponteiro, e pode ser puxado a qualquer momento.
 
 </details>
 
@@ -122,9 +127,13 @@ O que não for puxado continua ponteiro, e pode ser puxado depois a qualquer mom
 | **Noctua Noto** — texto e interface, com ícones do Nerd Fonts | [`noctua-noto/`](noctua-noto/) | [pt-BR](noctua-noto-pt-BR.md) · [EN](noctua-noto-en.md) |
 | **Symbols Nerd Font** — só ícones, como fallback de qualquer fonte de texto | [`symbols-nerd-font/`](symbols-nerd-font/) | [pt-BR](symbols-nerd-font-pt-BR.md) · [EN](symbols-nerd-font-en.md) |
 
+O plano de build da Noctua Iosevka, `noctua-iosevka/private-build-plans.toml`, é a fonte da
+verdade dessa tipografia; o documento dela explica como refazê-la.
+
 ## Ferramentas
 
-Servem para qualquer fonte; rode com `--help`. Exigem `pip install fonttools brotli`.
+Servem para qualquer fonte; rode qualquer uma com `--help`. Ambas exigem
+`pip install fonttools brotli`.
 
 | script | para quê |
 |---|---|

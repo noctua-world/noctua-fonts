@@ -2,23 +2,26 @@
 
 *[Versão em português](README-pt-BR.md)*
 
-Typefaces used across the projects, with their documentation and tooling.
+Where the Noctua typefaces were made: the Noctua Iosevka build plan, the Noto families patched
+with Nerd Fonts icons, the icon-only Symbols Nerd Font, the notes for converting fonts to WOFF2,
+two Python tools, and every font built, stored with Git LFS. It is kept as the record of how each
+font was made, and to rebuild one.
 
-> **Where to put it, and where to start an agent.** This repository belongs to a
-> workspace: clone it only inside `noctua-workspace/repos/`, and start your agents
-> only from the workspace root — never from inside this directory. An agent started
-> here cannot see the sibling repositories or the shared documents, so it guesses.
+> **Where to put it, and where to start an agent.** This repository belongs to a workspace: clone
+> it only inside `noctua-workspace/repos/`, and start your agents only from the workspace root —
+> never from inside this directory. An agent started here cannot see the sibling repositories or
+> the shared documents, so it guesses.
 >
-> Nothing here is built or consumed by the other projects; the fonts they ship were
-> copied out by hand. Read a font's own document before using anything from it.
+> Nothing here is built or consumed by the other projects; the fonts they ship were copied out by
+> hand. Read a font's own document before using anything from it.
 
 ---
 
 ## ⚠️ This repository uses Git LFS
 
-The font files (`*.ttf`, `*.woff2` — 642 files, 4.3 GB) are stored with
+The font files (`*.ttf` and `*.woff2`, about 4 GB in all) are stored with
 [Git LFS](https://git-lfs.com). **Install Git LFS before cloning.** Cloning without it succeeds
-without any error, but every font arrives as a ~130-byte text file like this:
+with no error at all, but every font arrives as a text pointer of about 130 bytes, like this:
 
 ```
 version https://git-lfs.github.com/spec/v1
@@ -41,8 +44,8 @@ winget install GitHub.GitLFS       # Windows
 ```
 
 On **NixOS**, add `git-lfs` to `environment.systemPackages` and rebuild. Do **not** rely on
-`nix-shell -p git-lfs`: the clean/smudge filters are written into the repository's config, so every
-`git add` and `git checkout` fails once the binary leaves `$PATH`.
+`nix-shell -p git-lfs`: the clean and smudge filters are written into the repository's config, so
+every `git add` and `git checkout` fails once the binary leaves `$PATH`.
 
 </details>
 
@@ -52,60 +55,65 @@ On **NixOS**, add `git-lfs` to `environment.systemPackages` and rebuild. Do **no
 git lfs install
 ```
 
-Writes the `lfs` filters into `~/.gitconfig`. Without this step, step 3 still produces pointer files.
+This writes the `lfs` filters into `~/.gitconfig`. Without it, step 3 still produces pointer
+files.
 
-### 3. Clone
+### 3. Clone, inside the workspace
 
 ```bash
+cd noctua-workspace/repos
 git clone <repository-url> noctua-fonts
 cd noctua-fonts
 ```
 
-Downloads 4.3 GB. To avoid that, see *Clone without downloading everything* below.
+This downloads every font. To avoid that, see *Clone without downloading everything* below.
 
-### 4. Check it worked
+### 4. Check that it worked
 
 ```bash
-git lfs ls-files | wc -l     # expected: 642
-git lfs fsck                 # expected: "Git LFS fsck OK"
+git lfs fsck                                  # expected: "Git LFS fsck OK"
+git lfs ls-files | awk '$2 == "-"' | wc -l    # fonts still pointers; expected: 0
 ```
 
-A real font is hundreds of kilobytes; a pointer is ~130 bytes:
+In `git lfs ls-files`, `*` marks a font whose content is present and `-` one that is still a
+pointer; `git lfs ls-files --size` adds each font's size. A real font is hundreds of kilobytes, a
+pointer about 130 bytes:
 
 ```bash
-ls -l noctua-noto/NotoSansMath-Regular.ttf     # ~1.0 MB = correct
+ls -l noctua-noto/NotoSansMath-Regular.ttf     # about 1 MB when correct
 ```
 
 <details>
-<summary><b>Already cloned and got ~130-byte text files?</b></summary>
+<summary><b>Already cloned, and got text files of about 130 bytes?</b></summary>
 
 Nothing is lost — the pointers know what to fetch. Install Git LFS (step 1), then:
 
 ```bash
 cd noctua-fonts
-git lfs install --local      # --local: only this repo, leaves ~/.gitconfig alone
+git lfs install --local      # --local: this repository only; ~/.gitconfig is left alone
 git lfs pull
 ```
 
-`git status` should come back clean and the fonts arrive at full size.
+`git status` comes back clean, and the fonts arrive at full size.
 
 </details>
 
 <details>
-<summary><b>Clone without downloading everything</b> (4.3 GB)</summary>
+<summary><b>Clone without downloading everything</b></summary>
 
-Skip the font download, then fetch only the folder you need:
+Skip the font download, then fetch only the folders you need:
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone <repository-url> noctua-fonts   # ~700 KB
+cd noctua-workspace/repos
+GIT_LFS_SKIP_SMUDGE=1 git clone <repository-url> noctua-fonts   # pointers only, under 1 MB
 cd noctua-fonts
 git lfs install --local
 
-git lfs pull --include="noctua-noto/**"            # ~208 MB
-git lfs pull --include="noctua-iosevka/WOFF2/**"   # ~218 MB, web only
+git lfs pull --include="noctua-noto/**"            # about 200 MB
+git lfs pull --include="noctua-iosevka/WOFF2/**"   # about 220 MB, web only
 ```
 
-Anything not pulled stays a pointer, and you can pull it later at any time.
+Anything not pulled stays a pointer, and you can pull it at any time.
 
 </details>
 
@@ -119,9 +127,12 @@ Anything not pulled stays a pointer, and you can pull it later at any time.
 | **Noctua Noto** — text and UI, with Nerd Fonts icons | [`noctua-noto/`](noctua-noto/) | [EN](noctua-noto-en.md) · [pt-BR](noctua-noto-pt-BR.md) |
 | **Symbols Nerd Font** — icons only, as a fallback for any text font | [`symbols-nerd-font/`](symbols-nerd-font/) | [EN](symbols-nerd-font-en.md) · [pt-BR](symbols-nerd-font-pt-BR.md) |
 
+Noctua Iosevka's build plan, `noctua-iosevka/private-build-plans.toml`, is the source of truth
+for that typeface; its document explains how to rebuild it.
+
 ## Tools
 
-Font-agnostic; run with `--help`. Require `pip install fonttools brotli`.
+Font-agnostic; run either with `--help`. Both need `pip install fonttools brotli`.
 
 | script | what it does |
 |---|---|
