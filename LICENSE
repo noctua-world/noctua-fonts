@@ -7,9 +7,8 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in this project by you shall be dual licensed as above, without any
 additional terms or conditions.
 
-This file exists so that automated licence detection has a single conventional
-name to find. The two files it points at are the actual licence texts; if they
-ever disagree with this summary, they win.
+This file is a summary. The two files it points at hold the actual licence
+texts; if they ever disagree with this summary, they win.
 
 That dual licence covers the repository's own content and nothing else: the
 scripts and their tests, the documentation, the Noctua Iosevka build plan
