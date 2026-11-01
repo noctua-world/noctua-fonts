@@ -1,0 +1,7 @@
+# Files whose bytes are checked, and so must be checked out exactly as committed.
+# Git for Windows converts line endings by default (core.autocrlf=true). That would
+# change the licence files that font-archives.py compares byte for byte with the
+# copies inside the release archives. -text rather than eol=lf: the committed
+# licences mix CRLF and LF files, and both must come out unchanged.
+/SHA256SUMS -text
+/*/licenses/** -text

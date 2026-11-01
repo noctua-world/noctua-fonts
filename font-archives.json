@@ -1,0 +1,309 @@
+{
+  "repository": "noctua-world/noctua-fonts",
+  "tag": "v1.0.0",
+  "archives": [
+    {
+      "name": "noctua-iosevka-ttf-normal.zip",
+      "description": "Noctua Iosevka in the normal width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF/NoctuaIosevka-*.ttf"
+      ],
+      "exclude": [
+        "noctua-iosevka/TTF/NoctuaIosevka-Condensed*.ttf",
+        "noctua-iosevka/TTF/NoctuaIosevka-SemiCondensed*.ttf",
+        "noctua-iosevka/TTF/NoctuaIosevka-SemiExtended*.ttf",
+        "noctua-iosevka/TTF/NoctuaIosevka-Extended*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-ttf-condensed.zip",
+      "description": "Noctua Iosevka in the condensed width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF/NoctuaIosevka-Condensed*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-ttf-semicondensed.zip",
+      "description": "Noctua Iosevka in the semi-condensed width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF/NoctuaIosevka-SemiCondensed*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-ttf-semiextended.zip",
+      "description": "Noctua Iosevka in the semi-extended width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF/NoctuaIosevka-SemiExtended*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-ttf-extended.zip",
+      "description": "Noctua Iosevka in the extended width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF/NoctuaIosevka-Extended*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-woff2-normal.zip",
+      "description": "Noctua Iosevka in the normal width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2/NoctuaIosevka-*.woff2"
+      ],
+      "exclude": [
+        "noctua-iosevka/WOFF2/NoctuaIosevka-Condensed*.woff2",
+        "noctua-iosevka/WOFF2/NoctuaIosevka-SemiCondensed*.woff2",
+        "noctua-iosevka/WOFF2/NoctuaIosevka-SemiExtended*.woff2",
+        "noctua-iosevka/WOFF2/NoctuaIosevka-Extended*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-woff2-condensed.zip",
+      "description": "Noctua Iosevka in the condensed width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2/NoctuaIosevka-Condensed*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-woff2-semicondensed.zip",
+      "description": "Noctua Iosevka in the semi-condensed width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2/NoctuaIosevka-SemiCondensed*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-woff2-semiextended.zip",
+      "description": "Noctua Iosevka in the semi-extended width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2/NoctuaIosevka-SemiExtended*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-woff2-extended.zip",
+      "description": "Noctua Iosevka in the extended width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2/NoctuaIosevka-Extended*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-ttf-normal.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the normal width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-*.ttf"
+      ],
+      "exclude": [
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-Condensed*.ttf",
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-SemiCondensed*.ttf",
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-SemiExtended*.ttf",
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-Extended*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-ttf-condensed.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the condensed width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-Condensed*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-ttf-semicondensed.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the semi-condensed width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-SemiCondensed*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-ttf-semiextended.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the semi-extended width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-SemiExtended*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-ttf-extended.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the extended width, as TTF.",
+      "include": [
+        "noctua-iosevka/TTF-nerdfonts/NoctuaIosevkaNerdFontMono-Extended*.ttf"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-woff2-normal.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the normal width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-*.woff2"
+      ],
+      "exclude": [
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-Condensed*.woff2",
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-SemiCondensed*.woff2",
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-SemiExtended*.woff2",
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-Extended*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-woff2-condensed.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the condensed width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-Condensed*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-woff2-semicondensed.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the semi-condensed width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-SemiCondensed*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-woff2-semiextended.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the semi-extended width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-SemiExtended*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-iosevka-nerd-font-woff2-extended.zip",
+      "description": "Noctua Iosevka Nerd Font Mono (patched with the Nerd Fonts icons) in the extended width, as WOFF2 for the web.",
+      "include": [
+        "noctua-iosevka/WOFF2-nerdfonts/NoctuaIosevkaNerdFontMono-Extended*.woff2"
+      ],
+      "licenses": [
+        "noctua-iosevka/licenses/OFL-Iosevka.txt",
+        "noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    },
+    {
+      "name": "noctua-noto-ttf.zip",
+      "description": "Noto Sans, Serif, Sans Mono and Sans Display, the script families (Arabic, Armenian, Devanagari, Ethiopic, Georgian, Hebrew, Japanese, Korean, Mongolian, Simplified Chinese, Thai), emoji, music and math, and the Nerd Font builds of Noto Sans, Serif, Sans Mono and Sans Display, as TTF.",
+      "include": [
+        "noctua-noto/*.ttf"
+      ],
+      "licenses": [
+        "noctua-noto/licenses/LICENSE-NerdFontsSymbolsOnly.txt",
+        "noctua-noto/licenses/OFL-Noto_Color_Emoji.txt",
+        "noctua-noto/licenses/OFL-Noto_Emoji.txt",
+        "noctua-noto/licenses/OFL-Noto_Music.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Arabic.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Armenian.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Devanagari.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Display.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Ethiopic.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Georgian.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Hebrew.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_JP.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_KR.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Math.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Mongolian.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Mono.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_SC.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Thai.txt",
+        "noctua-noto/licenses/OFL-Noto_Serif.txt"
+      ]
+    },
+    {
+      "name": "noctua-noto-woff2.zip",
+      "description": "Noto Sans, Serif, Sans Mono and Sans Display, the script families (Arabic, Armenian, Devanagari, Ethiopic, Georgian, Hebrew, Japanese, Korean, Mongolian, Simplified Chinese, Thai), emoji, music and math, and the Nerd Font builds of Noto Sans, Serif, Sans Mono and Sans Display, as WOFF2 for the web.",
+      "include": [
+        "noctua-noto/*.woff2"
+      ],
+      "licenses": [
+        "noctua-noto/licenses/LICENSE-NerdFontsSymbolsOnly.txt",
+        "noctua-noto/licenses/OFL-Noto_Color_Emoji.txt",
+        "noctua-noto/licenses/OFL-Noto_Emoji.txt",
+        "noctua-noto/licenses/OFL-Noto_Music.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Arabic.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Armenian.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Devanagari.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Display.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Ethiopic.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Georgian.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Hebrew.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_JP.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_KR.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Math.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Mongolian.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Mono.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_SC.txt",
+        "noctua-noto/licenses/OFL-Noto_Sans_Thai.txt",
+        "noctua-noto/licenses/OFL-Noto_Serif.txt"
+      ]
+    },
+    {
+      "name": "symbols-nerd-font.zip",
+      "description": "Symbols Nerd Font and Symbols Nerd Font Mono, the icon-only fonts, as TTF and WOFF2.",
+      "include": [
+        "symbols-nerd-font/*.ttf",
+        "symbols-nerd-font/*.woff2"
+      ],
+      "licenses": [
+        "symbols-nerd-font/licenses/LICENSE-NerdFontsSymbolsOnly.txt"
+      ]
+    }
+  ]
+}
