@@ -69,8 +69,10 @@ Security
 --------
 The trust anchor is SHA256SUMS as committed: commits in this repository are
 signed, so its contents are exactly as trustworthy as the signed commit you
-checked out (check it with `git log --show-signature` or `git verify-commit`;
-nothing here can make up for an unsigned or tampered checkout). Everything that
+checked out. GitHub marks each signed commit "Verified"; locally,
+`git verify-commit` checks one once the signer's public SSH key is in the file
+that gpg.ssh.allowedSignersFile names. Nothing here can make up for an
+unsigned or tampered checkout. Everything that
 comes over the network -- the zip, its directory, its sizes, and the release's
 own SHA256SUMS of the archives -- is untrusted input. The rule that follows is
 that a font is written under its final name only after its bytes have hashed to

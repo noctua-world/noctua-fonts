@@ -72,7 +72,8 @@ target by target while the files are written, so a font whose outlines or
 variation data are malformed can still fail part-way: the error then says
 how many files were complete before it.
 
-Requires: fonttools (plus brotli for WOFF2)  ->  pip install fonttools brotli
+Requires: fonttools (plus brotli for WOFF2), installed in a virtual
+environment: see README.md, Tools.
 
 Safety notes
 ------------
@@ -135,7 +136,8 @@ try:
     from fontTools.varLib import instancer
     from fontTools.varLib.instancer import names as instancer_names
 except ImportError:
-    sys.exit("error: fonttools not found.  ->  pip install fonttools brotli")
+    sys.exit("error: fonttools not found.  "
+             "->  install fonttools and brotli in a virtual environment (README.md, Tools)")
 
 
 # --help shows the docstring up to the safety notes; those are for maintainers.
@@ -284,7 +286,7 @@ class Source:
             raise
         except ImportError:
             raise ToolError("brotli not found (needed to read WOFF2).  "
-                            "->  pip install brotli") from None
+                            "->  install brotli in a virtual environment (README.md, Tools)") from None
         except Exception as exc:  # fontTools raises many types on malformed input
             raise ToolError(f"{where}: {error_text(exc)}") from None
 
@@ -640,7 +642,8 @@ def plan(source, targets, out_dir, want_woff2):
     if want_woff2 and source.flavor != "woff2":
         formats.append((".woff2", "woff2"))
     if any(flavor == "woff2" for _, flavor in formats) and not woff2_support.haveBrotli:
-        raise ToolError("brotli not found (needed for WOFF2).  ->  pip install brotli")
+        raise ToolError("brotli not found (needed for WOFF2).  "
+                        "->  install brotli in a virtual environment (README.md, Tools)")
 
     for target in targets:
         try:

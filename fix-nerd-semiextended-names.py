@@ -195,16 +195,17 @@ Safety (fonts are untrusted binary input; every check fails closed):
     refuses to replace an open file).
 
 The convention was derived from, and is only applied to, the Mono variant
-("Nerd Font Mono", PostScript "NFM") of font-patcher 3.4.0 -- the only variant
-this repository builds.
+("Nerd Font Mono", PostScript "NFM") of the font-patcher that stamps Nerd Fonts
+3.4.0 (image nerdfonts/patcher:4.26.0, the one this repository pins) -- the
+only variant this repository builds.
 
 Exit status: 0 when every file was fixed, already fixed or skipped; 1 when any
 argument named nothing to work on or any file was refused or failed (those
 files are left untouched -- the one exception, reported as such, is a fixed
 file in place whose old name could not be removed); 2 on bad usage.
 
-Requires: fonttools (plus brotli for .woff2 files)
-          ->  pip install fonttools brotli
+Requires: fonttools (plus brotli for .woff2 files), installed in a virtual
+environment: see README.md, Tools.
 """
 
 import argparse
@@ -222,7 +223,8 @@ try:
     from fontTools.ttLib import TTFont
     from fontTools.ttLib.tables.DefaultTable import DefaultTable
 except ImportError:
-    sys.exit("error: fonttools not found.  ->  pip install fonttools brotli")
+    sys.exit("error: fonttools not found.  "
+             "->  install fonttools and brotli in a virtual environment (README.md, Tools)")
 
 # The only Nerd Fonts variant the convention below was derived from.
 NERD_FAMILY = "Nerd Font Mono"
@@ -1056,7 +1058,8 @@ def main(argv=None):
             process(path, run)
         except ImportError as exc:
             run.errors += 1
-            print(f"error        {path}: {exc}  ->  pip install brotli", file=sys.stderr)
+            print(f"error        {path}: {exc}  ->  install brotli in a virtual environment (README.md, Tools)",
+                  file=sys.stderr)
         except Incomplete as exc:
             run.errors += 1
             print(f"error        {path}: {exc}", file=sys.stderr)

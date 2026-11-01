@@ -100,8 +100,8 @@ Idempotent and reversible
 Exit status: 0 when every file was handled (or had nothing to do), 1 when the
 batch was refused or stopped, 2 on a usage error.
 
-Requires: fonttools (plus brotli if .woff2 files are present)
-          ->  pip install fonttools brotli
+Requires: fonttools (plus brotli if .woff2 files are present), installed in a
+virtual environment: see README.md, Tools.
 """
 
 # Security and safety, decided at design time:
@@ -169,7 +169,8 @@ from typing import List, Optional, Tuple
 try:
     from fontTools.ttLib import TTFont
 except ImportError:
-    sys.exit("error: fonttools not found.  ->  pip install fonttools brotli")
+    sys.exit("error: fonttools not found.  "
+             "->  install fonttools and brotli in a virtual environment (README.md, Tools)")
 
 # Name IDs that identify the font. Never 0/7/13/14 -- those are legal text and
 # may legitimately contain the old name.
@@ -567,8 +568,8 @@ def open_font(path, data):
         raise
     except ImportError:
         raise RenameError(
-            f"{path}: brotli not found (needed for WOFF2)  ->  pip install "
-            "brotli") from None
+            f"{path}: brotli not found (needed for WOFF2)  "
+            "->  install brotli in a virtual environment (README.md, Tools)") from None
     except Exception as exc:  # fontTools raises many types on bad input
         raise RenameError(
             f"{path}: not a font this tool can read ({exc})") from None
