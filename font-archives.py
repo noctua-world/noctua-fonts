@@ -6,24 +6,37 @@ and symbols-nerd-font/) are not kept in git. They are published as GitHub
 Release assets, split into the zip archives that font-archives.json describes,
 and git keeps SHA256SUMS instead: one SHA-256 per built font, committed at the
 repository root in the GNU coreutils format, so a tree can be checked with no
-tool at all:
+tool at all, with `sha256sum -c SHA256SUMS` on Linux or
+`shasum -a 256 -c SHA256SUMS` on macOS.
 
-    sha256sum -c SHA256SUMS            # Linux
-    shasum -a 256 -c SHA256SUMS        # macOS
+Download and unpack every archive, or only some:
 
-    ./font-archives.py fetch                        # download and unpack every archive
+    ./font-archives.py fetch
     ./font-archives.py fetch --archive noctua-noto-ttf.zip symbols-nerd-font.zip
-    ./font-archives.py verify                       # does the tree match SHA256SUMS?
-    ./font-archives.py verify --allow-missing       # ... for the fonts that are present
-    ./font-archives.py list                         # archives, file counts, sizes
-    ./font-archives.py manifest                     # rewrite SHA256SUMS from the tree
-    ./font-archives.py pack                         # write dist/*.zip and dist/SHA256SUMS
+
+Check the tree against SHA256SUMS, or only the fonts that are present:
+
+    ./font-archives.py verify
+    ./font-archives.py verify --allow-missing
+
+Show the archives with file counts and sizes; rewrite SHA256SUMS from the tree;
+write dist/*.zip and dist/SHA256SUMS for a release:
+
+    ./font-archives.py list
+    ./font-archives.py manifest
+    ./font-archives.py pack
+
+(No command above carries a trailing comment: interactive zsh, the default
+shell on macOS, passes "# ..." to the command as arguments.)
 
 Commands:
   manifest  Hash every built font present in the tree and write SHA256SUMS
             atomically: "<64 lowercase hex>  <repo-relative POSIX path>", one
             line per font, sorted by path, LF line endings, UTF-8. It refuses
-            an empty tree, so running it in a fresh clone cannot erase the list.
+            an empty tree, so running it in a fresh clone cannot erase the list,
+            and a tree that lacks fonts the current list names, so running it
+            in a partly fetched tree cannot shrink it; --remove-missing drops
+            them on purpose, after a font was removed or renamed.
   verify    Check that every SHA256SUMS entry exists and matches, and that no
             built font in the tree is missing from SHA256SUMS. A missing file
             is an error unless --allow-missing, which checks only the files
@@ -698,8 +711,13 @@ def atomic_write(path, data):
         raise
 
 
-def write_manifest(root):
-    """Hash the built fonts present and write SHA256SUMS; return (new, previous or None)."""
+def write_manifest(root, remove_missing=False):
+    """Hash the built fonts present and write SHA256SUMS; return (new, previous or None).
+
+    A font listed in the previous SHA256SUMS but absent from the tree is a refusal unless
+    remove_missing is true: in a partially fetched tree, rewriting the list would otherwise
+    drop every font that was simply not fetched, and the next release would lose them.
+    """
     root = Path(root)
     found = discover_fonts(root)
     if found.problems:
@@ -724,6 +742,14 @@ def write_manifest(root):
             previous = parse_manifest(target.read_bytes())
         except FontArchivesError:
             previous = None
+    if previous is not None and not remove_missing:
+        gone = sorted(set(previous) - set(entries))
+        if gone:
+            raise FontArchivesError(
+                f"refusing to write {MANIFEST_NAME}: {len(gone)} font(s) it lists are not in the "
+                "tree, and rewriting it would drop them:\n" + "\n".join(_details(gone))
+                + "\nFetch them first ('fetch'), or pass --remove-missing if they were removed "
+                "or renamed on purpose.")
     atomic_write(target, data)
     return entries, previous
 
@@ -1407,7 +1433,7 @@ def _say(*lines):
 
 
 def cmd_manifest(args):
-    entries, previous = write_manifest(args.root)
+    entries, previous = write_manifest(args.root, remove_missing=args.remove_missing)
     _say(f"wrote {MANIFEST_NAME}: {len(entries)} built fonts")
     if previous is not None:
         added = sorted(set(entries) - set(previous))
@@ -1504,8 +1530,12 @@ def build_parser():
 
     p = sub.add_parser("manifest", help="hash the built fonts in the tree and write SHA256SUMS",
                        description="Hash every built font present in the tree and write SHA256SUMS "
-                                   "atomically. Refuses an empty tree, symbolic links and names "
-                                   "that are not portable.")
+                                   "atomically. Refuses an empty tree, symbolic links, names "
+                                   "that are not portable, and a tree that lacks fonts the "
+                                   "current SHA256SUMS lists (unless --remove-missing).")
+    p.add_argument("--remove-missing", action="store_true",
+                   help="drop the fonts SHA256SUMS lists that are no longer in the tree "
+                        "(after removing or renaming a font on purpose)")
     p.set_defaults(run=cmd_manifest)
 
     p = sub.add_parser("verify", help="check the tree against SHA256SUMS",

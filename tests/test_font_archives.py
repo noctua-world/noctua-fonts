@@ -345,6 +345,35 @@ class ManifestTest(TempTree):
         self.assertIn("0 added, 0 removed, 1 changed", out)
         self.assertEqual(fa.read_manifest(self.root)[NOTO_TTF], sha(b"rebuilt"))
 
+    def test_refuses_to_drop_a_listed_font_that_is_missing(self):
+        make_tree(self.root)
+        before = self.manifest_bytes()
+        (self.root / NOTO_TTF).unlink()
+        code, out, err = run_cli("--root", self.root, "manifest")
+        self.assertEqual(code, 1, out)
+        self.assertIn("1 font(s) it lists are not in the tree", err)
+        self.assertIn(NOTO_TTF, err)
+        self.assertIn("--remove-missing", err)
+        self.assertEqual(self.manifest_bytes(), before)
+
+    def test_remove_missing_drops_it_on_purpose(self):
+        make_tree(self.root)
+        (self.root / NOTO_TTF).unlink()
+        code, out, _ = run_cli("--root", self.root, "manifest", "--remove-missing")
+        self.assertEqual(code, 0)
+        self.assertIn("0 added, 1 removed, 0 changed", out)
+        self.assertNotIn(NOTO_TTF, fa.read_manifest(self.root))
+
+    def test_a_rename_needs_remove_missing(self):
+        make_tree(self.root)
+        old = self.root / NOTO_TTF
+        old.rename(old.with_name("Renamed-" + old.name))
+        with self.assertRaisesRegex(fa.FontArchivesError, "not in the tree"):
+            fa.write_manifest(self.root)
+        entries, _ = fa.write_manifest(self.root, remove_missing=True)
+        self.assertNotIn(NOTO_TTF, entries)
+        self.assertIn(str(Path(NOTO_TTF).with_name("Renamed-" + old.name).as_posix()), entries)
+
     def test_refuses_an_empty_tree(self):
         make_tree(self.root, fonts=False, manifest=False)
         code, _, err = run_cli("--root", self.root, "manifest")
