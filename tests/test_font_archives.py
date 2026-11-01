@@ -3,8 +3,8 @@
 The tool never parses a font, so the "fonts" in the synthetic trees are
 deterministic bytes. The fetch tests download from a local http.server bound to
 127.0.0.1; nothing reaches the network. The RealRepository tests read the real
-font-archives.json, .gitignore, .gitattributes and licence files, and the real
-SHA256SUMS once it exists; they never need the built fonts.
+font-archives.json, .gitignore, .gitattributes, licence files and SHA256SUMS;
+they never need the built fonts. A missing one is a failure, not a skip.
 """
 
 import contextlib
@@ -1449,14 +1449,10 @@ class RealRepositoryTest(unittest.TestCase):
         for path in sorted({p for a in self.config.archives for p in a.licenses}):
             with self.subTest(path=path):
                 full = fa._native(REPO, path)
-                if path == NERD_LICENSE_COPY and not full.exists():
-                    self.skipTest(f"{path} has not been added yet")
                 self.assertTrue(full.is_file(), path)
 
     def test_the_nerd_licence_copy_is_identical_to_the_original(self):
         copy = fa._native(REPO, NERD_LICENSE_COPY)
-        if not copy.exists():
-            self.skipTest(f"{NERD_LICENSE_COPY} has not been added yet")
         original = REPO / "symbols-nerd-font" / "licenses" / "LICENSE-NerdFontsSymbolsOnly.txt"
         self.assertEqual(copy.read_bytes(), original.read_bytes())
 
@@ -1466,7 +1462,6 @@ class RealRepositoryTest(unittest.TestCase):
         for name in ("noctua-noto-ttf.zip", "noctua-noto-woff2.zip"):
             self.assertEqual(set(self.config.archive(name).licenses), present, name)
 
-    @unittest.skipUnless(REAL_MANIFEST.is_file(), "SHA256SUMS has not been generated yet")
     def test_every_manifest_path_is_in_exactly_one_archive(self):
         manifest = fa.read_manifest(REPO)
         assignment = fa.assign(manifest, self.config)
@@ -1485,10 +1480,8 @@ class RealRepositoryTest(unittest.TestCase):
         self.assertIn(f"/.{fa.MANIFEST_NAME}.*.tmp", rules)
         self.assertIn("/dist/", rules)
 
-    @unittest.skipUnless((REPO / ".gitattributes").is_file(),
-                         ".gitattributes has not been added yet: SHA256SUMS and the licence files "
-                         "need '-text' so that a Windows checkout keeps their bytes")
     def test_gitattributes_keeps_the_byte_exact_files_exact(self):
+        """SHA256SUMS and the licence files need -text, so that a Windows checkout keeps their bytes."""
         attributes = {}
         for line in rule_lines(REPO / ".gitattributes"):
             pattern, *values = line.split()
