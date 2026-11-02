@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="{{@lang}}" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<title>{{meta.title}}</title>
+<meta name="description" content="{{meta.description}}">
+<link rel="canonical" href="{{@canonical}}">
+<link rel="alternate" hreflang="en" href="{{@url_en}}">
+<link rel="alternate" hreflang="pt-BR" href="{{@url_pt}}">
+<link rel="alternate" hreflang="x-default" href="{{@url_en}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Noctua Iosevka">
+<meta property="og:title" content="{{meta.og_title}}">
+<meta property="og:description" content="{{meta.og_description}}">
+<meta property="og:url" content="{{@canonical}}">
+<meta property="og:locale" content="{{@og_locale}}">
+<meta property="og:locale:alternate" content="{{@og_locale_alt}}">
+<meta name="theme-color" content="#f3eee3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0a10" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="{{@root}}assets/favicon.svg" type="image/svg+xml">
+<script src="{{@root}}assets/js/boot.js"></script>
+<link rel="preload" href="{{@root}}assets/fonts/text/NoctuaIosevka-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{@root}}assets/fonts/display/NoctuaIosevka-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{@root}}assets/css/fonts.css">
+<link rel="stylesheet" href="{{@root}}assets/css/site.css">
+<link rel="stylesheet" href="{{@root}}assets/css/facts.css">
+<script type="module" src="{{@root}}assets/js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">{{skip}}</a>
+
+<header class="masthead">
+  <a class="brand" href="#top">
+    <span class="brand-mark" aria-hidden="true"><span>N</span><span>I</span></span>
+    <span class="brand-word" aria-hidden="true">Noctua<b>/</b>Iosevka</span>
+    <span class="sr-only">{{nav.top}}</span>
+  </a>
+  <nav class="toc" id="toc" aria-label="{{nav.label}}">
+    <ol>
+      <li><a href="#faces">{{nav.faces}}</a></li>
+      <li><a href="#widths">{{nav.widths}}</a></li>
+      <li><a href="#legibility">{{nav.legibility}}</a></li>
+      <li><a href="#sets">{{nav.sets}}</a></li>
+      <li><a href="#code">{{nav.code}}</a></li>
+      <li><a href="#terminal">{{nav.terminal}}</a></li>
+      <li><a href="#tester">{{nav.tester}}</a></li>
+      <li><a href="#download">{{nav.download}}</a></li>
+    </ol>
+  </nav>
+  <div class="controls">
+    <button class="ctl toc-btn js-only" id="toc-btn" type="button" aria-expanded="false" aria-controls="toc">
+      <span class="ctl-ico ico-menu" aria-hidden="true"></span><span class="ctl-label">{{nav.label}}</span>
+    </button>
+    <button class="ctl js-only" id="theme-toggle" type="button">
+      <span class="ctl-ico ico-theme" aria-hidden="true"></span><span class="ctl-label">{{ctl.theme}}</span><span class="sr-only ctl-more">: {{ctl.theme_aria}}</span>
+    </button>
+    <button class="ctl js-only" id="motion-toggle" type="button">
+      <span class="ctl-ico ico-motion" aria-hidden="true"></span><span class="ctl-label">{{ctl.motion}}</span>
+    </button>
+    <nav class="lang" aria-label="{{nav.lang}}">
+      <a href="{{@href_en}}" hreflang="en" lang="en"{{@cur_en}}>EN<span class="sr-only"> · English</span></a>
+      <a href="{{@href_pt}}" hreflang="pt-BR" lang="pt-BR"{{@cur_pt}}>PT<span class="sr-only"> · Português (Brasil)</span></a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+
+<div class="ruler js-only" aria-hidden="true"><div class="ruler-ticks"></div><div class="ruler-mark"><span class="ruler-val">0000</span><span class="ruler-unit">/1000 em</span></div></div>
+<canvas class="trail js-only" aria-hidden="true"></canvas>
+
+<main id="main" tabindex="-1">
+
+<!-- HERO -->
+<section id="top" class="hero" aria-labelledby="hero-title" data-slip tabindex="-1">
+  <canvas class="hero-mesh js-only" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="hero-meta">
+      <span class="hm-build">{{hero.meta_build}}</span>
+      <span>{{hero.meta_release}}</span>
+      <span>SIL OFL 1.1</span>
+      <span class="now" aria-hidden="true"><span class="now-label">{{hero.now}}</span><span class="now-ag f-w8">Ag</span><span class="now-file">NoctuaIosevka-ExtraBold.woff2</span></span>
+      <span class="hero-hint js-only" aria-hidden="true"><span class="hint-dot"></span>{{hero.hint}}</span>
+    </p>
+    <h1 id="hero-title" class="hero-title">
+      <span class="sr-only">Noctua Iosevka</span>
+      <span class="line line-1" aria-hidden="true" data-kinetic="weight">Noctua</span>
+      <span class="line line-2" aria-hidden="true" data-kinetic="slope">Iosevka</span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-lede">{{hero.lede}}</p>
+      <dl class="flaps">
+        <div class="flap"><dt>{{hero.flap_faces}}</dt><dd><span class="odo" data-value="135">135</span></dd></div>
+        <div class="flap"><dt>{{hero.flap_weights}}</dt><dd><span class="odo" data-value="9">9</span></dd></div>
+        <div class="flap"><dt>{{hero.flap_widths}}</dt><dd><span class="odo" data-value="5">5</span></dd></div>
+        <div class="flap"><dt>{{hero.flap_slopes}}</dt><dd><span class="odo" data-value="3">3</span></dd></div>
+        <div class="flap"><dt>{{hero.flap_codepoints}}</dt><dd><span class="odo" data-value="{{@codepoints}}">{{@codepoints}}</span></dd></div>
+        <div class="flap"><dt>{{hero.flap_sets}}</dt><dd><span class="odo" data-value="{{@sets}}">{{@sets}}</span></dd></div>
+        <div class="flap"><dt>{{hero.flap_cv}}</dt><dd><span class="odo" data-value="{{@variants}}">{{@variants}}</span></dd></div>
+      </dl>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="#download">{{hero.cta_download}}</a>
+        <a class="btn" href="#faces">{{hero.cta_explore}}</a>
+      </div>
+    </div>
+  </div>
+  <canvas class="ticker js-only" aria-hidden="true"></canvas>
+</section>
+
+<!-- 01 WHAT IT IS -->
+<section id="about" class="sec sec-about" aria-labelledby="about-title">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§01</span><span>{{about.folio}}</span></p>
+    <h2 id="about-title" class="sec-title" data-scrub="weight">{{about.title}}</h2>
+    <span class="bignum" aria-hidden="true">01</span>
+  </div>
+  <p class="statement" data-words>{{about.statement}}</p>
+  <div class="plan" data-reveal>
+    <article class="plan-item">
+      <h3 class="plan-key"><code>spacing = "term"</code></h3>
+      <p>{{about.plan_spacing}}</p>
+    </article>
+    <article class="plan-item">
+      <h3 class="plan-key"><code>noCvSs = false</code></h3>
+      <p>{{about.plan_cvss}}</p>
+    </article>
+    <article class="plan-item">
+      <h3 class="plan-key"><code>exportGlyphNames = true</code></h3>
+      <p>{{about.plan_names}}</p>
+    </article>
+  </div>
+</section>
+
+<!-- 02 FACES -->
+<section id="faces" class="sec sec-faces" aria-labelledby="faces-title" tabindex="-1">
+  <div class="sec-head head-fit" data-reveal data-arm="d:100-900:1:u">
+    <p class="folio"><span>§02</span><span>{{faces.folio}}</span></p>
+    <h2 id="faces-title" class="sec-title t-ramp">{{%title_faces}}</h2>
+    <span class="bignum" aria-hidden="true">02</span>
+  </div>
+  <p class="sec-lede">{{faces.lede}}<span class="js-only"> {{faces.lede_pick}}</span></p>
+
+  <div class="explorer" data-reveal data-arm="s:100-900:3:u s:400:1-5:u s:400:3:i,o t:400:3:u">
+    <div class="stage" id="stage" data-slip>
+      <p class="stage-name" aria-hidden="true"><span class="stage-family">Noctua Iosevka</span> <span class="stage-style">Regular</span></p>
+      <p class="sr-only" id="stage-live" aria-live="polite" lang="en">Noctua Iosevka Regular</p>
+      <p class="stage-file"><span class="stage-file-name">NoctuaIosevka-Regular.woff2</span></p>
+      <div class="stage-grid" aria-hidden="true"></div>
+      <div class="stage-big-wrap" aria-hidden="true">
+        <p class="stage-big"><span class="stage-ag">Ag</span><span class="stage-ag stage-ag-ghost">Ag</span></p>
+        <div class="guides">
+          <span class="g-line g-asc"><b>{{guides.ascender}}</b><i>965</i></span>
+          <span class="g-line g-cap"><b>{{guides.cap}}</b><i>735</i></span>
+          <span class="g-line g-x"><b>{{guides.x}}</b><i>520</i></span>
+          <span class="g-line g-base"><b>{{guides.baseline}}</b><i>0</i></span>
+          <span class="g-line g-desc"><b>{{guides.descender}}</b><i>−285</i></span>
+          <span class="g-box"><i class="g-adv">2 × 600</i></span>
+        </div>
+      </div>
+      <div class="stage-lines">
+        <p class="stage-line">{{faces.stage_line}}</p>
+        <p class="stage-line stage-digits">0123456789 {[(&lt;&gt;)]} il1I| 0O8B</p>
+      </div>
+      <p class="stage-scan js-only" aria-hidden="true"><span class="scan-dot"></span><span class="scan-on">{{faces.scan_on}}</span><span class="scan-off">{{faces.scan_off}}</span></p>
+    </div>
+    <div class="axes-col">
+      <div class="axes js-only" role="group" aria-label="{{faces.axes_label}}">
+        {{%chips}}
+      </div>
+      <div class="readout">
+        <p class="ro-title">{{faces.readout_title}}</p>
+        <dl class="ro-list">
+          <div><dt><code>OS/2.usWeightClass</code></dt><dd id="ro-wght">400</dd></div>
+          <div><dt><code>OS/2.usWidthClass</code></dt><dd id="ro-wdth">5</dd></div>
+          <div><dt><code>post.italicAngle</code></dt><dd id="ro-ital">0°</dd></div>
+          <div><dt>{{faces.ro_advance}} <code>a</code></dt><dd id="ro-adv">600/1000</dd></div>
+        </dl>
+        <code class="stage-css">font-weight: 400; font-stretch: 100%; font-style: normal;</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="wall-wrap" data-reveal>
+    <h3 class="wall-title">{{faces.wall_title}} <small class="js-only">{{faces.wall_hint}}</small><small class="static-only">{{faces.wall_hint_static}}</small></h3>
+    <div class="wall" id="wall" role="group" aria-label="{{faces.wall_label}}">
+      {{%wall}}
+      <span class="wall-cross" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 WIDTHS -->
+<section id="widths" class="sec sec-widths" aria-labelledby="widths-title" tabindex="-1" data-arm="d:500,800:1-5:u d:100:1,5:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§03</span><span>{{widths.folio}}</span></p>
+    <h2 id="widths-title" class="sec-title t-words">{{%title_widths}}</h2>
+    <span class="bignum" aria-hidden="true"><span class="lx1">0</span><span class="lx5">3</span></span>
+  </div>
+  <p class="sec-lede">{{&widths.lede}}</p>
+  <div class="breathe-wrap" aria-hidden="true">
+    <div class="breathe-box">
+      <p class="breathe lfd lw8" data-kinetic="breathe">{{widths.word}}</p>
+      <div class="guides guides-row">
+        <span class="g-line g-cap"><b>{{guides.cap}}</b><i>735</i></span>
+        <span class="g-line g-x"><b>{{guides.x}}</b><i>520</i></span>
+        <span class="g-line g-base"><b>{{guides.baseline}}</b><i>0</i></span>
+      </div>
+    </div>
+    <p class="breathe-read"><span class="breathe-name">Normal</span> <span class="breathe-val">600</span></p>
+  </div>
+  <ol class="ladder">
+    {{%ladder}}
+  </ol>
+  <p class="note">{{&widths.note}}</p>
+</section>
+
+<!-- 04 SLOPES -->
+<section id="slopes" class="sec sec-slopes" aria-labelledby="slopes-title" data-arm="d:700:3:i,o d:800:1:i,o d:100:3:i">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§04</span><span>{{slopes.folio}}</span></p>
+    <h2 id="slopes-title" class="sec-title t-words">{{%title_slopes}}</h2>
+    <span class="bignum lsi" aria-hidden="true">04</span>
+    <p class="sec-lede">{{&slopes.lede}}</p>
+  </div>
+  <figure class="plate" data-reveal data-slip>
+    <div class="plate-ink" aria-hidden="true">
+      <span class="plate-a lfd lw7 lso">cite птица</span>
+      <span class="plate-b lfd lw7 lsi">cite птица</span>
+    </div>
+    <figcaption>{{&slopes.caption}}</figcaption>
+  </figure>
+</section>
+
+<!-- 05 LEGIBILITY -->
+<section id="legibility" class="sec sec-legibility" aria-labelledby="legibility-title" tabindex="-1" data-arm="t:400:3:i,o t:700:3:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§05</span><span>{{legibility.folio}}</span></p>
+    <h2 id="legibility-title" class="sec-title t-ovp" data-slip>{{%title_legibility}}</h2>
+    <span class="bignum" aria-hidden="true">05</span>
+  </div>
+  <p class="accept" data-reveal><span>il1I|</span><span>0O8B</span><span>5SZ2</span><span>3 5 S</span><span>g q 9</span></p>
+  <p class="sec-lede">{{legibility.lede}}</p>
+  <div class="pair-tools js-only" role="group" aria-label="{{legibility.tools_label}}">
+    <label class="squint" for="squint"><span>{{legibility.squint}} <output id="squint-out">{{@squint0}}</output></span><input type="range" id="squint" min="0" max="40" value="0" step="1"></label>
+    <button type="button" class="switch" id="collide" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"><span></span></span>{{legibility.collide}}</button>
+  </div>
+  <ul class="pairs" id="pairs" data-reveal data-slip>
+    <li class="pair is-teaser"><span class="pair-ink" aria-hidden="true"><span class="pa">0</span><span class="pb">O</span><span class="pg"></span></span><b>0 · O</b><span>{{legibility.p_0O}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">1</span><span class="pb">l</span><span class="pg"></span></span><b>1 · l</b><span>{{legibility.p_1l}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">I</span><span class="pb">l</span><span class="pg"></span></span><b>I · l</b><span>{{legibility.p_Il}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">l</span><span class="pb">|</span><span class="pg"></span></span><b>l · |</b><span>{{legibility.p_lbar}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">Z</span><span class="pb">2</span><span class="pg"></span></span><b>Z · 2</b><span>{{legibility.p_Z2}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">5</span><span class="pb">S</span><span class="pg"></span></span><b>5 · S</b><span>{{legibility.p_5S}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">8</span><span class="pb">B</span><span class="pg"></span></span><b>8 · B</b><span>{{legibility.p_8B}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">Q</span><span class="pb">O</span><span class="pg"></span></span><b>Q · O</b><span>{{legibility.p_QO}}</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">g</span><span class="pb">9</span><span class="pg"></span></span><b>g · 9</b><span>{{legibility.p_g9}}</span></li>
+    <li class="pair"><span class="pair-ink pair-ink-2" aria-hidden="true"><span class="pa">rn</span><span class="pb">m</span><span class="pg"></span></span><b>rn · m</b><span>{{legibility.p_rnm}}</span></li>
+  </ul>
+  <div class="guides guides-pair" aria-hidden="true">
+    <span class="g-line g-asc"><b>{{guides.ascender}}</b><i>965</i></span>
+    <span class="g-line g-cap"><b>{{guides.cap}}</b><i>735</i></span>
+    <span class="g-line g-x"><b>{{guides.x}}</b><i>520</i></span>
+    <span class="g-line g-base"><b>{{guides.baseline}}</b><i>0</i></span>
+    <span class="g-line g-desc"><b>{{guides.descender}}</b><i>−285</i></span>
+  </div>
+
+  <figure class="matter js-only" id="matter" data-reveal>
+    <div class="matter-stage" data-slip>
+      <canvas class="matter-canvas" aria-hidden="true"></canvas>
+      <p class="matter-now" aria-hidden="true"><span class="matter-word">il1I|</span></p>
+    </div>
+    <figcaption class="matter-cap">
+      <span>{{legibility.matter_caption}}</span>
+      <label class="matter-input"><span>{{legibility.matter_label}}</span><input type="text" id="matter-text" maxlength="12" spellcheck="false" autocomplete="off" placeholder="{{legibility.matter_placeholder}}"></label>
+    </figcaption>
+  </figure>
+
+  <div class="small-sizes" data-reveal>
+    <h3 class="small-title">{{legibility.small_title}} <small class="js-only">{{legibility.small_hint}}</small></h3>
+    <div class="ss-head" aria-hidden="true"><span></span><span>{{slope.upright}}</span><span>{{slope.italic}}</span><span>{{slope.oblique}}</span></div>
+    {{%small_sizes}}
+    <canvas class="loupe" aria-hidden="true"></canvas>
+  </div>
+</section>
+
+<!-- INTERLUDE: THE OWL -->
+<section id="owl" class="interlude js-only" aria-labelledby="owl-title" data-slip>
+  <h2 id="owl-title" class="sr-only">{{owl.title}}</h2>
+  <figure class="owl">
+    <canvas class="owl-canvas" aria-hidden="true"></canvas>
+    <figcaption class="owl-cap"><span class="owl-n">noctua.ans</span> {{owl.caption}} <span class="owl-count"></span></figcaption>
+  </figure>
+</section>
+
+<!-- 06 STYLISTIC SETS -->
+<section id="sets" class="sec sec-sets" aria-labelledby="sets-title" tabindex="-1" data-arm="t:800:1:u t:100:3:u">
+  <div class="sec-head head-fit" data-reveal>
+    <p class="folio"><span>§06</span><span>{{sets.folio}}</span></p>
+    <h2 id="sets-title" class="sec-title lft t-sets">{{sets.title}}</h2>
+    <span class="bignum lft lw1 t-sets-num" aria-hidden="true">06</span>
+  </div>
+  <p class="sec-lede">{{&sets.lede}}<span class="js-only"> {{&sets.lede_lens}}</span><span class="static-only"> {{&sets.lede_static}}</span></p>
+  <div class="lens-stage" id="lens" role="group" aria-roledescription="{{sets.lens_role}}" aria-label="{{sets.lens_label}}">
+    <p class="lens-text lens-base" aria-hidden="true">0 O o · il1I| · a g q y · $ @ &amp; * % · {r: f(k)} · 5SZ2 · 9 · tzZQ · (&lt;=&gt;)</p>
+    <div class="lens-win" aria-hidden="true"><div class="lens-inner"><p class="lens-text lens-alt">0 O o · il1I| · a g q y · $ @ &amp; * % · {r: f(k)} · 5SZ2 · 9 · tzZQ · (&lt;=&gt;)</p></div></div>
+    <div class="lens-ring" aria-hidden="true"></div>
+    <span class="lens-tag" aria-hidden="true">{{%set_default}}</span>
+  </div>
+  <p class="note js-only" id="lens-help">{{sets.lens_help}}</p>
+  <div class="wear-bar js-only">
+    <p class="wear-status" id="wear-status" aria-live="polite">{{sets.wear_none}}</p>
+    <button type="button" class="btn btn-small" id="wear-reset" disabled>{{sets.wear_reset}}</button>
+  </div>
+  <ul class="sets" id="sets-grid">
+    {{%sets}}
+  </ul>
+  <p class="sets-more js-only"><button type="button" class="btn btn-small" id="sets-all" aria-expanded="false" aria-controls="sets-grid">{{sets.show_all}}</button></p>
+</section>
+
+<!-- 07 CHARACTER VARIANTS -->
+<section id="variants" class="sec sec-variants" aria-labelledby="variants-title" data-arm="l:400:3:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§07</span><span>{{cv.folio}}</span></p>
+    <h2 id="variants-title" class="sec-title" data-scrub="weight">{{cv.title}}</h2>
+    <span class="bignum lfl" id="cv-num" aria-hidden="true">07</span>
+  </div>
+  <p class="sec-lede">{{&cv.lede}}</p>
+  <div class="slot" id="slot" data-reveal>
+    <div class="slot-pick js-only" role="radiogroup" aria-label="{{cv.pick_label}}">
+      {{%cv_pick}}
+    </div>
+    <div class="slot-machine">
+      <div class="slot-window" data-slip>
+        <span class="slot-glyph lfl" aria-hidden="true">a</span>
+        <span class="slot-glyph slot-glyph-ghost lfl" aria-hidden="true">a</span>
+      </div>
+      <div class="slot-side">
+        <p class="slot-count" aria-live="polite">{{%cv_count}}</p>
+        <code class="slot-css">font-feature-settings: "cv36" 2;</code>
+        <button type="button" class="btn btn-solid slot-spin js-only" id="slot-spin">{{cv.spin}}</button>
+      </div>
+    </div>
+    <ul class="slot-tiles js-only" id="slot-tiles" aria-label="{{cv.tiles_label}}"></ul>
+  </div>
+</section>
+
+<!-- 08 LIGATURES -->
+<section id="ligatures" class="sec sec-ligatures band band-ink" aria-labelledby="ligatures-title" data-arm="t:800:1:u">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§08</span><span>{{lig.folio}}</span></p>
+    <h2 id="ligatures-title" class="sec-title"><span class="t-lig lft" aria-hidden="true">=&gt;</span> {{lig.title}}</h2>
+    <span class="bignum" aria-hidden="true">08</span>
+    <p class="sec-lede">{{&lig.lede}}</p>
+  </div>
+  <div class="lig-controls js-only" role="group" aria-label="{{lig.controls_label}}">
+    <button type="button" class="switch" id="lig-calt" role="switch" aria-checked="true"><span class="switch-track" aria-hidden="true"><span></span></span><code>calt</code> {{lig.calt}}</button>
+    <button type="button" class="switch" id="lig-dlig" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"><span></span></span><code>dlig</code> {{lig.dlig}}</button>
+    <button type="button" class="switch" id="lig-hskl" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"><span></span></span><code>HSKL</code> {{lig.hskl}}</button>
+  </div>
+  <div class="ligs" id="ligs">
+      {{%ligatures}}
+  </div>
+  <p class="note">{{&lig.note}}</p>
+  <p class="note">{{&lig.note_langs}}</p>
+</section>
+
+<!-- 09 CODE -->
+<section id="code" class="sec sec-code" aria-labelledby="code-title" tabindex="-1" data-arm="t:400,700:3:u t:400:3:i">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§09</span><span>{{code.folio}}</span></p>
+    <h2 id="code-title" class="sec-title" data-scrub="weight">{{code.title}}</h2>
+    <span class="bignum" aria-hidden="true">09</span>
+  </div>
+  <p class="sec-lede">{{code.lede}}</p>
+  <div class="editor" data-reveal>
+    <div class="ed-tabs js-only" role="tablist" aria-label="{{code.tabs_label}}">
+      <button type="button" role="tab" id="tab-rs" aria-controls="pane-rs" aria-selected="true">ladder.rs</button>
+      <button type="button" role="tab" id="tab-ts" aria-controls="pane-ts" aria-selected="false" tabindex="-1">debounce.ts</button>
+      <button type="button" role="tab" id="tab-py" aria-controls="pane-py" aria-selected="false" tabindex="-1">audit.py</button>
+      <button type="button" role="tab" id="tab-go" aria-controls="pane-go" aria-selected="false" tabindex="-1">tail.go</button>
+      <button type="button" role="tab" id="tab-hs" aria-controls="pane-hs" aria-selected="false" tabindex="-1">Ladder.hs</button>
+    </div>
+    <div class="ed-body">
+      <div class="ed-panes">
+<div class="pane" role="group" id="pane-rs" aria-labelledby="pane-rs-name" data-lang="Rust"><p class="pane-name static-only" id="pane-rs-name">ladder.rs <span lang="en">Rust</span></p><pre><code><span class="ln"><span class="c">// {{code.rs_c1}}</span></span>
+<span class="ln"><span class="k">use</span> std::num::<span class="t">ParseIntError</span>;</span>
+<span class="ln"></span>
+<span class="ln"><span class="m">#[derive(Debug, Clone, Copy, PartialEq)]</span></span>
+<span class="ln"><span class="k">pub struct</span> <span class="t">Rgb</span> { <span class="k">pub</span> r: <span class="t">u8</span>, <span class="k">pub</span> g: <span class="t">u8</span>, <span class="k">pub</span> b: <span class="t">u8</span> }</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">impl</span> std::str::<span class="t">FromStr</span> <span class="k">for</span> <span class="t">Rgb</span> {</span>
+<span class="ln">    <span class="k">type</span> <span class="t">Err</span> = <span class="t">ParseIntError</span>;</span>
+<span class="ln"></span>
+<span class="ln">    <span class="c">/// {{code.rs_c2}}</span></span>
+<span class="ln">    <span class="k">fn</span> <span class="f">from_str</span>(s: &amp;<span class="t">str</span>) -&gt; <span class="t">Result</span>&lt;<span class="t">Self</span>, <span class="t">Self</span>::<span class="t">Err</span>&gt; {</span>
+<span class="ln">        <span class="k">let</span> hex = s.<span class="f">trim_start_matches</span>(<span class="s">'#'</span>);</span>
+<span class="ln">        <span class="k">let</span> byte = |i: <span class="t">usize</span>| <span class="t">u8</span>::<span class="f">from_str_radix</span>(&amp;hex[i..i + <span class="n">2</span>], <span class="n">16</span>);</span>
+<span class="ln">        <span class="t">Ok</span>(<span class="t">Rgb</span> { r: <span class="f">byte</span>(<span class="n">0</span>)?, g: <span class="f">byte</span>(<span class="n">2</span>)?, b: <span class="f">byte</span>(<span class="n">4</span>)? })</span>
+<span class="ln">    }</span>
+<span class="ln">}</span></code></pre></div>
+<div class="pane" role="group" id="pane-ts" aria-labelledby="pane-ts-name" data-lang="TypeScript" hidden><p class="pane-name static-only" id="pane-ts-name">debounce.ts <span lang="en">TypeScript</span></p><pre><code><span class="ln"><span class="c">/** {{code.ts_c1}} */</span></span>
+<span class="ln"><span class="k">export function</span> <span class="f">debounce</span>&lt;<span class="t">T</span> <span class="k">extends</span> <span class="t">unknown</span>[]&gt;(fn: (...args: <span class="t">T</span>) =&gt; <span class="t">void</span>, ms = <span class="n">120</span>) {</span>
+<span class="ln">  <span class="k">let</span> timer: <span class="t">ReturnType</span>&lt;<span class="k">typeof</span> setTimeout&gt; | <span class="t">undefined</span>;</span>
+<span class="ln">  <span class="k">return</span> (...args: <span class="t">T</span>): <span class="t">void</span> =&gt; {</span>
+<span class="ln">    <span class="k">if</span> (timer !== <span class="t">undefined</span>) <span class="f">clearTimeout</span>(timer);</span>
+<span class="ln">    timer = <span class="f">setTimeout</span>(() =&gt; <span class="f">fn</span>(...args), ms);</span>
+<span class="ln">  };</span>
+<span class="ln">}</span>
+<span class="ln"></span>
+<span class="ln"><span class="c">// {{code.ts_c2}}</span></span>
+<span class="ln"><span class="k">const</span> onResize = <span class="f">debounce</span>(() =&gt; console.<span class="f">log</span>(<span class="s">`${innerWidth}×${innerHeight}`</span>));</span>
+<span class="ln">window.<span class="f">addEventListener</span>(<span class="s">"resize"</span>, onResize, { passive: <span class="k">true</span> });</span></code></pre></div>
+<div class="pane" role="group" id="pane-py" aria-labelledby="pane-py-name" data-lang="Python" hidden><p class="pane-name static-only" id="pane-py-name">audit.py <span lang="en">Python</span></p><pre><code><span class="ln"><span class="c"># {{code.py_c1}}</span></span>
+<span class="ln"><span class="k">from</span> collections <span class="k">import</span> <span class="t">Counter</span></span>
+<span class="ln"><span class="k">from</span> pathlib <span class="k">import</span> <span class="t">Path</span></span>
+<span class="ln"></span>
+<span class="ln">CONFUSABLE = <span class="f">set</span>(<span class="s">"il1I|0O8B5SZ2gq9"</span>)</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">def</span> <span class="f">audit</span>(path: <span class="t">Path</span>) -&gt; <span class="t">dict</span>[<span class="t">str</span>, <span class="t">int</span>]:</span>
+<span class="ln">    text = path.<span class="f">read_text</span>(encoding=<span class="s">"utf-8"</span>)</span>
+<span class="ln">    counts = <span class="t">Counter</span>(ch <span class="k">for</span> ch <span class="k">in</span> text <span class="k">if</span> ch <span class="k">in</span> CONFUSABLE)</span>
+<span class="ln">    <span class="k">return</span> {ch: n <span class="k">for</span> ch, n <span class="k">in</span> counts.<span class="f">most_common</span>() <span class="k">if</span> n &gt;= <span class="n">1</span>}</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">if</span> __name__ == <span class="s">"__main__"</span>:</span>
+<span class="ln">    <span class="k">for</span> ch, n <span class="k">in</span> <span class="f">audit</span>(<span class="t">Path</span>(<span class="s">"README.md"</span>)).<span class="f">items</span>():</span>
+<span class="ln">        <span class="f">print</span>(<span class="s">f"</span>{ch!r:&gt;5}<span class="s"> → </span>{n:&gt;4}<span class="s">"</span>)</span></code></pre></div>
+<div class="pane" role="group" id="pane-go" aria-labelledby="pane-go-name" data-lang="Go" hidden><p class="pane-name static-only" id="pane-go-name">tail.go <span lang="en">Go</span></p><pre><code><span class="ln"><span class="c">// {{code.go_c1}}</span></span>
+<span class="ln"><span class="k">package</span> main</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">import</span> (<span class="s">"bufio"</span>; <span class="s">"fmt"</span>; <span class="s">"os"</span>; <span class="s">"time"</span>)</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">func</span> <span class="f">main</span>() {</span>
+<span class="ln">	f, err := os.<span class="f">Open</span>(<span class="s">"/var/log/syslog"</span>)</span>
+<span class="ln">	<span class="k">if</span> err != <span class="k">nil</span> {</span>
+<span class="ln">		fmt.<span class="f">Fprintln</span>(os.Stderr, <span class="s">"tail:"</span>, err)</span>
+<span class="ln">		os.<span class="f">Exit</span>(<span class="n">1</span>)</span>
+<span class="ln">	}</span>
+<span class="ln">	r := bufio.<span class="f">NewReader</span>(f)</span>
+<span class="ln">	<span class="k">for</span> {</span>
+<span class="ln">		line, err := r.<span class="f">ReadString</span>(<span class="s">'\n'</span>)</span>
+<span class="ln">		<span class="k">if</span> err != <span class="k">nil</span> { time.<span class="f">Sleep</span>(<span class="n">250</span> * time.Millisecond); <span class="k">continue</span> } <span class="c">// {{code.go_c2}}</span></span>
+<span class="ln">		fmt.<span class="f">Print</span>(line)</span>
+<span class="ln">	}</span>
+<span class="ln">}</span></code></pre></div>
+<div class="pane" role="group" id="pane-hs" aria-labelledby="pane-hs-name" data-lang="Haskell" hidden><p class="pane-name static-only" id="pane-hs-name">Ladder.hs <span lang="en">Haskell</span></p><pre><code><span class="ln"><span class="c">-- | {{code.hs_c1}}</span></span>
+<span class="ln"><span class="k">module</span> <span class="t">Ladder</span> <span class="k">where</span></span>
+<span class="ln"></span>
+<span class="ln"><span class="k">data</span> <span class="t">Width</span> = <span class="t">Condensed</span> | <span class="t">SemiCondensed</span> | <span class="t">Normal</span> | <span class="t">SemiExtended</span> | <span class="t">Extended</span></span>
+<span class="ln">  <span class="k">deriving</span> (<span class="t">Show</span>, <span class="t">Eq</span>, <span class="t">Ord</span>, <span class="t">Enum</span>, <span class="t">Bounded</span>)</span>
+<span class="ln"></span>
+<span class="ln"><span class="f">advance</span> :: <span class="t">Width</span> -&gt; <span class="t">Int</span></span>
+<span class="ln"><span class="f">advance</span> w = <span class="k">case</span> w <span class="k">of</span></span>
+<span class="ln">  <span class="t">Condensed</span>     -&gt; <span class="n">456</span></span>
+<span class="ln">  <span class="t">SemiCondensed</span> -&gt; <span class="n">548</span></span>
+<span class="ln">  <span class="t">Normal</span>        -&gt; <span class="n">600</span></span>
+<span class="ln">  <span class="t">SemiExtended</span>  -&gt; <span class="n">658</span></span>
+<span class="ln">  <span class="t">Extended</span>      -&gt; <span class="n">720</span></span>
+<span class="ln"></span>
+<span class="ln"><span class="c">-- {{code.hs_c2}}</span></span>
+<span class="ln"><span class="f">ladder</span> :: [(<span class="t">Width</span>, <span class="t">Double</span>)]</span>
+<span class="ln"><span class="f">ladder</span> = [ (w, <span class="f">fromIntegral</span> (<span class="f">advance</span> w) / <span class="n">1000</span>) | w &lt;- [<span class="t">minBound</span> .. <span class="t">maxBound</span>] ]</span></code></pre></div>
+      </div>
+      <div class="minimap js-only" aria-hidden="true"><div class="minimap-inner"></div><span class="minimap-view"></span></div>
+    </div>
+    <div class="ed-status" aria-hidden="true"><span>UTF-8</span><span>LF</span><span class="ed-lang js-only">Rust</span><span>Noctua Iosevka 15px</span></div>
+  </div>
+</section>
+
+<!-- 10 TERMINAL -->
+<section id="terminal" class="sec sec-terminal band band-slab" aria-labelledby="terminal-title" tabindex="-1" data-arm="m:400,700:3:u m:400:3:i">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§10</span><span>{{term.folio}}</span></p>
+    <h2 id="terminal-title" class="sec-title"><span class="t-ico lfm" aria-hidden="true">&#xF120;</span> {{term.title}}</h2>
+    <span class="bignum" aria-hidden="true">10</span>
+    <p class="sec-lede">{{&term.lede}}</p>
+  </div>
+  <div class="term-wrap" data-reveal>
+    <div class="term" id="term" role="img" aria-label="{{term.aria}}">
+      <div class="term-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">ghostty — owl@nest — zsh</span></div>
+      <div class="term-body" aria-hidden="true">
+        <div class="term-main"><div class="term-lines" id="term-lines">{{%term_still}}</div></div>
+        <div class="term-side" id="term-side">{{%term_side}}</div>
+      </div>
+      <div class="term-status" id="term-status" aria-hidden="true">{{%term_status}}</div>
+    </div>
+    <aside class="family-string" aria-labelledby="fs-label">
+      <p class="fs-label" id="fs-label">{{term.fs_label}}</p>
+      <p class="fs-value"><code id="family-string">NoctuaIosevka Nerd Font Mono</code></p>
+      <button type="button" class="btn btn-small copy js-only" data-copy="#family-string" aria-describedby="family-string">{{copy}}</button>
+      <p class="fs-note">{{&term.fs_note}}</p>
+      <ul class="fs-icons" aria-label="{{term.icons_label}}">
+        {{%icon_strip}}
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- 11 COVERAGE -->
+<section id="scripts" class="sec sec-scripts" aria-labelledby="scripts-title" data-arm="t:800:1:u,i l:400:3:u">
+  <div class="sec-head head-fit" data-reveal>
+    <p class="folio"><span>§11</span><span>{{scripts.folio}}</span></p>
+    <h2 id="scripts-title" class="sec-title t-scripts">{{%title_scripts}}</h2>
+    <span class="bignum" aria-hidden="true">11</span>
+  </div>
+  <p class="sec-lede">{{scripts.lede}}</p>
+  <div class="scripts">
+    <article class="script" data-reveal>
+      <h3><span>{{scripts.latin}}</span><small>{{scripts.latin_sub}}</small></h3>
+      <p class="decode lft lw8 lx1" lang="pt-BR" data-alphabet="latin">{{scripts.latin_sample}}</p>
+    </article>
+    <article class="script" data-reveal>
+      <h3><span>{{scripts.greek}}</span><small lang="el">Ελληνικά</small></h3>
+      <p class="decode lft lw8 lx1" lang="el" data-alphabet="greek">Ξεσκεπάζω την ψυχοφθόρα βδελυγμία.</p>
+    </article>
+    <article class="script" data-reveal>
+      <h3><span>{{scripts.cyrillic}}</span><small><span lang="ru">Русский</span> · <span lang="uk">Українська</span></small></h3>
+      <p class="decode lft lw8 lx1" lang="ru" data-alphabet="cyrillic">Съешь же ещё этих мягких французских булок, да выпей чаю.</p>
+      <p class="decode decode-2 lft lw8 lx1 lsi" lang="uk" data-alphabet="cyrillic">Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!</p>
+    </article>
+  </div>
+  <div class="scripts-bottom">
+    <div class="globe js-only" id="globe" aria-hidden="true"><div class="globe-spin" id="globe-spin"></div></div>
+    <figure class="symbols" data-reveal>
+      <figcaption class="sr-only">{{scripts.symbols_label}}</figcaption>
+      <div class="sym"><p class="sym-g" aria-hidden="true">→ ← ↑ ↓ ⇒ ⇔ ↦ ↻</p><p class="sym-k">{{scripts.sym_arrows}}</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">∀ ∃ ∈ ∉ ≠ ≈ ≤ ≥ ∑ ∏ ∫ √ ∞ ∂ ∇ ⊂ ⊃ ∧ ∨</p><p class="sym-k">{{scripts.sym_math}}</p></div>
+      <div class="sym sym-box"><pre class="sym-g" aria-hidden="true">╭──┬──╮ ╔══╦══╗
+├──┼──┤ ╠══╬══╣
+╰──┴──╯ ╚══╩══╝</pre><p class="sym-k">{{scripts.sym_box}}</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">▀ ▄ █ ▌ ▐ ░ ▒ ▓</p><p class="sym-k">{{scripts.sym_blocks}}</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">◆ ◇ ● ○ ■ □ ▲ △</p><p class="sym-k">{{scripts.sym_shapes}}</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">⣿ ⡇ ⢸ ⠿ ⣤ ⠛ ⢀ ⡀</p><p class="sym-k">{{scripts.sym_braille}}</p></div>
+    </figure>
+  </div>
+  <details class="coverage" data-reveal>
+    <summary class="cov-sum"><h3 class="cov-title">{{scripts.cov_title}}</h3><span class="cov-open">{{scripts.cov_open}}</span></summary>
+    <p class="cov-note">{{scripts.cov_note}}</p>
+    <ul class="cov-list">
+      {{%coverage}}
+    </ul>
+  </details>
+</section>
+
+<!-- 12 TESTER -->
+<section id="tester" class="sec sec-tester" aria-labelledby="tester-title" tabindex="-1">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§12</span><span>{{tester.folio}}</span></p>
+    <h2 id="tester-title" class="sec-title" data-scrub="weight">{{tester.title}}</h2>
+    <span class="bignum" aria-hidden="true">12</span>
+    <p class="sec-lede">{{tester.lede}}<span class="js-only"> {{tester.lede_controls}}</span><span class="static-only"> {{tester.lede_static}}</span></p>
+  </div>
+  <div class="tester">
+    <div class="t-controls js-only">
+      <label class="t-field" for="t-size"><span>{{tester.size}} <output id="t-size-out">56</output> px</span><input type="range" id="t-size" min="9" max="200" value="56"></label>
+      <label class="t-field" for="t-wght"><span>{{tester.weight}} <output id="t-wght-out" lang="en">Regular 400</output></span><input type="range" id="t-wght" min="100" max="900" step="100" value="400" aria-valuetext="Regular 400"{{@lang_en}}></label>
+      <label class="t-field" for="t-wdth"><span>{{tester.width}} <output id="t-wdth-out" lang="en">Normal 600</output></span><input type="range" id="t-wdth" min="1" max="5" step="1" value="3" aria-valuetext="Normal 600"{{@lang_en}}></label>
+      <fieldset class="t-field t-slope">
+        <legend>{{tester.slope}}</legend>
+        <label><input type="radio" name="t-slope" value="normal" checked> {{slope.upright}}</label>
+        <label><input type="radio" name="t-slope" value="italic"> {{slope.italic}}</label>
+        <label><input type="radio" name="t-slope" value="oblique"> {{slope.oblique}}</label>
+      </fieldset>
+      <fieldset class="t-field t-feats">
+        <legend>{{tester.features}}</legend>
+        <label><input type="checkbox" value="calt" checked> calt</label>
+        <label><input type="checkbox" value="dlig"> dlig</label>
+        <label><input type="checkbox" value="HSKL"> HSKL</label>
+        <label><input type="checkbox" value="zero"> zero</label>
+        <label><input type="checkbox" value="onum"> onum</label>
+        <label><input type="checkbox" value="frac"> frac</label>
+      </fieldset>
+      <label class="t-field"><span>{{tester.set}}</span>
+        <select id="t-ss">
+          <option value="">{{tester.set_none}}</option>
+          {{%ss_options}}
+        </select>
+      </label>
+      <label class="t-check"><input type="checkbox" id="t-grid"> {{tester.grid}}</label>
+    </div>
+    <div class="t-preview-wrap">
+      <label class="sr-only" for="t-text">{{tester.text_label}}</label>
+      <textarea id="t-text" class="t-preview" spellcheck="false">{{tester.sample}}
+0O il1I| 5SZ2 -&gt; =&gt; != /= 1/2 1984</textarea>
+      <div class="t-css"><code id="t-css-out">font-family: "Noctua Iosevka"; font-size: 56px; font-weight: 400; font-stretch: 100%; font-style: normal;</code><button type="button" class="btn btn-small copy js-only" data-copy="#t-css-out" aria-describedby="t-css-out">{{tester.copy_css}}</button></div>
+      <p class="t-face"><span class="t-face-label">{{tester.face}}</span> <code class="t-face-file" lang="en">NoctuaIosevka-Regular.woff2</code> <span class="t-face-state" aria-live="polite"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 13 DOWNLOAD -->
+<section id="download" class="sec sec-download band band-pink" aria-labelledby="download-title" tabindex="-1" data-arm="d:800:1-5:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§13</span><span>{{dl.folio}}</span></p>
+    <h2 id="download-title" class="sec-title">{{dl.title}}</h2>
+    <span class="bignum" aria-hidden="true">13</span>
+  </div>
+  <p class="sec-lede">{{&dl.lede}}</p>
+  <ul class="dl-grid">
+    {{%downloads}}
+  </ul>
+  <div class="install" data-reveal>
+    <div class="ins-tabs js-only" role="tablist" aria-label="{{dl.os_label}}">
+      <button type="button" role="tab" id="os-linux" aria-controls="os-linux-p" aria-selected="true">Linux</button>
+      <button type="button" role="tab" id="os-mac" aria-controls="os-mac-p" aria-selected="false" tabindex="-1">macOS</button>
+      <button type="button" role="tab" id="os-win" aria-controls="os-win-p" aria-selected="false" tabindex="-1">Windows</button>
+    </div>
+    <div class="ins-panes">
+    <div class="ins-pane" role="group" id="os-linux-p" aria-labelledby="os-linux-p-name">
+      <p class="ins-name static-only" id="os-linux-p-name">Linux</p>
+      <ol class="steps">
+        <li><p>{{dl.linux_1}}</p><div class="cmd-block"><pre><code id="cmd-linux-1"><span class="cl">mkdir -p ~/<wbr>.local/<wbr>share/<wbr>fonts/<wbr>NoctuaIosevka</span><span class="cl">unzip noctua-iosevka-nerd-font-ttf-normal.zip -d ~/<wbr>.local/<wbr>share/<wbr>fonts/<wbr>NoctuaIosevka</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cmd-linux-1" aria-describedby="cmd-linux-1">{{copy}}</button></div></li>
+        <li><p>{{dl.linux_2}}</p><div class="cmd-block"><pre><code id="cmd-linux-2"><span class="cl">fc-cache -f</span><span class="cl">fc-match "NoctuaIosevka Nerd Font Mono"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cmd-linux-2" aria-describedby="cmd-linux-2">{{copy}}</button></div></li>
+        <li><p>{{&dl.linux_3}}</p></li>
+      </ol>
+    </div>
+    <div class="ins-pane" role="group" id="os-mac-p" aria-labelledby="os-mac-p-name" hidden>
+      <p class="ins-name static-only" id="os-mac-p-name">macOS</p>
+      <ol class="steps">
+        <li><p>{{dl.mac_1}}</p></li>
+        <li><p>{{&dl.mac_2}}</p><div class="cmd-block"><pre><code id="cmd-mac-1"><span class="cl">unzip noctua-iosevka-nerd-font-ttf-normal.zip -d ~/<wbr>Library/<wbr>Fonts/<wbr>NoctuaIosevka</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cmd-mac-1" aria-describedby="cmd-mac-1">{{copy}}</button></div></li>
+        <li><p>{{dl.mac_3}}</p></li>
+      </ol>
+    </div>
+    <div class="ins-pane" role="group" id="os-win-p" aria-labelledby="os-win-p-name" hidden>
+      <p class="ins-name static-only" id="os-win-p-name">Windows</p>
+      <ol class="steps">
+        <li><p>{{dl.win_1}}</p></li>
+        <li><p>{{&dl.win_2}}</p></li>
+        <li><p>{{dl.win_3}}</p></li>
+      </ol>
+    </div>
+    </div>
+    <div class="configs">
+      <p class="cfg-title">{{dl.cfg_title}}</p>
+      <div class="cfg">
+        <p class="cfg-name">Ghostty <small>~/.config/ghostty/config</small></p>
+        <div class="cmd-block"><pre><code id="cfg-ghostty"><span class="cl">font-family = "NoctuaIosevka Nerd Font Mono"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-ghostty" aria-describedby="cfg-ghostty">{{copy}}</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">kitty <small>~/.config/kitty/kitty.conf</small></p>
+        <div class="cmd-block"><pre><code id="cfg-kitty"><span class="cl">font_family NoctuaIosevka Nerd Font Mono</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-kitty" aria-describedby="cfg-kitty">{{copy}}</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">Alacritty <small>~/.config/alacritty/alacritty.toml</small></p>
+        <div class="cmd-block"><pre><code id="cfg-alacritty"><span class="cl">[font.normal]</span><span class="cl">family = "NoctuaIosevka Nerd Font Mono"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-alacritty" aria-describedby="cfg-alacritty">{{copy}}</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">VS Code <small>settings.json</small></p>
+        <div class="cmd-block"><pre><code id="cfg-vscode"><span class="cl">"editor.fontFamily": "'NoctuaIosevka Nerd Font Mono', monospace",</span><span class="cl">"editor.fontLigatures": true,</span><span class="cl">"terminal.integrated.fontFamily": "'NoctuaIosevka Nerd Font Mono'"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-vscode" aria-describedby="cfg-vscode">{{copy}}</button></div>
+      </div>
+      <p class="note">{{&dl.cfg_note}}</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 LICENCE -->
+<section id="licence" class="sec sec-licence" aria-labelledby="licence-title">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§14</span><span>{{lic.folio}}</span></p>
+    <h2 id="licence-title" class="sec-title">{{lic.title}}</h2>
+    <span class="bignum" aria-hidden="true">14</span>
+    <p class="sec-lede">{{lic.lede}}</p>
+  </div>
+  <div class="credits">
+    <article class="credit" data-reveal>
+      <h3>Iosevka</h3>
+      <p>{{&lic.iosevka}}</p>
+      <p class="credit-links"><a href="{{@root}}assets/fonts/licenses/OFL-Iosevka.txt">{{lic.iosevka_link}}</a><a href="https://github.com/be5invis/Iosevka">{{lic.iosevka_repo}}</a></p>
+    </article>
+    <article class="credit" data-reveal>
+      <h3>Nerd Fonts</h3>
+      <p>{{&lic.nerd}}</p>
+      <p class="credit-links"><a href="{{@root}}assets/fonts/licenses/LICENSE-NerdFontsSymbolsOnly.txt">{{lic.nerd_link}}</a><a href="https://github.com/ryanoasis/nerd-fonts">{{lic.nerd_repo}}</a></p>
+    </article>
+    <article class="credit" data-reveal>
+      <h3>{{lic.page_title}}</h3>
+      <p>{{&lic.page}}</p>
+      <p class="credit-links"><a href="{{@repo_url}}">{{lic.page_link}}</a></p>
+    </article>
+  </div>
+  <div class="colophon" data-reveal>
+    <p class="colophon-line js-only"><span class="colophon-k">{{lic.colophon_faces}}</span><span class="colophon-v" id="faces-loaded">—</span></p>
+    <p class="colophon-line"><span class="colophon-k">{{lic.colophon_requests}}</span><span class="colophon-v">0</span></p>
+    <p class="colophon-line"><span class="colophon-k">{{lic.colophon_images}}</span><span class="colophon-v">0</span></p>
+    <p class="colophon-line"><span class="colophon-k">{{lic.colophon_inks}}</span><span class="colophon-v colophon-inks"><i class="ink-a"></i><i class="ink-b"></i><i class="ink-c"></i></span></p>
+  </div>
+</section>
+</main>
+
+<footer class="footer" data-arm="d:100:3:i">
+  <p class="footer-mark" aria-hidden="true"><span data-kinetic="weight">Noctua</span><span class="lfd lw1 lsi">Iosevka</span></p>
+  <div class="footer-row">
+    <p><a href="{{@repo_url}}">{{@repo_label}}</a></p>
+    <nav class="lang" aria-label="{{nav.lang_footer}}">
+      <a href="{{@href_en}}" hreflang="en" lang="en"{{@cur_en}}>English</a>
+      <a href="{{@href_pt}}" hreflang="pt-BR" lang="pt-BR"{{@cur_pt}}>Português (Brasil)</a>
+    </nav>
+    <p>{{footer.licences}}</p>
+  </div>
+</footer>
+<p class="sr-only" id="announce" role="status"></p>
+</body>
+</html>

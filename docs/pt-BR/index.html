@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Noctua Iosevka — uma monoespaçada para terminais, editores e código</title>
+<meta name="description" content="Noctua Iosevka é uma compilação sob medida da Iosevka: 135 estilos de verdade em nove pesos, cinco larguras e três inclinações, 19 conjuntos estilísticos com nome, 99 variantes de caractere e uma gêmea Nerd Font para o terminal. Livre sob a SIL Open Font License 1.1.">
+<link rel="canonical" href="https://noctua-world.github.io/noctua-fonts/pt-BR/">
+<link rel="alternate" hreflang="en" href="https://noctua-world.github.io/noctua-fonts/">
+<link rel="alternate" hreflang="pt-BR" href="https://noctua-world.github.io/noctua-fonts/pt-BR/">
+<link rel="alternate" hreflang="x-default" href="https://noctua-world.github.io/noctua-fonts/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Noctua Iosevka">
+<meta property="og:title" content="Noctua Iosevka — 135 estilos de verdade de uma só monoespaçada">
+<meta property="og:description" content="Nove pesos, cinco larguras, três inclinações, 19 conjuntos estilísticos e uma gêmea Nerd Font. Uma compilação sob medida da Iosevka, livre sob a SIL OFL 1.1.">
+<meta property="og:url" content="https://noctua-world.github.io/noctua-fonts/pt-BR/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="theme-color" content="#f3eee3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0a10" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<script src="../assets/js/boot.js"></script>
+<link rel="preload" href="../assets/fonts/text/NoctuaIosevka-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/display/NoctuaIosevka-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/fonts.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/facts.css">
+<script type="module" src="../assets/js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<header class="masthead">
+  <a class="brand" href="#top">
+    <span class="brand-mark" aria-hidden="true"><span>N</span><span>I</span></span>
+    <span class="brand-word" aria-hidden="true">Noctua<b>/</b>Iosevka</span>
+    <span class="sr-only">Noctua Iosevka, voltar ao topo</span>
+  </a>
+  <nav class="toc" id="toc" aria-label="Seções">
+    <ol>
+      <li><a href="#faces">Estilos</a></li>
+      <li><a href="#widths">Larguras</a></li>
+      <li><a href="#legibility">Legibilidade</a></li>
+      <li><a href="#sets">Conjuntos</a></li>
+      <li><a href="#code">Código</a></li>
+      <li><a href="#terminal">Terminal</a></li>
+      <li><a href="#tester">Teste</a></li>
+      <li><a href="#download">Baixar</a></li>
+    </ol>
+  </nav>
+  <div class="controls">
+    <button class="ctl toc-btn js-only" id="toc-btn" type="button" aria-expanded="false" aria-controls="toc">
+      <span class="ctl-ico ico-menu" aria-hidden="true"></span><span class="ctl-label">Seções</span>
+    </button>
+    <button class="ctl js-only" id="theme-toggle" type="button">
+      <span class="ctl-ico ico-theme" aria-hidden="true"></span><span class="ctl-label">Tema</span><span class="sr-only ctl-more">: alternar entre dia e noite</span>
+    </button>
+    <button class="ctl js-only" id="motion-toggle" type="button">
+      <span class="ctl-ico ico-motion" aria-hidden="true"></span><span class="ctl-label">Pausar animações</span>
+    </button>
+    <nav class="lang" aria-label="Idioma">
+      <a href="../" hreflang="en" lang="en">EN<span class="sr-only"> · English</span></a>
+      <a href="./" hreflang="pt-BR" lang="pt-BR" aria-current="page">PT<span class="sr-only"> · Português (Brasil)</span></a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+
+<div class="ruler js-only" aria-hidden="true"><div class="ruler-ticks"></div><div class="ruler-mark"><span class="ruler-val">0000</span><span class="ruler-unit">/1000 em</span></div></div>
+<canvas class="trail js-only" aria-hidden="true"></canvas>
+
+<main id="main" tabindex="-1">
+
+<!-- HERO -->
+<section id="top" class="hero" aria-labelledby="hero-title" data-slip tabindex="-1">
+  <canvas class="hero-mesh js-only" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="hero-meta">
+      <span class="hm-build">Uma compilação sob medida da Iosevka</span>
+      <span>Versão 1.0.0</span>
+      <span>SIL OFL 1.1</span>
+      <span class="now" aria-hidden="true"><span class="now-label">Renderizando agora</span><span class="now-ag f-w8">Ag</span><span class="now-file">NoctuaIosevka-ExtraBold.woff2</span></span>
+      <span class="hero-hint js-only" aria-hidden="true"><span class="hint-dot"></span>Passe o mouse pelo título — o peso acompanha o cursor</span>
+    </p>
+    <h1 id="hero-title" class="hero-title">
+      <span class="sr-only">Noctua Iosevka</span>
+      <span class="line line-1" aria-hidden="true" data-kinetic="weight">Noctua</span>
+      <span class="line line-2" aria-hidden="true" data-kinetic="slope">Iosevka</span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-lede">Uma monoespaçada para terminais, editores e código. Nove pesos, cinco larguras, três inclinações — cada um é um estilo de verdade, nenhum sintetizado pelo navegador.</p>
+      <dl class="flaps">
+        <div class="flap"><dt>estilos</dt><dd><span class="odo" data-value="135">135</span></dd></div>
+        <div class="flap"><dt>pesos</dt><dd><span class="odo" data-value="9">9</span></dd></div>
+        <div class="flap"><dt>larguras</dt><dd><span class="odo" data-value="5">5</span></dd></div>
+        <div class="flap"><dt>inclinações</dt><dd><span class="odo" data-value="3">3</span></dd></div>
+        <div class="flap"><dt>pontos de código</dt><dd><span class="odo" data-value="7.580">7.580</span></dd></div>
+        <div class="flap"><dt>conjuntos estilísticos</dt><dd><span class="odo" data-value="19">19</span></dd></div>
+        <div class="flap"><dt>variantes de caractere</dt><dd><span class="odo" data-value="99">99</span></dd></div>
+      </dl>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="#download">Baixar a v1.0.0</a>
+        <a class="btn" href="#faces">Explorar os 135 estilos</a>
+      </div>
+    </div>
+  </div>
+  <canvas class="ticker js-only" aria-hidden="true"></canvas>
+</section>
+
+<!-- 01 WHAT IT IS -->
+<section id="about" class="sec sec-about" aria-labelledby="about-title">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§01</span><span>O que é</span></p>
+    <h2 id="about-title" class="sec-title" data-scrub="weight">Não é um fork. Nada foi redesenhado.</h2>
+    <span class="bignum" aria-hidden="true">01</span>
+  </div>
+  <p class="statement" data-words>A Noctua Iosevka é uma seleção cuidadosa entre as variantes de glifo que a Iosevka já oferece, mais uma escada de larguras remapeada. A largura Normal tem 600 unidades — o mesmo avanço de 0,6 em da JetBrains Mono — e assim cada glifo tem espaço para ser ele mesmo.</p>
+  <div class="plan" data-reveal>
+    <article class="plan-item">
+      <h3 class="plan-key"><code>spacing = "term"</code></h3>
+      <p>Os símbolos são estreitados até caber na célula do terminal, e as ligaduras continuam no arquivo como um recurso OpenType opcional, que cada aplicativo pode desligar.</p>
+    </article>
+    <article class="plan-item">
+      <h3 class="plan-key"><code>noCvSs = false</code></h3>
+      <p>As variantes de caractere e os conjuntos estilísticos vão junto no arquivo, então qualquer editor que entenda OpenType troca formas enquanto você trabalha.</p>
+    </article>
+    <article class="plan-item">
+      <h3 class="plan-key"><code>exportGlyphNames = true</code></h3>
+      <p>Os nomes dos glifos ficam no arquivo — é deles que dependem o patcher da Nerd Fonts e terminais como o kitty.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 02 FACES -->
+<section id="faces" class="sec sec-faces" aria-labelledby="faces-title" tabindex="-1">
+  <div class="sec-head head-fit" data-reveal data-arm="d:100-900:1:u">
+    <p class="folio"><span>§02</span><span>A família</span></p>
+    <h2 id="faces-title" class="sec-title t-ramp"><span class="sr-only">135 estilos. Nenhum sintetizado.</span><span class="t-vis" aria-hidden="true"><span class="nb"><span class="lw1">1</span><span class="lw1">3</span><span class="lw2">5</span></span> <span class="nb"><span class="lw2">e</span><span class="lw2">s</span><span class="lw2">t</span><span class="lw3">i</span><span class="lw3">l</span><span class="lw3">o</span><span class="lw4">s</span><span class="lw4">.</span></span> <span class="nb"><span class="lw4">N</span><span class="lw4">e</span><span class="lw5">n</span><span class="lw5">h</span><span class="lw5">u</span><span class="lw6">m</span></span> <span class="nb"><span class="lw6">s</span><span class="lw6">i</span><span class="lw6">n</span><span class="lw7">t</span><span class="lw7">e</span><span class="lw7">t</span><span class="lw8">i</span><span class="lw8">z</span><span class="lw8">a</span><span class="lw8">d</span><span class="lw9">o</span><span class="lw9">.</span></span></span></h2>
+    <span class="bignum" aria-hidden="true">02</span>
+  </div>
+  <p class="sec-lede">9 pesos × 5 larguras × 3 inclinações. Cada coordenada é um arquivo próprio, e o navegador nunca tem permissão para fingir um negrito ou uma inclinação.<span class="js-only"> Escolha uma e o palco passa a usar exatamente aquele estilo.</span></p>
+
+  <div class="explorer" data-reveal data-arm="s:100-900:3:u s:400:1-5:u s:400:3:i,o t:400:3:u">
+    <div class="stage" id="stage" data-slip>
+      <p class="stage-name" aria-hidden="true"><span class="stage-family">Noctua Iosevka</span> <span class="stage-style">Regular</span></p>
+      <p class="sr-only" id="stage-live" aria-live="polite" lang="en">Noctua Iosevka Regular</p>
+      <p class="stage-file"><span class="stage-file-name">NoctuaIosevka-Regular.woff2</span></p>
+      <div class="stage-grid" aria-hidden="true"></div>
+      <div class="stage-big-wrap" aria-hidden="true">
+        <p class="stage-big"><span class="stage-ag">Ag</span><span class="stage-ag stage-ag-ghost">Ag</span></p>
+        <div class="guides">
+          <span class="g-line g-asc"><b>ascendente</b><i>965</i></span>
+          <span class="g-line g-cap"><b>altura das maiúsculas</b><i>735</i></span>
+          <span class="g-line g-x"><b>altura-x</b><i>520</i></span>
+          <span class="g-line g-base"><b>linha de base</b><i>0</i></span>
+          <span class="g-line g-desc"><b>descendente</b><i>−285</i></span>
+          <span class="g-box"><i class="g-adv">2 × 600</i></span>
+        </div>
+      </div>
+      <div class="stage-lines">
+        <p class="stage-line">Um pequeno jabuti xereta viu dez cegonhas felizes.</p>
+        <p class="stage-line stage-digits">0123456789 {[(&lt;&gt;)]} il1I| 0O8B</p>
+      </div>
+      <p class="stage-scan js-only" aria-hidden="true"><span class="scan-dot"></span><span class="scan-on">Percorrendo a família — passe o cursor, clique ou use as setas para assumir o controle</span><span class="scan-off">Sua escolha</span></p>
+    </div>
+    <div class="axes-col">
+      <div class="axes js-only" role="group" aria-label="Escolha um estilo">
+        <fieldset class="axis axis-wght"><legend>Peso</legend><div class="chips chips-9">
+      <label class="chip"><input type="radio" name="wght" value="100"><span class="chip-face lfs lw1" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Thin</span> <small>100</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="200"><span class="chip-face lfs lw2" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">ExtraLight</span> <small>200</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="300"><span class="chip-face lfs lw3" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Light</span> <small>300</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="400" checked><span class="chip-face lfs lw4" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Regular</span> <small>400</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="500"><span class="chip-face lfs lw5" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Medium</span> <small>500</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="600"><span class="chip-face lfs lw6" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">SemiBold</span> <small>600</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="700"><span class="chip-face lfs lw7" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Bold</span> <small>700</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="800"><span class="chip-face lfs lw8" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">ExtraBold</span> <small>800</small></span></label>
+      <label class="chip"><input type="radio" name="wght" value="900"><span class="chip-face lfs lw9" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Heavy</span> <small>900</small></span></label>
+      </div></fieldset>
+      <fieldset class="axis axis-wdth"><legend>Largura</legend><div class="chips chips-5">
+      <label class="chip"><input type="radio" name="wdth" value="1"><span class="chip-face lfs lx1" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Condensed</span> <small>456</small></span></label>
+      <label class="chip"><input type="radio" name="wdth" value="2"><span class="chip-face lfs lx2" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">SemiCondensed</span> <small>548</small></span></label>
+      <label class="chip"><input type="radio" name="wdth" value="3" checked><span class="chip-face lfs lx3" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Normal</span> <small>600</small></span></label>
+      <label class="chip"><input type="radio" name="wdth" value="4"><span class="chip-face lfs lx4" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">SemiExtended</span> <small>658</small></span></label>
+      <label class="chip"><input type="radio" name="wdth" value="5"><span class="chip-face lfs lx5" aria-hidden="true">Aa</span><span class="chip-meta"><span lang="en">Extended</span> <small>720</small></span></label>
+      </div></fieldset>
+      <fieldset class="axis axis-slope"><legend>Inclinação</legend><div class="chips chips-3">
+      <label class="chip"><input type="radio" name="slope" value="up" checked><span class="chip-face lfs lsu" aria-hidden="true">Aa</span><span class="chip-meta"><span>Reta</span> <small>0°</small></span></label>
+      <label class="chip"><input type="radio" name="slope" value="it"><span class="chip-face lfs lsi" aria-hidden="true">Aa</span><span class="chip-meta"><span>Itálica</span> <small>9°</small></span></label>
+      <label class="chip"><input type="radio" name="slope" value="ob"><span class="chip-face lfs lso" aria-hidden="true">Aa</span><span class="chip-meta"><span>Oblíqua</span> <small>9°</small></span></label>
+      </div></fieldset>
+      </div>
+      <div class="readout">
+        <p class="ro-title">Lido nas tabelas do próprio estilo</p>
+        <dl class="ro-list">
+          <div><dt><code>OS/2.usWeightClass</code></dt><dd id="ro-wght">400</dd></div>
+          <div><dt><code>OS/2.usWidthClass</code></dt><dd id="ro-wdth">5</dd></div>
+          <div><dt><code>post.italicAngle</code></dt><dd id="ro-ital">0°</dd></div>
+          <div><dt>avanço <code>a</code></dt><dd id="ro-adv">600/1000</dd></div>
+        </dl>
+        <code class="stage-css">font-weight: 400; font-stretch: 100%; font-style: normal;</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="wall-wrap" data-reveal>
+    <h3 class="wall-title">A família inteira numa só folha <small class="js-only">— cada quadradinho é um arquivo de verdade; escolha um para levá-lo ao palco. As setas do teclado percorrem a folha.</small><small class="static-only">— cada quadradinho é um arquivo de verdade, composto no próprio estilo.</small></h3>
+    <div class="wall" id="wall" role="group" aria-label="Os 135 estilos">
+      <div class="wall-panel" data-s="0" data-arm="s:100-900:1-5:u">
+      <h4><span>Reta</span><span>45 estilos</span></h4>
+      <div class="wall-grid">
+      <span class="wall-lab wall-corner" aria-hidden="true"></span>
+      <span class="wall-lab" aria-hidden="true">100</span>
+      <span class="wall-lab" aria-hidden="true">200</span>
+      <span class="wall-lab" aria-hidden="true">300</span>
+      <span class="wall-lab" aria-hidden="true">400</span>
+      <span class="wall-lab" aria-hidden="true">500</span>
+      <span class="wall-lab" aria-hidden="true">600</span>
+      <span class="wall-lab" aria-hidden="true">700</span>
+      <span class="wall-lab" aria-hidden="true">800</span>
+      <span class="wall-lab" aria-hidden="true">900</span>
+      <span class="wall-lab row" aria-hidden="true">456</span>
+      <span class="tile lfs lw1 lx1 lsu" data-w="0" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed Thin" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx1 lsu" data-w="1" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed ExtraLight" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx1 lsu" data-w="2" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed Light" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx1 lsu" data-w="3" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx1 lsu" data-w="4" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed Medium" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx1 lsu" data-w="5" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed SemiBold" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx1 lsu" data-w="6" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed Bold" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx1 lsu" data-w="7" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed ExtraBold" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx1 lsu" data-w="8" data-x="0" data-s="0" role="img" aria-label="Noctua Iosevka Condensed Heavy" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">548</span>
+      <span class="tile lfs lw1 lx2 lsu" data-w="0" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed Thin" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx2 lsu" data-w="1" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed ExtraLight" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx2 lsu" data-w="2" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed Light" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx2 lsu" data-w="3" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx2 lsu" data-w="4" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed Medium" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx2 lsu" data-w="5" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed SemiBold" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx2 lsu" data-w="6" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed Bold" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx2 lsu" data-w="7" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed ExtraBold" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx2 lsu" data-w="8" data-x="1" data-s="0" role="img" aria-label="Noctua Iosevka SemiCondensed Heavy" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">600</span>
+      <span class="tile lfs lw1 lx3 lsu" data-w="0" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka Thin" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx3 lsu" data-w="1" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka ExtraLight" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx3 lsu" data-w="2" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka Light" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx3 lsu" data-w="3" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka Regular" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx3 lsu" data-w="4" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka Medium" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx3 lsu" data-w="5" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka SemiBold" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx3 lsu" data-w="6" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka Bold" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx3 lsu" data-w="7" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka ExtraBold" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx3 lsu" data-w="8" data-x="2" data-s="0" role="img" aria-label="Noctua Iosevka Heavy" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">658</span>
+      <span class="tile lfs lw1 lx4 lsu" data-w="0" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended Thin" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx4 lsu" data-w="1" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended ExtraLight" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx4 lsu" data-w="2" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended Light" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx4 lsu" data-w="3" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx4 lsu" data-w="4" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended Medium" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx4 lsu" data-w="5" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended SemiBold" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx4 lsu" data-w="6" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended Bold" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx4 lsu" data-w="7" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended ExtraBold" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx4 lsu" data-w="8" data-x="3" data-s="0" role="img" aria-label="Noctua Iosevka SemiExtended Heavy" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">720</span>
+      <span class="tile lfs lw1 lx5 lsu" data-w="0" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended Thin" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx5 lsu" data-w="1" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended ExtraLight" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx5 lsu" data-w="2" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended Light" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx5 lsu" data-w="3" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx5 lsu" data-w="4" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended Medium" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx5 lsu" data-w="5" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended SemiBold" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx5 lsu" data-w="6" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended Bold" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx5 lsu" data-w="7" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended ExtraBold" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx5 lsu" data-w="8" data-x="4" data-s="0" role="img" aria-label="Noctua Iosevka Extended Heavy" lang="en">Ag</span>
+      </div></div>
+      <div class="wall-panel" data-s="1" data-arm="s:100-900:1-5:i">
+      <h4><span>Itálica</span><span>45 estilos</span></h4>
+      <div class="wall-grid">
+      <span class="wall-lab wall-corner" aria-hidden="true"></span>
+      <span class="wall-lab" aria-hidden="true">100</span>
+      <span class="wall-lab" aria-hidden="true">200</span>
+      <span class="wall-lab" aria-hidden="true">300</span>
+      <span class="wall-lab" aria-hidden="true">400</span>
+      <span class="wall-lab" aria-hidden="true">500</span>
+      <span class="wall-lab" aria-hidden="true">600</span>
+      <span class="wall-lab" aria-hidden="true">700</span>
+      <span class="wall-lab" aria-hidden="true">800</span>
+      <span class="wall-lab" aria-hidden="true">900</span>
+      <span class="wall-lab row" aria-hidden="true">456</span>
+      <span class="tile lfs lw1 lx1 lsi" data-w="0" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed Thin Italic" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx1 lsi" data-w="1" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed ExtraLight Italic" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx1 lsi" data-w="2" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed Light Italic" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx1 lsi" data-w="3" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed Italic" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx1 lsi" data-w="4" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed Medium Italic" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx1 lsi" data-w="5" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed SemiBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx1 lsi" data-w="6" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed Bold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx1 lsi" data-w="7" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed ExtraBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx1 lsi" data-w="8" data-x="0" data-s="1" role="img" aria-label="Noctua Iosevka Condensed Heavy Italic" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">548</span>
+      <span class="tile lfs lw1 lx2 lsi" data-w="0" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed Thin Italic" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx2 lsi" data-w="1" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed ExtraLight Italic" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx2 lsi" data-w="2" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed Light Italic" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx2 lsi" data-w="3" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed Italic" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx2 lsi" data-w="4" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed Medium Italic" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx2 lsi" data-w="5" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed SemiBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx2 lsi" data-w="6" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed Bold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx2 lsi" data-w="7" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed ExtraBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx2 lsi" data-w="8" data-x="1" data-s="1" role="img" aria-label="Noctua Iosevka SemiCondensed Heavy Italic" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">600</span>
+      <span class="tile lfs lw1 lx3 lsi" data-w="0" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka Thin Italic" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx3 lsi" data-w="1" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka ExtraLight Italic" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx3 lsi" data-w="2" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka Light Italic" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx3 lsi" data-w="3" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka Italic" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx3 lsi" data-w="4" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka Medium Italic" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx3 lsi" data-w="5" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka SemiBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx3 lsi" data-w="6" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka Bold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx3 lsi" data-w="7" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka ExtraBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx3 lsi" data-w="8" data-x="2" data-s="1" role="img" aria-label="Noctua Iosevka Heavy Italic" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">658</span>
+      <span class="tile lfs lw1 lx4 lsi" data-w="0" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended Thin Italic" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx4 lsi" data-w="1" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended ExtraLight Italic" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx4 lsi" data-w="2" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended Light Italic" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx4 lsi" data-w="3" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended Italic" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx4 lsi" data-w="4" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended Medium Italic" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx4 lsi" data-w="5" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended SemiBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx4 lsi" data-w="6" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended Bold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx4 lsi" data-w="7" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended ExtraBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx4 lsi" data-w="8" data-x="3" data-s="1" role="img" aria-label="Noctua Iosevka SemiExtended Heavy Italic" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">720</span>
+      <span class="tile lfs lw1 lx5 lsi" data-w="0" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended Thin Italic" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx5 lsi" data-w="1" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended ExtraLight Italic" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx5 lsi" data-w="2" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended Light Italic" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx5 lsi" data-w="3" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended Italic" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx5 lsi" data-w="4" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended Medium Italic" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx5 lsi" data-w="5" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended SemiBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx5 lsi" data-w="6" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended Bold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx5 lsi" data-w="7" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended ExtraBold Italic" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx5 lsi" data-w="8" data-x="4" data-s="1" role="img" aria-label="Noctua Iosevka Extended Heavy Italic" lang="en">Ag</span>
+      </div></div>
+      <div class="wall-panel" data-s="2" data-arm="s:100-900:1-5:o">
+      <h4><span>Oblíqua</span><span>45 estilos</span></h4>
+      <div class="wall-grid">
+      <span class="wall-lab wall-corner" aria-hidden="true"></span>
+      <span class="wall-lab" aria-hidden="true">100</span>
+      <span class="wall-lab" aria-hidden="true">200</span>
+      <span class="wall-lab" aria-hidden="true">300</span>
+      <span class="wall-lab" aria-hidden="true">400</span>
+      <span class="wall-lab" aria-hidden="true">500</span>
+      <span class="wall-lab" aria-hidden="true">600</span>
+      <span class="wall-lab" aria-hidden="true">700</span>
+      <span class="wall-lab" aria-hidden="true">800</span>
+      <span class="wall-lab" aria-hidden="true">900</span>
+      <span class="wall-lab row" aria-hidden="true">456</span>
+      <span class="tile lfs lw1 lx1 lso" data-w="0" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed Thin Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx1 lso" data-w="1" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed ExtraLight Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx1 lso" data-w="2" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed Light Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx1 lso" data-w="3" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx1 lso" data-w="4" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed Medium Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx1 lso" data-w="5" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed SemiBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx1 lso" data-w="6" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed Bold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx1 lso" data-w="7" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed ExtraBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx1 lso" data-w="8" data-x="0" data-s="2" role="img" aria-label="Noctua Iosevka Condensed Heavy Oblique" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">548</span>
+      <span class="tile lfs lw1 lx2 lso" data-w="0" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed Thin Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx2 lso" data-w="1" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed ExtraLight Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx2 lso" data-w="2" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed Light Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx2 lso" data-w="3" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx2 lso" data-w="4" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed Medium Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx2 lso" data-w="5" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed SemiBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx2 lso" data-w="6" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed Bold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx2 lso" data-w="7" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed ExtraBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx2 lso" data-w="8" data-x="1" data-s="2" role="img" aria-label="Noctua Iosevka SemiCondensed Heavy Oblique" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">600</span>
+      <span class="tile lfs lw1 lx3 lso" data-w="0" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka Thin Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx3 lso" data-w="1" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka ExtraLight Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx3 lso" data-w="2" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka Light Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx3 lso" data-w="3" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx3 lso" data-w="4" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka Medium Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx3 lso" data-w="5" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka SemiBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx3 lso" data-w="6" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka Bold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx3 lso" data-w="7" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka ExtraBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx3 lso" data-w="8" data-x="2" data-s="2" role="img" aria-label="Noctua Iosevka Heavy Oblique" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">658</span>
+      <span class="tile lfs lw1 lx4 lso" data-w="0" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended Thin Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx4 lso" data-w="1" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended ExtraLight Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx4 lso" data-w="2" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended Light Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx4 lso" data-w="3" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx4 lso" data-w="4" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended Medium Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx4 lso" data-w="5" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended SemiBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx4 lso" data-w="6" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended Bold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx4 lso" data-w="7" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended ExtraBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx4 lso" data-w="8" data-x="3" data-s="2" role="img" aria-label="Noctua Iosevka SemiExtended Heavy Oblique" lang="en">Ag</span>
+      <span class="wall-lab row" aria-hidden="true">720</span>
+      <span class="tile lfs lw1 lx5 lso" data-w="0" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended Thin Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw2 lx5 lso" data-w="1" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended ExtraLight Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw3 lx5 lso" data-w="2" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended Light Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw4 lx5 lso" data-w="3" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw5 lx5 lso" data-w="4" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended Medium Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw6 lx5 lso" data-w="5" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended SemiBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw7 lx5 lso" data-w="6" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended Bold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw8 lx5 lso" data-w="7" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended ExtraBold Oblique" lang="en">Ag</span>
+      <span class="tile lfs lw9 lx5 lso" data-w="8" data-x="4" data-s="2" role="img" aria-label="Noctua Iosevka Extended Heavy Oblique" lang="en">Ag</span>
+      </div></div>
+      <span class="wall-cross" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 WIDTHS -->
+<section id="widths" class="sec sec-widths" aria-labelledby="widths-title" tabindex="-1" data-arm="d:500,800:1-5:u d:100:1,5:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§03</span><span>A escada de larguras</span></p>
+    <h2 id="widths-title" class="sec-title t-words"><span class="sr-only">Cinco larguras, uma escada honesta.</span><span class="t-vis" aria-hidden="true"><span class="nb lx1">Cinco</span> <span class="nb lx2">larguras,</span> <span class="nb lx3">uma</span> <span class="nb lx4">escada</span> <span class="nb lx5">honesta.</span></span></h2>
+    <span class="bignum" aria-hidden="true"><span class="lx1">0</span><span class="lx5">3</span></span>
+  </div>
+  <p class="sec-lede">A Iosevka original é famosa por ser estreita. Aqui a Normal tem 600 unidades — o 0,6 em da JetBrains Mono — e os outros quatro degraus correspondem direitinho às classes de largura do CSS: <code>condensed</code>, <code>semi-condensed</code>, <code>semi-expanded</code>, <code>expanded</code>.</p>
+  <div class="breathe-wrap" aria-hidden="true">
+    <div class="breathe-box">
+      <p class="breathe lfd lw8" data-kinetic="breathe">RESPIRA</p>
+      <div class="guides guides-row">
+        <span class="g-line g-cap"><b>altura das maiúsculas</b><i>735</i></span>
+        <span class="g-line g-x"><b>altura-x</b><i>520</i></span>
+        <span class="g-line g-base"><b>linha de base</b><i>0</i></span>
+      </div>
+    </div>
+    <p class="breathe-read"><span class="breathe-name">Normal</span> <span class="breathe-val">600</span></p>
+  </div>
+  <ol class="ladder">
+    <li class="rung" data-reveal><div class="rung-meta"><b lang="en">Condensed</b><span class="rung-val">456</span><code>font-stretch: 75%</code></div><div class="rung-sample-wrap"><p class="rung-sample lfd lw5 lx1">cells[0..16] -&gt; ok</p></div></li>
+    <li class="rung" data-reveal><div class="rung-meta"><b lang="en">SemiCondensed</b><span class="rung-val">548</span><code>font-stretch: 87.5%</code></div><div class="rung-sample-wrap"><p class="rung-sample lfd lw5 lx2">cells[0..16] -&gt; ok</p></div></li>
+    <li class="rung rung-normal" data-reveal><div class="rung-meta"><b lang="en">Normal</b><span class="rung-val">600</span><code>font-stretch: 100%</code></div><div class="rung-sample-wrap"><p class="rung-sample lfd lw5 lx3">cells[0..16] -&gt; ok</p></div></li>
+    <li class="rung" data-reveal><div class="rung-meta"><b lang="en">SemiExtended</b><span class="rung-val">658</span><code>font-stretch: 112.5%</code></div><div class="rung-sample-wrap"><p class="rung-sample lfd lw5 lx4">cells[0..16] -&gt; ok</p></div></li>
+    <li class="rung" data-reveal><div class="rung-meta"><b lang="en">Extended</b><span class="rung-val">720</span><code>font-stretch: 125%</code></div><div class="rung-sample-wrap"><p class="rung-sample lfd lw5 lx5">cells[0..16] -&gt; ok</p></div></li>
+  </ol>
+  <p class="note">A grade clarinha sob cada linha é desenhada em unidades <code>ch</code>. Numa monoespaçada, um <code>ch</code> é exatamente uma célula, então a escada mede a si mesma.</p>
+</section>
+
+<!-- 04 SLOPES -->
+<section id="slopes" class="sec sec-slopes" aria-labelledby="slopes-title" data-arm="d:700:3:i,o d:800:1:i,o d:100:3:i">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§04</span><span>Três inclinações</span></p>
+    <h2 id="slopes-title" class="sec-title t-words"><span class="sr-only">Reta, oblíqua, itálica.</span><span class="t-vis" aria-hidden="true"><span class="nb lsu">Reta,</span> <span class="nb lso">oblíqua,</span> <span class="nb lsi">itálica.</span></span></h2>
+    <span class="bignum lsi" aria-hidden="true">04</span>
+    <p class="sec-lede">Os dois estilos inclinados pendem 9°. A oblíqua é a romana inclinada. A itálica tem a mesma inclinação, com letras cursivas onde faz diferença. Ela redesenha, entre outras, <i>C c e i t</i> e <i>ß æ œ ſ</i> no latim, <i lang="el">ε ι τ ϲ</i> no grego e, no cirílico, as maiúsculas <i lang="ru">С Є</i> e a maior parte das minúsculas — <i lang="ru">а в г д е и й п с т у ф ц ш щ ъ ы ь</i>. As letras acentuadas acompanham a letra-base, e alguns símbolos, como <i>¢ © €</i>, também mudam. Ao todo, 466 dos 7.580 pontos de código são diferentes; o resto é compartilhado com a oblíqua.</p>
+  </div>
+  <figure class="plate" data-reveal data-slip>
+    <div class="plate-ink" aria-hidden="true">
+      <span class="plate-a lfd lw7 lso">cite птица</span>
+      <span class="plate-b lfd lw7 lsi">cite птица</span>
+    </div>
+    <figcaption>A <b class="key key-a">oblíqua</b> impressa por cima da <b class="key key-b">itálica</b>. Onde as tintas coincidem, as formas são iguais; onde elas se separam, a itálica desenhou uma letra própria.</figcaption>
+  </figure>
+</section>
+
+<!-- 05 LEGIBILITY -->
+<section id="legibility" class="sec sec-legibility" aria-labelledby="legibility-title" tabindex="-1" data-arm="t:400:3:i,o t:700:3:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§05</span><span>Legibilidade</span></p>
+    <h2 id="legibility-title" class="sec-title t-ovp" data-slip><span class="sr-only">Toda letra parecida, resolvida pela forma.</span><span class="t-vis" aria-hidden="true">Toda letra <span class="nb"><span class="ovp"><span class="ovp-a">parecida</span><span class="ovp-b">parecida</span></span>,</span> resolvida pela forma.</span></h2>
+    <span class="bignum" aria-hidden="true">05</span>
+  </div>
+  <p class="accept" data-reveal><span>il1I|</span><span>0O8B</span><span>5SZ2</span><span>3 5 S</span><span>g q 9</span></p>
+  <p class="sec-lede">O conjunto de aceitação: em qualquer tamanho e nas três inclinações, nenhum destes caracteres pode ser confundido com o vizinho. Abaixo, cada par é impresso duas vezes no mesmo lugar, em duas tintas — onde as cores se separam, as letras são diferentes.</p>
+  <div class="pair-tools js-only" role="group" aria-label="Inspeção dos pares">
+    <label class="squint" for="squint"><span>Semicerrar os olhos <output id="squint-out">0,0 px</output></span><input type="range" id="squint" min="0" max="40" value="0" step="1"></label>
+    <button type="button" class="switch" id="collide" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"><span></span></span>Imprimir no mesmo lugar</button>
+  </div>
+  <ul class="pairs" id="pairs" data-reveal data-slip>
+    <li class="pair is-teaser"><span class="pair-ink" aria-hidden="true"><span class="pa">0</span><span class="pb">O</span><span class="pg"></span></span><b>0 · O</b><span>Zero oval com um traço comprido por dentro; nunca se confunde com Ø ou ∅.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">1</span><span class="pb">l</span><span class="pg"></span></span><b>1 · l</b><span>O um tem serifa no alto e no pé; o l termina numa cauda reta.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">I</span><span class="pb">l</span><span class="pg"></span></span><b>I · l</b><span>Um I maiúsculo com serifas contra o l de cauda.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">l</span><span class="pb">|</span><span class="pg"></span></span><b>l · |</b><span>A barra continua barra: sem serifa e sem cauda.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">Z</span><span class="pb">2</span><span class="pg"></span></span><b>Z · 2</b><span>O Z leva um traço horizontal no meio.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">5</span><span class="pb">S</span><span class="pg"></span></span><b>5 · S</b><span>Um cinco de topo reto contra um S com uma serifa só.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">8</span><span class="pb">B</span><span class="pg"></span></span><b>8 · B</b><span>Um oito cruzado contra um B com serifas dos dois lados.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">Q</span><span class="pb">O</span><span class="pg"></span></span><b>Q · O</b><span>A cauda do Q atravessa o bojo e se enrola para fora.</span></li>
+    <li class="pair"><span class="pair-ink" aria-hidden="true"><span class="pa">g</span><span class="pb">9</span><span class="pg"></span></span><b>g · 9</b><span>Um g de um andar só, com gancho reto, contra o nove redondo.</span></li>
+    <li class="pair"><span class="pair-ink pair-ink-2" aria-hidden="true"><span class="pa">rn</span><span class="pb">m</span><span class="pg"></span></span><b>rn · m</b><span>O m tem cauda, então r n nunca vira m.</span></li>
+  </ul>
+  <div class="guides guides-pair" aria-hidden="true">
+    <span class="g-line g-asc"><b>ascendente</b><i>965</i></span>
+    <span class="g-line g-cap"><b>altura das maiúsculas</b><i>735</i></span>
+    <span class="g-line g-x"><b>altura-x</b><i>520</i></span>
+    <span class="g-line g-base"><b>linha de base</b><i>0</i></span>
+    <span class="g-line g-desc"><b>descendente</b><i>−285</i></span>
+  </div>
+
+  <figure class="matter js-only" id="matter" data-reveal>
+    <div class="matter-stage" data-slip>
+      <canvas class="matter-canvas" aria-hidden="true"></canvas>
+      <p class="matter-now" aria-hidden="true"><span class="matter-word">il1I|</span></p>
+    </div>
+    <figcaption class="matter-cap">
+      <span>Os mesmos glifos amostrados numa retícula de três tintas: cada ponto é um pixel do contorno de verdade. Ela percorre as letras parecidas.</span>
+      <label class="matter-input"><span>Imprima o seu</span><input type="text" id="matter-text" maxlength="12" spellcheck="false" autocomplete="off" placeholder="digite aqui"></label>
+    </figcaption>
+  </figure>
+
+  <div class="small-sizes" data-reveal>
+    <h3 class="small-title">Tamanhos pequenos, nas três inclinações <small class="js-only">Aponte para uma linha: uma lupa de 6× a redesenha na densidade de pixels da sua tela, até 2×.</small></h3>
+    <div class="ss-head" aria-hidden="true"><span></span><span>Reta</span><span>Itálica</span><span>Oblíqua</span></div>
+    <p class="ss-row px9" data-px="9"><span class="ss-px">9 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px10" data-px="10"><span class="ss-px">10 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px11" data-px="11"><span class="ss-px">11 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px12" data-px="12"><span class="ss-px">12 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px13" data-px="13"><span class="ss-px">13 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px14" data-px="14"><span class="ss-px">14 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px16" data-px="16"><span class="ss-px">16 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <p class="ss-row px20" data-px="20"><span class="ss-px">20 px</span><span class="ss-c"><span class="ss-k">Reta</span><span class="ss-s">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Itálica</span><span class="ss-s lsi">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span><span class="ss-c"><span class="ss-k">Oblíqua</span><span class="ss-s lso">il1I| 0O8B 5SZ2 3 5 S g q 9 rn m</span></span></p>
+    <canvas class="loupe" aria-hidden="true"></canvas>
+  </div>
+</section>
+
+<!-- INTERLUDE: THE OWL -->
+<section id="owl" class="interlude js-only" aria-labelledby="owl-title" data-slip>
+  <h2 id="owl-title" class="sr-only">Interlúdio: uma coruja composta com a fonte</h2>
+  <figure class="owl">
+    <canvas class="owl-canvas" aria-hidden="true"></canvas>
+    <figcaption class="owl-cap"><span class="owl-n">noctua.ans</span> é desenhada só com a fonte — meios-blocos, sombreados, traços de caixa e braile. Nenhuma imagem, nenhum SVG. <span class="owl-count"></span></figcaption>
+  </figure>
+</section>
+
+<!-- 06 STYLISTIC SETS -->
+<section id="sets" class="sec sec-sets" aria-labelledby="sets-title" tabindex="-1" data-arm="t:800:1:u t:100:3:u">
+  <div class="sec-head head-fit" data-reveal>
+    <p class="folio"><span>§06</span><span>Conjuntos estilísticos</span></p>
+    <h2 id="sets-title" class="sec-title lft t-sets">19 alter egos, com nome dentro da fonte.</h2>
+    <span class="bignum lft lw1 t-sets-num" aria-hidden="true">06</span>
+  </div>
+  <p class="sec-lede">A compilação exporta os conjuntos estilísticos da Iosevka, de <code>ss01</code> a <code>ss20</code> (não existe <code>ss19</code>). Cada um veste as mesmas letras como outra monoespaçada clássica, e o nome vem direto da tabela <code>name</code> da fonte.<span class="js-only"> Passe a lente pelo texto para ver um conjunto — o título acima também o veste; use <b>vestir</b> para compor o texto corrido desta página com ele.</span><span class="static-only"> A lente sobre o exemplo e o título acima mostram o <code>ss02</code>, o conjunto que mais redesenha glifos.</span></p>
+  <div class="lens-stage" id="lens" role="group" aria-roledescription="lente" aria-label="Uma lente que mostra o texto de exemplo no conjunto estilístico escolhido">
+    <p class="lens-text lens-base" aria-hidden="true">0 O o · il1I| · a g q y · $ @ &amp; * % · {r: f(k)} · 5SZ2 · 9 · tzZQ · (&lt;=&gt;)</p>
+    <div class="lens-win" aria-hidden="true"><div class="lens-inner"><p class="lens-text lens-alt">0 O o · il1I| · a g q y · $ @ &amp; * % · {r: f(k)} · 5SZ2 · 9 · tzZQ · (&lt;=&gt;)</p></div></div>
+    <div class="lens-ring" aria-hidden="true"></div>
+    <span class="lens-tag" aria-hidden="true"><b>ss02</b> Anonymous Pro Style</span>
+  </div>
+  <p class="note js-only" id="lens-help">Com o mouse: passe sobre o texto. Com o teclado: dê foco ao painel e use as setas. Escolha um cartão abaixo para pôr o conjunto dele na lente; cada cartão imprime as letras que o conjunto redesenha por cima das formas padrão, que aparecem em rosa por baixo.</p>
+  <div class="wear-bar js-only">
+    <p class="wear-status" id="wear-status" aria-live="polite">A página está com as formas próprias da Noctua Iosevka.</p>
+    <button type="button" class="btn btn-small" id="wear-reset" disabled>Voltar às formas padrão</button>
+  </div>
+  <ul class="sets" id="sets-grid">
+    <li class="set is-picked" data-ss="ss02"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss02</span><span class="set-name">Anonymous Pro Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">$</i><i class="sv">$</i></span><span class="sg"><i class="sd">@</i><i class="sv">@</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span></span><span class="set-count">48 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Anonymous Pro Style</span></button></li>
+    <li class="set" data-ss="ss17"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss17</span><span class="set-name">Recursive Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">$</i><i class="sv">$</i></span></span><span class="set-count">47 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Recursive Mono Style</span></button></li>
+    <li class="set" data-ss="ss16"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss16</span><span class="set-name">PT Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">$</i><i class="sv">$</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span></span><span class="set-count">42 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: PT Mono Style</span></button></li>
+    <li class="set" data-ss="ss04"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss04</span><span class="set-name">Menlo Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">Q</i><i class="sv">Q</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">&amp;</i><i class="sv">&amp;</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span></span><span class="set-count">41 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Menlo Style</span></button></li>
+    <li class="set" data-ss="ss12"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss12</span><span class="set-name">Ubuntu Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span></span><span class="set-count">41 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Ubuntu Mono Style</span></button></li>
+    <li class="set" data-ss="ss06"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss06</span><span class="set-name">Liberation Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">@</i><i class="sv">@</i></span><span class="sg"><i class="sd">%</i><i class="sv">%</i></span></span><span class="set-count">38 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Liberation Mono Style</span></button></li>
+    <li class="set" data-ss="ss08"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss08</span><span class="set-name">Pragmata Pro Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">Q</i><i class="sv">Q</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">$</i><i class="sv">$</i></span><span class="sg"><i class="sd">&amp;</i><i class="sv">&amp;</i></span></span><span class="set-count">38 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Pragmata Pro Style</span></button></li>
+    <li class="set" data-ss="ss01"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss01</span><span class="set-name">Andale Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">@</i><i class="sv">@</i></span></span><span class="set-count">36 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Andale Mono Style</span></button></li>
+    <li class="set" data-ss="ss03"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss03</span><span class="set-name">Consolas Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">@</i><i class="sv">@</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span></span><span class="set-count">36 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Consolas Style</span></button></li>
+    <li class="set" data-ss="ss13"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss13</span><span class="set-name">Lucida Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span></span><span class="set-count">36 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Lucida Style</span></button></li>
+    <li class="set" data-ss="ss15"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss15</span><span class="set-name">IBM Plex Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">&amp;</i><i class="sv">&amp;</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span></span><span class="set-count">36 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: IBM Plex Mono Style</span></button></li>
+    <li class="set" data-ss="ss05"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss05</span><span class="set-name">Fira Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span></span><span class="set-count">35 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Fira Mono Style</span></button></li>
+    <li class="set" data-ss="ss14"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss14</span><span class="set-name">JetBrains Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">Q</i><i class="sv">Q</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">&amp;</i><i class="sv">&amp;</i></span></span><span class="set-count">35 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: JetBrains Mono Style</span></button></li>
+    <li class="set" data-ss="ss07"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss07</span><span class="set-name">Monaco Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span></span><span class="set-count">34 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Monaco Style</span></button></li>
+    <li class="set" data-ss="ss10"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss10</span><span class="set-name">Envy Code R Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">Q</i><i class="sv">Q</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">$</i><i class="sv">$</i></span></span><span class="set-count">33 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Envy Code R Style</span></button></li>
+    <li class="set" data-ss="ss09"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss09</span><span class="set-name">Source Code Pro Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">i</i><i class="sv">i</i></span><span class="sg"><i class="sd">t</i><i class="sv">t</i></span><span class="sg"><i class="sd">r</i><i class="sv">r</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span></span><span class="set-count">32 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Source Code Pro Style</span></button></li>
+    <li class="set" data-ss="ss18"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss18</span><span class="set-name">Input Mono Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">a</i><i class="sv">a</i></span><span class="sg"><i class="sd">g</i><i class="sv">g</i></span><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">l</i><i class="sv">l</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">f</i><i class="sv">f</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">G</i><i class="sv">G</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">M</i><i class="sv">M</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span><span class="sg"><i class="sd">%</i><i class="sv">%</i></span></span><span class="set-count">31 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Input Mono Style</span></button></li>
+    <li class="set" data-ss="ss11"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss11</span><span class="set-name">X Window Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">0</i><i class="sv">0</i></span><span class="sg"><i class="sd">1</i><i class="sv">1</i></span><span class="sg"><i class="sd">$</i><i class="sv">$</i></span><span class="sg"><i class="sd">*</i><i class="sv">*</i></span><span class="sg"><i class="sd">%</i><i class="sv">%</i></span><span class="sg"><i class="sd">{</i><i class="sv">{</i></span><span class="sg"><i class="sd">}</i><i class="sv">}</i></span><span class="sg"><i class="sd">2</i><i class="sv">2</i></span><span class="sg"><i class="sd">4</i><i class="sv">4</i></span><span class="sg"><i class="sd">7</i><i class="sv">7</i></span><span class="sg"><i class="sd">9</i><i class="sv">9</i></span><span class="sg"><i class="sd">5</i><i class="sv">5</i></span><span class="sg"><i class="sd">6</i><i class="sv">6</i></span><span class="sg"><i class="sd">8</i><i class="sv">8</i></span><span class="sg"><i class="sd">^</i><i class="sv">^</i></span><span class="sg"><i class="sd">~</i><i class="sv">~</i></span></span><span class="set-count">18 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: X Window Style</span></button></li>
+    <li class="set" data-ss="ss20"><span class="set-pick"><span class="sr-only js-only">Ver na lente: </span><span class="set-head"><span class="set-tag">ss20</span><span class="set-name">Curly Style</span></span><span class="set-glyphs" aria-hidden="true"><span class="sg"><i class="sd">y</i><i class="sv">y</i></span><span class="sg"><i class="sd">k</i><i class="sv">k</i></span><span class="sg"><i class="sd">R</i><i class="sv">R</i></span><span class="sg"><i class="sd">K</i><i class="sv">K</i></span><span class="sg"><i class="sd">W</i><i class="sv">W</i></span><span class="sg"><i class="sd">Z</i><i class="sv">Z</i></span><span class="sg"><i class="sd">w</i><i class="sv">w</i></span><span class="sg"><i class="sd">v</i><i class="sv">v</i></span><span class="sg"><i class="sd">x</i><i class="sv">x</i></span><span class="sg"><i class="sd">z</i><i class="sv">z</i></span><span class="sg"><i class="sd">7</i><i class="sv">7</i></span><span class="sg"><i class="sd">9</i><i class="sv">9</i></span><span class="sg"><i class="sd">6</i><i class="sv">6</i></span><span class="sg"><i class="sd">V</i><i class="sv">V</i></span><span class="sg"><i class="sd">X</i><i class="sv">X</i></span><span class="sg"><i class="sd">Y</i><i class="sv">Y</i></span></span><span class="set-count">16 de 94 glifos ASCII mudam</span><span class="set-bar" aria-hidden="true"><span></span></span></span><button type="button" class="set-wear js-only" aria-pressed="false">Vestir<span class="sr-only">: Curly Style</span></button></li>
+  </ul>
+  <p class="sets-more js-only"><button type="button" class="btn btn-small" id="sets-all" aria-expanded="false" aria-controls="sets-grid">Mostrar os 19 conjuntos</button></p>
+</section>
+
+<!-- 07 CHARACTER VARIANTS -->
+<section id="variants" class="sec sec-variants" aria-labelledby="variants-title" data-arm="l:400:3:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§07</span><span>Variantes de caractere</span></p>
+    <h2 id="variants-title" class="sec-title" data-scrub="weight">99 botões, um glifo de cada vez.</h2>
+    <span class="bignum lfl" id="cv-num" aria-hidden="true">07</span>
+  </div>
+  <p class="sec-lede">Abaixo dos conjuntos estilísticos ficam as variantes de caractere, de <code>cv01</code> a <code>cv99</code>: um recurso por letra, e cada valor escolhe uma das formas dela. As contagens vêm da própria fonte. Um dos valores sempre reproduz o glifo padrão, então “33 formas” quer dizer 33 contornos diferentes, contando o padrão.</p>
+  <div class="slot" id="slot" data-reveal>
+    <div class="slot-pick js-only" role="radiogroup" aria-label="Escolha um glifo">
+      <button type="button" role="radio" class="lfl" aria-checked="true" tabindex="0" data-ch="a" data-tag="cv36" data-n="33" data-def="2" aria-label="a — cv36, 33 formas">a</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="g" data-tag="cv42" data-n="16" data-def="9" aria-label="g — cv42, 16 formas">g</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="f" data-tag="cv41" data-n="45" data-def="32" aria-label="f — cv41, 45 formas">f</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="0" data-tag="cv10" data-n="54" data-def="25" aria-label="0 — cv10, 54 formas">0</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="m" data-tag="cv48" data-n="58" data-def="29" aria-label="m — cv48, 58 formas">m</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="r" data-tag="cv52" data-n="28" data-def="1" aria-label="r — cv52, 28 formas">r</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="t" data-tag="cv54" data-n="30" data-def="1" aria-label="t — cv54, 30 formas">t</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="y" data-tag="cv59" data-n="18" data-def="2" aria-label="y — cv59, 18 formas">y</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="k" data-tag="cv46" data-n="40" data-def="1" aria-label="k — cv46, 40 formas">k</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="l" data-tag="cv47" data-n="14" data-def="10" aria-label="l — cv47, 14 formas">l</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="1" data-tag="cv01" data-n="9" data-def="5" aria-label="1 — cv01, 9 formas">1</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="Q" data-tag="cv26" data-n="11" data-def="2" aria-label="Q — cv26, 11 formas">Q</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="G" data-tag="cv17" data-n="36" data-def="2" aria-label="G — cv17, 36 formas">G</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="W" data-tag="cv32" data-n="45" data-def="35" aria-label="W — cv32, 45 formas">W</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="ß" data-tag="cv63" data-n="48" data-def="17" aria-label="ß — cv63, 48 formas">ß</button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="а" data-tag="cv87" data-n="33" data-def="1" aria-label="а (cirílico) — cv87, 33 formas">а<small class="cv-sc lft" aria-hidden="true">Cir</small></button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="χ" data-tag="cv84" data-n="26" data-def="1" aria-label="χ (grego) — cv84, 26 formas">χ<small class="cv-sc lft" aria-hidden="true">Gre</small></button>
+      <button type="button" role="radio" class="lfl" aria-checked="false" tabindex="-1" data-ch="$" data-tag="cv28" data-n="5" data-def="2" aria-label="$ — cv28, 5 formas">$</button>
+    </div>
+    <div class="slot-machine">
+      <div class="slot-window" data-slip>
+        <span class="slot-glyph lfl" aria-hidden="true">a</span>
+        <span class="slot-glyph slot-glyph-ghost lfl" aria-hidden="true">a</span>
+      </div>
+      <div class="slot-side">
+        <p class="slot-count" aria-live="polite">33 formas · cv36 = 1 a 33 · o padrão é cv36 = 2</p>
+        <code class="slot-css">font-feature-settings: "cv36" 2;</code>
+        <button type="button" class="btn btn-solid slot-spin js-only" id="slot-spin">Girar</button>
+      </div>
+    </div>
+    <ul class="slot-tiles js-only" id="slot-tiles" aria-label="Todos os valores do recurso"></ul>
+  </div>
+</section>
+
+<!-- 08 LIGATURES -->
+<section id="ligatures" class="sec sec-ligatures band band-ink" aria-labelledby="ligatures-title" data-arm="t:800:1:u">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§08</span><span>Ligaduras</span></p>
+    <h2 id="ligatures-title" class="sec-title"><span class="t-lig lft" aria-hidden="true">=&gt;</span> Ligaduras que respeitam a grade.</h2>
+    <span class="bignum" aria-hidden="true">08</span>
+    <p class="sec-lede">Os operadores se juntam pelo <code>calt</code>, que os navegadores, e terminais como o Ghostty e o kitty, já deixam ligado; editores como o VS Code precisam que você o ative (veja as configurações em Baixar). O <code>dlig</code> junta vários outros, e o <code>HSKL</code> junta o diferente do Haskell. Cada glifo ligado ocupa exatamente as células que seus caracteres ocupariam — a grade por baixo prova isso.</p>
+  </div>
+  <div class="lig-controls js-only" role="group" aria-label="Recursos de ligadura">
+    <button type="button" class="switch" id="lig-calt" role="switch" aria-checked="true"><span class="switch-track" aria-hidden="true"><span></span></span><code>calt</code> contextuais</button>
+    <button type="button" class="switch" id="lig-dlig" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"><span></span></span><code>dlig</code> opcionais</button>
+    <button type="button" class="switch" id="lig-hskl" role="switch" aria-checked="false"><span class="switch-track" aria-hidden="true"><span></span></span><code>HSKL</code> Haskell</button>
+  </div>
+  <div class="ligs" id="ligs">
+      <div class="lig-group lig-g-calt"><h3 class="lig-h"><code>calt</code> <span>alternativas contextuais, ligadas por padrão</span> <small>35 sequências</small></h3><ul class="lig-list">
+      <li><span class="lg">-&gt;</span><span class="lig-cp" aria-hidden="true">2D 3E</span></li>
+      <li><span class="lg">=&gt;</span><span class="lig-cp" aria-hidden="true">3D 3E</span></li>
+      <li><span class="lg">!=</span><span class="lig-cp" aria-hidden="true">21 3D</span></li>
+      <li><span class="lg">==</span><span class="lig-cp" aria-hidden="true">3D 3D</span></li>
+      <li><span class="lg">===</span><span class="lig-cp" aria-hidden="true">3D 3D 3D</span></li>
+      <li><span class="lg">!==</span><span class="lig-cp" aria-hidden="true">21 3D 3D</span></li>
+      <li><span class="lg">&lt;=</span><span class="lig-cp" aria-hidden="true">3C 3D</span></li>
+      <li><span class="lg">&gt;=</span><span class="lig-cp" aria-hidden="true">3E 3D</span></li>
+      <li><span class="lg">&lt;=&gt;</span><span class="lig-cp" aria-hidden="true">3C 3D 3E</span></li>
+      <li><span class="lg">::</span><span class="lig-cp" aria-hidden="true">3A 3A</span></li>
+      <li><span class="lg">:=</span><span class="lig-cp" aria-hidden="true">3A 3D</span></li>
+      <li><span class="lg">::=</span><span class="lig-cp" aria-hidden="true">3A 3A 3D</span></li>
+      <li><span class="lg">|&gt;</span><span class="lig-cp" aria-hidden="true">7C 3E</span></li>
+      <li><span class="lg">&lt;|&gt;</span><span class="lig-cp" aria-hidden="true">3C 7C 3E</span></li>
+      <li><span class="lg">&lt;-</span><span class="lig-cp" aria-hidden="true">3C 2D</span></li>
+      <li><span class="lg">&lt;-&gt;</span><span class="lig-cp" aria-hidden="true">3C 2D 3E</span></li>
+      <li><span class="lg">--&gt;</span><span class="lig-cp" aria-hidden="true">2D 2D 3E</span></li>
+      <li><span class="lg">&lt;!--</span><span class="lig-cp" aria-hidden="true">3C 21 2D 2D</span></li>
+      <li><span class="lg">&gt;&gt;=</span><span class="lig-cp" aria-hidden="true">3E 3E 3D</span></li>
+      <li><span class="lg">=&lt;&lt;</span><span class="lig-cp" aria-hidden="true">3D 3C 3C</span></li>
+      <li><span class="lg">~&gt;</span><span class="lig-cp" aria-hidden="true">7E 3E</span></li>
+      <li><span class="lg">&lt;~&gt;</span><span class="lig-cp" aria-hidden="true">3C 7E 3E</span></li>
+      <li><span class="lg">||</span><span class="lig-cp" aria-hidden="true">7C 7C</span></li>
+      <li><span class="lg">..</span><span class="lig-cp" aria-hidden="true">2E 2E</span></li>
+      <li><span class="lg">...</span><span class="lig-cp" aria-hidden="true">2E 2E 2E</span></li>
+      <li><span class="lg">??</span><span class="lig-cp" aria-hidden="true">3F 3F</span></li>
+      <li><span class="lg">?.</span><span class="lig-cp" aria-hidden="true">3F 2E</span></li>
+      <li><span class="lg">&lt;/&gt;</span><span class="lig-cp" aria-hidden="true">3C 2F 3E</span></li>
+      <li><span class="lg">//</span><span class="lig-cp" aria-hidden="true">2F 2F</span></li>
+      <li><span class="lg">/*</span><span class="lig-cp" aria-hidden="true">2F 2A</span></li>
+      <li><span class="lg">;;</span><span class="lig-cp" aria-hidden="true">3B 3B</span></li>
+      <li><span class="lg">&lt;&gt;</span><span class="lig-cp" aria-hidden="true">3C 3E</span></li>
+      <li><span class="lg">&lt;*&gt;</span><span class="lig-cp" aria-hidden="true">3C 2A 3E</span></li>
+      <li><span class="lg">&gt;&gt;</span><span class="lig-cp" aria-hidden="true">3E 3E</span></li>
+      <li><span class="lg">==&gt;</span><span class="lig-cp" aria-hidden="true">3D 3D 3E</span></li>
+      </ul></div>
+      <div class="lig-group lig-g-dlig"><h3 class="lig-h"><code>dlig</code> <span>ligaduras opcionais</span> <small>12 sequências</small></h3><ul class="lig-list">
+      <li><span class="lg">++</span><span class="lig-cp" aria-hidden="true">2B 2B</span></li>
+      <li><span class="lg">--</span><span class="lig-cp" aria-hidden="true">2D 2D</span></li>
+      <li><span class="lg">##</span><span class="lig-cp" aria-hidden="true">23 23</span></li>
+      <li><span class="lg">~~</span><span class="lig-cp" aria-hidden="true">7E 7E</span></li>
+      <li><span class="lg">__</span><span class="lig-cp" aria-hidden="true">5F 5F</span></li>
+      <li><span class="lg">|=</span><span class="lig-cp" aria-hidden="true">7C 3D</span></li>
+      <li><span class="lg">.=</span><span class="lig-cp" aria-hidden="true">2E 3D</span></li>
+      <li><span class="lg">=&lt;</span><span class="lig-cp" aria-hidden="true">3D 3C</span></li>
+      <li><span class="lg">[|</span><span class="lig-cp" aria-hidden="true">5B 7C</span></li>
+      <li><span class="lg">|]</span><span class="lig-cp" aria-hidden="true">7C 5D</span></li>
+      <li><span class="lg">|-</span><span class="lig-cp" aria-hidden="true">7C 2D</span></li>
+      <li><span class="lg">-|</span><span class="lig-cp" aria-hidden="true">2D 7C</span></li>
+      </ul></div>
+      <div class="lig-group lig-g-hskl"><h3 class="lig-h"><code>HSKL</code> <span>o diferente do Haskell</span> <small>2 sequências</small></h3><ul class="lig-list">
+      <li><span class="lg">/=</span><span class="lig-cp" aria-hidden="true">2F 3D</span></li>
+      <li><span class="lg">=/=</span><span class="lig-cp" aria-hidden="true">3D 2F 3D</span></li>
+      </ul></div>
+  </div>
+  <p class="note">Sequências como <code>&amp;&amp;</code>, <code>**</code> e <code>+=</code> ficam como estão, de propósito. Sob cada forma ligada, em hexadecimal: os pontos de código que a compõem.</p>
+  <p class="note">O <code>HSKL</code> é um dos vários conjuntos de ligaduras feitos para uma linguagem que a fonte traz como recursos próprios — <code>RAKU</code>, <code>MLXX</code>, <code>PURS</code>, <code>ELMX</code>, <code>ERLA</code>, <code>JLIA</code>, <code>SWFT</code> e outros.</p>
+</section>
+
+<!-- 09 CODE -->
+<section id="code" class="sec sec-code" aria-labelledby="code-title" tabindex="-1" data-arm="t:400,700:3:u t:400:3:i">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§09</span><span>No editor</span></p>
+    <h2 id="code-title" class="sec-title" data-scrub="weight">Código, em cinco linguagens.</h2>
+    <span class="bignum" aria-hidden="true">09</span>
+  </div>
+  <p class="sec-lede">Os comentários caem no itálico, as palavras-chave no negrito, e as ligaduras fazem o trabalho delas em silêncio. As cores foram escritas à mão: nenhum realçador de sintaxe roda nesta página.</p>
+  <div class="editor" data-reveal>
+    <div class="ed-tabs js-only" role="tablist" aria-label="Linguagem">
+      <button type="button" role="tab" id="tab-rs" aria-controls="pane-rs" aria-selected="true">ladder.rs</button>
+      <button type="button" role="tab" id="tab-ts" aria-controls="pane-ts" aria-selected="false" tabindex="-1">debounce.ts</button>
+      <button type="button" role="tab" id="tab-py" aria-controls="pane-py" aria-selected="false" tabindex="-1">audit.py</button>
+      <button type="button" role="tab" id="tab-go" aria-controls="pane-go" aria-selected="false" tabindex="-1">tail.go</button>
+      <button type="button" role="tab" id="tab-hs" aria-controls="pane-hs" aria-selected="false" tabindex="-1">Ladder.hs</button>
+    </div>
+    <div class="ed-body">
+      <div class="ed-panes">
+<div class="pane" role="group" id="pane-rs" aria-labelledby="pane-rs-name" data-lang="Rust"><p class="pane-name static-only" id="pane-rs-name">ladder.rs <span lang="en">Rust</span></p><pre><code><span class="ln"><span class="c">// Converte uma cor hexadecimal como &quot;#0b0a10&quot; nos seus três canais.</span></span>
+<span class="ln"><span class="k">use</span> std::num::<span class="t">ParseIntError</span>;</span>
+<span class="ln"></span>
+<span class="ln"><span class="m">#[derive(Debug, Clone, Copy, PartialEq)]</span></span>
+<span class="ln"><span class="k">pub struct</span> <span class="t">Rgb</span> { <span class="k">pub</span> r: <span class="t">u8</span>, <span class="k">pub</span> g: <span class="t">u8</span>, <span class="k">pub</span> b: <span class="t">u8</span> }</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">impl</span> std::str::<span class="t">FromStr</span> <span class="k">for</span> <span class="t">Rgb</span> {</span>
+<span class="ln">    <span class="k">type</span> <span class="t">Err</span> = <span class="t">ParseIntError</span>;</span>
+<span class="ln"></span>
+<span class="ln">    <span class="c">/// Falha com qualquer coisa que não tenha dois dígitos hexadecimais por canal.</span></span>
+<span class="ln">    <span class="k">fn</span> <span class="f">from_str</span>(s: &amp;<span class="t">str</span>) -&gt; <span class="t">Result</span>&lt;<span class="t">Self</span>, <span class="t">Self</span>::<span class="t">Err</span>&gt; {</span>
+<span class="ln">        <span class="k">let</span> hex = s.<span class="f">trim_start_matches</span>(<span class="s">'#'</span>);</span>
+<span class="ln">        <span class="k">let</span> byte = |i: <span class="t">usize</span>| <span class="t">u8</span>::<span class="f">from_str_radix</span>(&amp;hex[i..i + <span class="n">2</span>], <span class="n">16</span>);</span>
+<span class="ln">        <span class="t">Ok</span>(<span class="t">Rgb</span> { r: <span class="f">byte</span>(<span class="n">0</span>)?, g: <span class="f">byte</span>(<span class="n">2</span>)?, b: <span class="f">byte</span>(<span class="n">4</span>)? })</span>
+<span class="ln">    }</span>
+<span class="ln">}</span></code></pre></div>
+<div class="pane" role="group" id="pane-ts" aria-labelledby="pane-ts-name" data-lang="TypeScript" hidden><p class="pane-name static-only" id="pane-ts-name">debounce.ts <span lang="en">TypeScript</span></p><pre><code><span class="ln"><span class="c">/** Executa `fn` quando as chamadas param por `ms` milissegundos. */</span></span>
+<span class="ln"><span class="k">export function</span> <span class="f">debounce</span>&lt;<span class="t">T</span> <span class="k">extends</span> <span class="t">unknown</span>[]&gt;(fn: (...args: <span class="t">T</span>) =&gt; <span class="t">void</span>, ms = <span class="n">120</span>) {</span>
+<span class="ln">  <span class="k">let</span> timer: <span class="t">ReturnType</span>&lt;<span class="k">typeof</span> setTimeout&gt; | <span class="t">undefined</span>;</span>
+<span class="ln">  <span class="k">return</span> (...args: <span class="t">T</span>): <span class="t">void</span> =&gt; {</span>
+<span class="ln">    <span class="k">if</span> (timer !== <span class="t">undefined</span>) <span class="f">clearTimeout</span>(timer);</span>
+<span class="ln">    timer = <span class="f">setTimeout</span>(() =&gt; <span class="f">fn</span>(...args), ms);</span>
+<span class="ln">  };</span>
+<span class="ln">}</span>
+<span class="ln"></span>
+<span class="ln"><span class="c">// Registra o tamanho da janela no máximo uma vez por rajada de redimensionamentos.</span></span>
+<span class="ln"><span class="k">const</span> onResize = <span class="f">debounce</span>(() =&gt; console.<span class="f">log</span>(<span class="s">`${innerWidth}×${innerHeight}`</span>));</span>
+<span class="ln">window.<span class="f">addEventListener</span>(<span class="s">"resize"</span>, onResize, { passive: <span class="k">true</span> });</span></code></pre></div>
+<div class="pane" role="group" id="pane-py" aria-labelledby="pane-py-name" data-lang="Python" hidden><p class="pane-name static-only" id="pane-py-name">audit.py <span lang="en">Python</span></p><pre><code><span class="ln"><span class="c"># Conta os caracteres que se confundem num arquivo — uma pequena auditoria de legibilidade.</span></span>
+<span class="ln"><span class="k">from</span> collections <span class="k">import</span> <span class="t">Counter</span></span>
+<span class="ln"><span class="k">from</span> pathlib <span class="k">import</span> <span class="t">Path</span></span>
+<span class="ln"></span>
+<span class="ln">CONFUSABLE = <span class="f">set</span>(<span class="s">"il1I|0O8B5SZ2gq9"</span>)</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">def</span> <span class="f">audit</span>(path: <span class="t">Path</span>) -&gt; <span class="t">dict</span>[<span class="t">str</span>, <span class="t">int</span>]:</span>
+<span class="ln">    text = path.<span class="f">read_text</span>(encoding=<span class="s">"utf-8"</span>)</span>
+<span class="ln">    counts = <span class="t">Counter</span>(ch <span class="k">for</span> ch <span class="k">in</span> text <span class="k">if</span> ch <span class="k">in</span> CONFUSABLE)</span>
+<span class="ln">    <span class="k">return</span> {ch: n <span class="k">for</span> ch, n <span class="k">in</span> counts.<span class="f">most_common</span>() <span class="k">if</span> n &gt;= <span class="n">1</span>}</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">if</span> __name__ == <span class="s">"__main__"</span>:</span>
+<span class="ln">    <span class="k">for</span> ch, n <span class="k">in</span> <span class="f">audit</span>(<span class="t">Path</span>(<span class="s">"README.md"</span>)).<span class="f">items</span>():</span>
+<span class="ln">        <span class="f">print</span>(<span class="s">f"</span>{ch!r:&gt;5}<span class="s"> → </span>{n:&gt;4}<span class="s">"</span>)</span></code></pre></div>
+<div class="pane" role="group" id="pane-go" aria-labelledby="pane-go-name" data-lang="Go" hidden><p class="pane-name static-only" id="pane-go-name">tail.go <span lang="en">Go</span></p><pre><code><span class="ln"><span class="c">// tail acompanha um arquivo como o `tail -f`, linha por linha.</span></span>
+<span class="ln"><span class="k">package</span> main</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">import</span> (<span class="s">"bufio"</span>; <span class="s">"fmt"</span>; <span class="s">"os"</span>; <span class="s">"time"</span>)</span>
+<span class="ln"></span>
+<span class="ln"><span class="k">func</span> <span class="f">main</span>() {</span>
+<span class="ln">	f, err := os.<span class="f">Open</span>(<span class="s">"/var/log/syslog"</span>)</span>
+<span class="ln">	<span class="k">if</span> err != <span class="k">nil</span> {</span>
+<span class="ln">		fmt.<span class="f">Fprintln</span>(os.Stderr, <span class="s">"tail:"</span>, err)</span>
+<span class="ln">		os.<span class="f">Exit</span>(<span class="n">1</span>)</span>
+<span class="ln">	}</span>
+<span class="ln">	r := bufio.<span class="f">NewReader</span>(f)</span>
+<span class="ln">	<span class="k">for</span> {</span>
+<span class="ln">		line, err := r.<span class="f">ReadString</span>(<span class="s">'\n'</span>)</span>
+<span class="ln">		<span class="k">if</span> err != <span class="k">nil</span> { time.<span class="f">Sleep</span>(<span class="n">250</span> * time.Millisecond); <span class="k">continue</span> } <span class="c">// ainda não chegou nada</span></span>
+<span class="ln">		fmt.<span class="f">Print</span>(line)</span>
+<span class="ln">	}</span>
+<span class="ln">}</span></code></pre></div>
+<div class="pane" role="group" id="pane-hs" aria-labelledby="pane-hs-name" data-lang="Haskell" hidden><p class="pane-name static-only" id="pane-hs-name">Ladder.hs <span lang="en">Haskell</span></p><pre><code><span class="ln"><span class="c">-- | A escada de larguras da Noctua Iosevka, em unidades por em.</span></span>
+<span class="ln"><span class="k">module</span> <span class="t">Ladder</span> <span class="k">where</span></span>
+<span class="ln"></span>
+<span class="ln"><span class="k">data</span> <span class="t">Width</span> = <span class="t">Condensed</span> | <span class="t">SemiCondensed</span> | <span class="t">Normal</span> | <span class="t">SemiExtended</span> | <span class="t">Extended</span></span>
+<span class="ln">  <span class="k">deriving</span> (<span class="t">Show</span>, <span class="t">Eq</span>, <span class="t">Ord</span>, <span class="t">Enum</span>, <span class="t">Bounded</span>)</span>
+<span class="ln"></span>
+<span class="ln"><span class="f">advance</span> :: <span class="t">Width</span> -&gt; <span class="t">Int</span></span>
+<span class="ln"><span class="f">advance</span> w = <span class="k">case</span> w <span class="k">of</span></span>
+<span class="ln">  <span class="t">Condensed</span>     -&gt; <span class="n">456</span></span>
+<span class="ln">  <span class="t">SemiCondensed</span> -&gt; <span class="n">548</span></span>
+<span class="ln">  <span class="t">Normal</span>        -&gt; <span class="n">600</span></span>
+<span class="ln">  <span class="t">SemiExtended</span>  -&gt; <span class="n">658</span></span>
+<span class="ln">  <span class="t">Extended</span>      -&gt; <span class="n">720</span></span>
+<span class="ln"></span>
+<span class="ln"><span class="c">-- Cada largura como fração do em.</span></span>
+<span class="ln"><span class="f">ladder</span> :: [(<span class="t">Width</span>, <span class="t">Double</span>)]</span>
+<span class="ln"><span class="f">ladder</span> = [ (w, <span class="f">fromIntegral</span> (<span class="f">advance</span> w) / <span class="n">1000</span>) | w &lt;- [<span class="t">minBound</span> .. <span class="t">maxBound</span>] ]</span></code></pre></div>
+      </div>
+      <div class="minimap js-only" aria-hidden="true"><div class="minimap-inner"></div><span class="minimap-view"></span></div>
+    </div>
+    <div class="ed-status" aria-hidden="true"><span>UTF-8</span><span>LF</span><span class="ed-lang js-only">Rust</span><span>Noctua Iosevka 15px</span></div>
+  </div>
+</section>
+
+<!-- 10 TERMINAL -->
+<section id="terminal" class="sec sec-terminal band band-slab" aria-labelledby="terminal-title" tabindex="-1" data-arm="m:400,700:3:u m:400:3:i">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§10</span><span>No terminal</span></p>
+    <h2 id="terminal-title" class="sec-title"><span class="t-ico lfm" aria-hidden="true">&#xF120;</span> Cada ícone, exatamente uma célula.</h2>
+    <span class="bignum" aria-hidden="true">10</span>
+    <p class="sec-lede">A família gêmea, <b>NoctuaIosevka Nerd Font Mono</b>, já vem com todos os ícones da Nerd Fonts, cada um com uma célula de largura — então prompts, listagens de arquivos e barras de status se alinham na grade como todo o resto.</p>
+  </div>
+  <div class="term-wrap" data-reveal>
+    <div class="term" id="term" role="img" aria-label="Um terminal composto em NoctuaIosevka Nerd Font Mono: um prompt Powerline com ícones, gráficos do btop em braile dentro de painéis de caixa, com um ícone ao lado de cada processo, o fastfetch com uma coruja desenhada em meios-blocos e uma linha de status do tmux.">
+      <div class="term-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">ghostty — owl@nest — zsh</span></div>
+      <div class="term-body" aria-hidden="true">
+        <div class="term-main"><div class="term-lines" id="term-lines"><div class="term-line" data-row="prompt1"><span class="k-dim">╭─</span><span class="pl-a k-bold">  owl </span><span class="pl-ab"></span><span class="pl-b">  ~/fonts </span><span class="pl-bc"></span><span class="pl-c k-bold">  main  </span><span class="pl-cf"></span></div><div class="term-line" data-row="prompt2"><span class="k-dim">╰─</span><span class="k-c k-bold">❯ </span><span class="k-w term-input">btop --preset glyphs</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="top"><span class="k-dim">╭─ cpu ──────────────────────────── 3.1 GHz ─╮</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="g1"><span class="k-dim">│ </span><span class="k-g">⠀⢀⣠⢠⢀⣰⠀⢀⣠⣠⣦⣦⣶⣆⡀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⢠⣄⣴⣾⣶⣦⣄⡄⠀⠀⠀⡀⡀⠀</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="g2"><span class="k-dim">│ </span><span class="k-g">⣼⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣇⣤⣄⣦⣴⣿⣼⣾⣼⣼⣰⣴⣾⣿⣿⣿⣿⣿⣿⣷⣧⣷⣦⣷⣷⣿</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="c"><span class="k-dim">│ </span><span class="k-w">c0 ▕</span><span class="k-a">██████░   </span><span class="k-w">▏ 62% c1 ▕</span><span class="k-a">████▓     </span><span class="k-w">▏ 47%</span><span class="k-dim">    │</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="bottom"><span class="k-dim">╰────────────────────────────────────────────╯</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="top"><span class="k-dim">╭─ proc ─────────────────────────── 2 tasks ─╮</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="proc" data-name="ghostty" data-icon=""><span class="k-dim">│ </span><span class="k-b"> </span><span class="k-w">ghostty  </span><span class="k-g">███████████████▒          </span><span class="k-w">  60%</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="proc" data-name="nvim" data-icon=""><span class="k-dim">│ </span><span class="k-b"> </span><span class="k-w">nvim     </span><span class="k-g">███████████████▓          </span><span class="k-w">  61%</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="46" data-part="bottom"><span class="k-dim">╰────────────────────────────────────────────╯</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="top"><span class="k-dim">╭─ cpu ──────────────────── 3.1 GHz ─╮</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="g1"><span class="k-dim">│ </span><span class="k-g">⣠⣦⣶⣧⡇⡆⡄⡀⠀⠀⠀⠀⠀⠀⠀⢀⢀⢀⢀⢀⢠⣠⣴⣾⣿⣶⣄⡄⠀⡀⠀⡀⠀⠀</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="g2"><span class="k-dim">│ </span><span class="k-g">⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⣄⣄⣤⣿⣶⣾⣾⣸⣼⣾⣾⣿⣿⣿⣿⣿⣿⣷⣧⣷⣧⣷⣷⣷</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="c"><span class="k-dim">│ </span><span class="k-w">c0 ▕</span><span class="k-a">███▓  </span><span class="k-w">▏ 62% c1 ▕</span><span class="k-a">██▓   </span><span class="k-w">▏ 47%</span><span class="k-dim">    │</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="bottom"><span class="k-dim">╰────────────────────────────────────╯</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="top"><span class="k-dim">╭─ proc ─────────────────── 2 tasks ─╮</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="proc" data-name="ghostty" data-icon=""><span class="k-dim">│ </span><span class="k-b"> </span><span class="k-w">ghostty  </span><span class="k-g">██████████▓       </span><span class="k-w">  60%</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="proc" data-name="nvim" data-icon=""><span class="k-dim">│ </span><span class="k-b"> </span><span class="k-w">nvim     </span><span class="k-g">██████████▓       </span><span class="k-w">  61%</span><span class="k-dim"> │</span></div><div class="term-line" data-row="panel" data-cols="38" data-part="bottom"><span class="k-dim">╰────────────────────────────────────╯</span></div><div class="term-line" data-row="prompt1"><span class="k-dim">╭─</span><span class="pl-a k-bold">  owl </span><span class="pl-ab"></span><span class="pl-b">  ~/fonts </span><span class="pl-bc"></span><span class="pl-c k-bold">  main  </span><span class="pl-cf"></span></div><div class="term-line" data-row="prompt2"><span class="k-dim">╰─</span><span class="k-c k-bold">❯ </span><span class="k-w term-input">fastfetch</span></div><div class="term-line" data-row="ff"><span class="k-g"> ▄▄       ▄▄ </span><span> </span><span class="k-g k-bold">owl</span><span class="k-w">@</span><span class="k-g k-bold">nest</span></div><div class="term-line" data-row="ff"><span class="k-g"> █▀█▄▄▄▄▄█▀█ </span><span> </span><span class="k-dim">────────</span></div><div class="term-line" data-row="ff"><span class="k-g">█ ▄▀▀▄ ▄▀▀▄ █</span><span> </span><span class="k-b k-bold">Font  </span><span class="k-w">NoctuaIosevka NFM</span></div><div class="term-line" data-row="ff"><span class="k-g">█ █</span><span class="k-y">◉</span><span class="k-g"> █ █</span><span class="k-y">◉</span><span class="k-g"> █ █</span><span> </span><span class="k-b k-bold">Faces </span><span class="k-w">135 = 9 × 5 × 3</span></div><div class="term-line" data-row="ff"><span class="k-g">█ ▀▄▄▀</span><span class="k-a">▼</span><span class="k-g">▀▄▄▀ █</span><span> </span><span class="k-b k-bold">Cell  </span><span class="k-w">0,6 em, com ícones</span></div><div class="term-line" data-row="ff"><span class="k-g">▀█ </span><span class="k-dim">░▒▓▓▓▒░</span><span class="k-g"> █▀</span><span> </span><span class="k-b k-bold">Icons </span><span class="k-w">Nerd Fonts 3.4.0</span></div><div class="term-line" data-row="ff"><span class="k-g"> █ </span><span class="k-dim">╲╱╲╱╲╱╲</span><span class="k-g"> █ </span><span> </span><span class="k-b k-bold">Base  </span><span class="k-w">Iosevka 34.7.0</span></div><div class="term-line" data-row="ff"><span class="k-g">  ▀▄▄▄▄▄▄▄▀  </span><span> </span><span class="k-b k-bold">Lic   </span><span class="k-w">SIL OFL 1.1</span></div><div class="term-line" data-row="ff"><span class="k-a">   ╨     ╨   </span><span> </span><span class="blk-1">███</span><span class="blk-2">███</span><span class="blk-3">███</span><span class="blk-4">███</span><span class="blk-5">███</span><span class="blk-6">███</span><span class="blk-7">███</span></div><div class="term-line" data-row="prompt1"><span class="k-dim">╭─</span><span class="pl-a k-bold">  owl </span><span class="pl-ab"></span><span class="pl-b">  ~/fonts </span><span class="pl-bc"></span><span class="pl-c k-bold">  main  </span><span class="pl-cf"></span></div><div class="term-line" data-row="prompt2"><span class="k-dim">╰─</span><span class="k-c k-bold">❯ </span><span class="k-w term-input"></span><span class="term-cursor"> </span></div></div></div>
+        <div class="term-side" id="term-side"><div class="term-tree"><div class="term-line"><span class="k-b k-bold"> noctua-fonts</span></div><div class="term-line"><span class="k-dim">├ </span><span class="k-b"> noctua-iosevka</span></div><div class="term-line"><span class="k-dim">│ ├ </span><span class="k-b"> licenses</span></div><div class="term-line"><span class="k-dim">│ ├ </span><span class="k-b"> TTF</span></div><div class="term-line"><span class="k-dim">│ ├ </span><span class="k-b"> TTF-nerdfonts</span></div><div class="term-line"><span class="k-dim">│ ├ </span><span class="k-b"> WOFF2</span></div><div class="term-line"><span class="k-dim">│ ├ </span><span class="k-b"> WOFF2-nerdfonts</span></div><div class="term-line"><span class="k-dim">│ └ </span><span class="k-w"> private-build-plans.toml</span></div><div class="term-line"><span class="k-dim">├ </span><span class="k-b"> symbols-nerd-font</span></div><div class="term-line"><span class="k-dim">├ </span><span class="k-b"> site</span></div><div class="term-line"><span class="k-dim">├ </span><span class="k-b"> docs</span></div><div class="term-line"><span class="k-dim">├ </span><span class="k-b"> tests</span></div><div class="term-line"><span class="k-dim">├ </span><span class="k-w"> README.md</span></div><div class="term-line"><span class="k-dim">└ </span><span class="k-y"> font-archives.py</span></div></div><div class="term-buf"><div class="term-line"><span class="k-dim">  1 </span><span class="k-dim k-it"># ~/.config/ghostty/config</span></div><div class="term-line"><span class="k-dim">  2 </span><span class="k-dim k-it"># </span><span class="k-dim k-it">o nome exato, caractere por caractere:</span></div><div class="term-line"><span class="k-dim">  3 </span><span class="k-b">font-family</span><span class="k-w"> = </span><span class="k-a">&quot;NoctuaIosevka Nerd Font Mono&quot;</span></div><div class="term-line"><span class="k-dim">  4 </span><span class="k-b">font-size</span><span class="k-w">   = </span><span class="k-y">13</span></div><div class="term-line"><span class="k-dim">  5 </span></div><div class="term-line"><span class="k-dim">  6 </span><span class="k-dim k-it"># </span><span class="k-dim k-it">as ligaduras vêm do calt; para tirá-las:</span></div><div class="term-line"><span class="k-dim">  7 </span><span class="k-dim k-it"># font-feature = -calt</span></div><div class="term-line"><span class="k-dim">  8 </span></div><div class="term-line"><span class="k-dim">  9 </span><span class="k-dim k-it"># </span><span class="k-dim k-it">cada ícone ocupa uma célula:</span></div><div class="term-line"><span class="k-dim"> 10 </span><span class="k-c">         󰍛    </span></div><div class="term-line"><span class="k-dim"> 11 </span><span class="k-dim">▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔ ▔</span></div><div class="term-line"><span class="k-dim"> 12 </span><span class="pl-a"> a </span><span class="pl-ab"></span><span class="pl-b"> b </span><span class="pl-bc"></span><span class="pl-c"> c </span><span class="pl-cf"></span><span class="k-dim"> </span><span class="pl-cf"></span><span class="pl-c"> round </span><span class="pl-cf"></span></div></div><div class="term-nvim"><span class="pl-a k-bold"> NORMAL </span><span class="pl-ab"></span><span class="pl-b">  main </span><span class="pl-bd"></span><span class="pl-d"> config </span><span class="pl-df"></span></div></div>
+      </div>
+      <div class="term-status" id="term-status" aria-hidden="true"><span class="pl-a k-bold">  0 </span><span class="pl-ab"></span><span class="pl-b"> 1:zsh* </span><span class="pl-bd"></span><span class="pl-d tmux-more"> 2:nvim 3:btop </span><span class="pl-df"></span><span class="sp"></span><span class="term-clock js-only"><span class="pl-cf"></span><span class="pl-c k-bold">  <span class="term-time">--:--</span> </span></span></div>
+    </div>
+    <aside class="family-string" aria-labelledby="fs-label">
+      <p class="fs-label" id="fs-label">O nome da família para o terminal, caractere por caractere</p>
+      <p class="fs-value"><code id="family-string">NoctuaIosevka Nerd Font Mono</code></p>
+      <button type="button" class="btn btn-small copy js-only" data-copy="#family-string" aria-describedby="family-string">Copiar</button>
+      <p class="fs-note">Confira com <code>fc-match</code>: um nome com erro de digitação falha em silêncio e entrega outra fonte no lugar.</p>
+      <ul class="fs-icons" aria-label="Alguns dos ícones da Nerd Fonts na família gêmea">
+        <li title="nf-fa-linux"><span aria-hidden="true">&#xF17C;</span><span class="sr-only">nf-fa-linux</span></li>
+        <li title="nf-linux-nixos"><span aria-hidden="true">&#xF313;</span><span class="sr-only">nf-linux-nixos</span></li>
+        <li title="nf-fa-apple"><span aria-hidden="true">&#xF179;</span><span class="sr-only">nf-fa-apple</span></li>
+        <li title="nf-fa-windows"><span aria-hidden="true">&#xF17A;</span><span class="sr-only">nf-fa-windows</span></li>
+        <li title="nf-dev-git_branch"><span aria-hidden="true">&#xE725;</span><span class="sr-only">nf-dev-git_branch</span></li>
+        <li title="nf-fa-github"><span aria-hidden="true">&#xF09B;</span><span class="sr-only">nf-fa-github</span></li>
+        <li title="nf-dev-rust"><span aria-hidden="true">&#xE7A8;</span><span class="sr-only">nf-dev-rust</span></li>
+        <li title="nf-seti-python"><span aria-hidden="true">&#xE606;</span><span class="sr-only">nf-seti-python</span></li>
+        <li title="nf-custom-go"><span aria-hidden="true">&#xE626;</span><span class="sr-only">nf-custom-go</span></li>
+        <li title="nf-dev-haskell"><span aria-hidden="true">&#xE777;</span><span class="sr-only">nf-dev-haskell</span></li>
+        <li title="nf-seti-typescript"><span aria-hidden="true">&#xE628;</span><span class="sr-only">nf-seti-typescript</span></li>
+        <li title="nf-oct-markdown"><span aria-hidden="true">&#xF48A;</span><span class="sr-only">nf-oct-markdown</span></li>
+        <li title="nf-oct-cpu"><span aria-hidden="true">&#xF4BC;</span><span class="sr-only">nf-oct-cpu</span></li>
+        <li title="nf-fa-database"><span aria-hidden="true">&#xF1C0;</span><span class="sr-only">nf-fa-database</span></li>
+        <li title="nf-fa-bolt"><span aria-hidden="true">&#xF0E7;</span><span class="sr-only">nf-fa-bolt</span></li>
+        <li title="nf-md-owl"><span aria-hidden="true">&#xF03D2;</span><span class="sr-only">nf-md-owl</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- 11 COVERAGE -->
+<section id="scripts" class="sec sec-scripts" aria-labelledby="scripts-title" data-arm="t:800:1:u,i l:400:3:u">
+  <div class="sec-head head-fit" data-reveal>
+    <p class="folio"><span>§11</span><span>Cobertura</span></p>
+    <h2 id="scripts-title" class="sec-title t-scripts"><span class="sr-only">Latim, grego, cirílico.</span><span class="t-vis" aria-hidden="true"><span class="t-la">Latim,</span> <span class="lft t-gk" lang="el">Ελληνικά,</span> <span class="lft t-cy" lang="ru">Кириллица.</span></span></h2>
+    <span class="bignum" aria-hidden="true">11</span>
+  </div>
+  <p class="sec-lede">7.580 pontos de código em cada um dos 135 estilos: três alfabetos, mais traços de caixa, elementos de bloco, setas, matemática, braile e os separadores do Powerline.</p>
+  <div class="scripts">
+    <article class="script" data-reveal>
+      <h3><span>Latim</span><small>Português</small></h3>
+      <p class="decode lft lw8 lx1" lang="pt-BR" data-alphabet="latin">À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso e vovó põe açúcar no chá de tâmaras do jabuti feliz.</p>
+    </article>
+    <article class="script" data-reveal>
+      <h3><span>Grego</span><small lang="el">Ελληνικά</small></h3>
+      <p class="decode lft lw8 lx1" lang="el" data-alphabet="greek">Ξεσκεπάζω την ψυχοφθόρα βδελυγμία.</p>
+    </article>
+    <article class="script" data-reveal>
+      <h3><span>Cirílico</span><small><span lang="ru">Русский</span> · <span lang="uk">Українська</span></small></h3>
+      <p class="decode lft lw8 lx1" lang="ru" data-alphabet="cyrillic">Съешь же ещё этих мягких французских булок, да выпей чаю.</p>
+      <p class="decode decode-2 lft lw8 lx1 lsi" lang="uk" data-alphabet="cyrillic">Чуєш їх, доцю, га? Кумедна ж ти, прощайся без ґольфів!</p>
+    </article>
+  </div>
+  <div class="scripts-bottom">
+    <div class="globe js-only" id="globe" aria-hidden="true"><div class="globe-spin" id="globe-spin"></div></div>
+    <figure class="symbols" data-reveal>
+      <figcaption class="sr-only">Símbolos de exemplo: setas, matemática, traços de caixa, blocos e braile</figcaption>
+      <div class="sym"><p class="sym-g" aria-hidden="true">→ ← ↑ ↓ ⇒ ⇔ ↦ ↻</p><p class="sym-k">Setas</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">∀ ∃ ∈ ∉ ≠ ≈ ≤ ≥ ∑ ∏ ∫ √ ∞ ∂ ∇ ⊂ ⊃ ∧ ∨</p><p class="sym-k">Matemática</p></div>
+      <div class="sym sym-box"><pre class="sym-g" aria-hidden="true">╭──┬──╮ ╔══╦══╗
+├──┼──┤ ╠══╬══╣
+╰──┴──╯ ╚══╩══╝</pre><p class="sym-k">Traços de caixa</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">▀ ▄ █ ▌ ▐ ░ ▒ ▓</p><p class="sym-k">Blocos e sombreados</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">◆ ◇ ● ○ ■ □ ▲ △</p><p class="sym-k">Formas geométricas</p></div>
+      <div class="sym"><p class="sym-g" aria-hidden="true">⣿ ⡇ ⢸ ⠿ ⣤ ⠛ ⢀ ⡀</p><p class="sym-k">Braile</p></div>
+    </figure>
+  </div>
+  <details class="coverage" data-reveal>
+    <summary class="cov-sum"><h3 class="cov-title">Blocos Unicode, contados no cmap</h3><span class="cov-open">Os 17 blocos principais dos 7.580 pontos de código — abrir a tabela</span></summary>
+    <p class="cov-note">— os pontos de código que a fonte desenha, sobre os caracteres que o Unicode atribui a cada bloco (sem os códigos de controle). Cada faixa mostra 24 deles, compostos na fonte; uma célula vazia é um caractere que ela não desenha.</p>
+    <ul class="cov-list">
+      <li class="cov"><span class="cov-name">Latim básico</span><span class="cov-strip lfl" aria-hidden="true"><i>$</i><i>1</i><i>4</i><i>7</i><i>&lt;</i><i>A</i><i>D</i><i>G</i><i>J</i><i>M</i><i>P</i><i>S</i><i>W</i><i>Z</i><i>a</i><i>d</i><i>g</i><i>j</i><i>m</i><i>p</i><i>s</i><i>v</i><i>y</i><i>~</i></span><span class="cov-num"><span aria-hidden="true">95/95</span><span class="sr-only">95 de 95</span></span></li>
+      <li class="cov"><span class="cov-name">Suplemento Latin-1</span><span class="cov-strip lfl" aria-hidden="true"><i>¢</i><i>¦</i><i>ª</i><i>°</i><i>´</i><i>º</i><i>¾</i><i>Ã</i><i>Ç</i><i>Ë</i><i>Î</i><i>Ò</i><i>Ö</i><i>Ú</i><i>Ý</i><i>á</i><i>å</i><i>é</i><i>ì</i><i>ð</i><i>ô</i><i>ø</i><i>û</i><i>ÿ</i></span><span class="cov-num"><span aria-hidden="true">96/96</span><span class="sr-only">96 de 96</span></span></li>
+      <li class="cov"><span class="cov-name">Latim estendido A</span><span class="cov-strip lfl" aria-hidden="true"><i>Ā</i><i>Ć</i><i>ċ</i><i>đ</i><i>Ė</i><i>Ĝ</i><i>ġ</i><i>ħ</i><i>Ĭ</i><i>Ĳ</i><i>ķ</i><i>Ľ</i><i>ł</i><i>ň</i><i>ō</i><i>œ</i><i>Ř</i><i>Ş</i><i>ţ</i><i>ũ</i><i>Ů</i><i>Ŵ</i><i>Ź</i><i>ſ</i></span><span class="cov-num"><span aria-hidden="true">128/128</span><span class="sr-only">128 de 128</span></span></li>
+      <li class="cov"><span class="cov-name">Latim estendido B</span><span class="cov-strip lfl" aria-hidden="true"><i>ƀ</i><i>Ɖ</i><i>ƒ</i><i>ƛ</i><i>Ƥ</i><i>ƭ</i><i>ƶ</i><i>ƿ</i><i>ǈ</i><i>Ǒ</i><i>ǚ</i><i>ǣ</i><i>Ǭ</i><i>ǵ</i><i>Ǿ</i><i>ȇ</i><i>Ȑ</i><i>ș</i><i>Ȣ</i><i>ȫ</i><i>ȴ</i><i>Ƚ</i><i>Ɇ</i><i>ɏ</i></span><span class="cov-num"><span aria-hidden="true">208/208</span><span class="sr-only">208 de 208</span></span></li>
+      <li class="cov"><span class="cov-name">Extensões do IPA</span><span class="cov-strip lfl" aria-hidden="true"><i>ɐ</i><i>ɔ</i><i>ɘ</i><i>ɜ</i><i>ɡ</i><i>ɥ</i><i>ɩ</i><i>ɭ</i><i>ɱ</i><i>ɵ</i><i>ɹ</i><i>ɽ</i><i>ʂ</i><i>ʆ</i><i>ʊ</i><i>ʎ</i><i>ʒ</i><i>ʖ</i><i>ʚ</i><i>ʞ</i><i>ʣ</i><i>ʧ</i><i>ʫ</i><i>ʯ</i></span><span class="cov-num"><span aria-hidden="true">96/96</span><span class="sr-only">96 de 96</span></span></li>
+      <li class="cov"><span class="cov-name">Latim estendido adicional</span><span class="cov-strip lfl" aria-hidden="true"><i>Ḁ</i><i>ḋ</i><i>Ḗ</i><i>ḡ</i><i>Ḭ</i><i>ḷ</i><i>ṃ</i><i>Ṏ</i><i>ṙ</i><i>Ṥ</i><i>ṯ</i><i>Ṻ</i><i>ẅ</i><i>Ẑ</i><i>ẛ</i><i>Ầ</i><i>ằ</i><i>Ẽ</i><i>Ỉ</i><i>ồ</i><i>Ở</i><i>ứ</i><i>Ỵ</i><i>ỿ</i></span><span class="cov-num"><span aria-hidden="true">256/256</span><span class="sr-only">256 de 256</span></span></li>
+      <li class="cov"><span class="cov-name">Grego e copta</span><span class="cov-strip lfl" aria-hidden="true"><i>Ͱ</i><i>Ͷ</i><i>ͽ</i><i>Ή</i><i>Α</i><i>Η</i><i>Μ</i><i>Σ</i><i>Ω</i><i>ί</i><i>δ</i><i>κ</i><i>π</i><i>φ</i><i>ϋ</i><i>ϑ</i><i>ϗ</i><i>ϝ</i><i class="miss"></i><i class="miss"></i><i class="miss"></i><i>ϴ</i><i>Ϲ</i><i>Ͽ</i></span><span class="cov-num"><span aria-hidden="true">121/135</span><span class="sr-only">121 de 135</span></span></li>
+      <li class="cov"><span class="cov-name">Grego estendido</span><span class="cov-strip lfl" aria-hidden="true"><i>ἀ</i><i>Ἂ</i><i>ἔ</i><i>ἢ</i><i>Ἤ</i><i>ἶ</i><i>ὁ</i><i>Ὅ</i><i>Ὓ</i><i>ὧ</i><i>&#x1F71;</i><i>&#x1F7B;</i><i>ᾇ</i><i>ᾑ</i><i>ᾛ</i><i>ᾥ</i><i>ᾯ</i><i>Ὰ</i><i>ῆ</i><i>ῐ</i><i>῝</i><i>ῧ</i><i>ῳ</i><i>῾</i></span><span class="cov-num"><span aria-hidden="true">233/233</span><span class="sr-only">233 de 233</span></span></li>
+      <li class="cov"><span class="cov-name">Cirílico</span><span class="cov-strip lfl" aria-hidden="true"><i>Ѐ</i><i>Ћ</i><i>Ж</i><i>Р</i><i>Ы</i><i>ж</i><i>с</i><i>ы</i><i>і</i><i>ѡ</i><i>Ѭ</i><i>ѷ</i><i>ҁ</i><i>ғ</i><i>Ҟ</i><i>ҩ</i><i>Ҵ</i><i>Ҿ</i><i>Ӊ</i><i>Ӕ</i><i>ӟ</i><i>ө</i><i>Ӵ</i><i>ӿ</i></span><span class="cov-num"><span aria-hidden="true">256/256</span><span class="sr-only">256 de 256</span></span></li>
+      <li class="cov"><span class="cov-name">Suplemento cirílico</span><span class="cov-strip lfl" aria-hidden="true"><i>Ԁ</i><i>Ԃ</i><i>Ԅ</i><i>Ԇ</i><i>Ԉ</i><i>Ԋ</i><i>Ԍ</i><i>Ԏ</i><i>Ԑ</i><i>Ԓ</i><i>Ԕ</i><i>Ԗ</i><i>ԙ</i><i>ԛ</i><i>ԝ</i><i>ԟ</i><i>ԡ</i><i>ԣ</i><i>ԥ</i><i>ԧ</i><i>ԩ</i><i>ԫ</i><i>ԭ</i><i>ԯ</i></span><span class="cov-num"><span aria-hidden="true">48/48</span><span class="sr-only">48 de 48</span></span></li>
+      <li class="cov"><span class="cov-name">Pontuação geral</span><span class="cov-strip lfl" aria-hidden="true"><i>‐</i><i>–</i><i>‖</i><i>’</i><i>“</i><i>‟</i><i>•</i><i>‥</i><i>‰</i><i>″</i><i>‶</i><i>‹</i><i>‽</i><i>⁀</i><i>⁃</i><i>⁆</i><i>⁉</i><i>⁌</i><i>⁏</i><i>⁒</i><i>⁕</i><i>⁘</i><i>⁛</i><i>⁞</i></span><span class="cov-num"><span aria-hidden="true">94/111</span><span class="sr-only">94 de 111</span></span></li>
+      <li class="cov"><span class="cov-name">Setas</span><span class="cov-strip lfl" aria-hidden="true"><i>←</i><i>↕</i><i>↚</i><i>↞</i><i>↣</i><i>↨</i><i>↭</i><i>↲</i><i>↷</i><i>↻</i><i>⇀</i><i>⇅</i><i>⇊</i><i>⇏</i><i>⇔</i><i>⇘</i><i>⇝</i><i>⇢</i><i>⇧</i><i>⇬</i><i>⇱</i><i>⇵</i><i>⇺</i><i>⇿</i></span><span class="cov-num"><span aria-hidden="true">112/112</span><span class="sr-only">112 de 112</span></span></li>
+      <li class="cov"><span class="cov-name">Operadores matemáticos</span><span class="cov-strip lfl" aria-hidden="true"><i>∀</i><i>∋</i><i>∖</i><i>∡</i><i>∬</i><i>∷</i><i>≃</i><i>≎</i><i>≙</i><i>≤</i><i>≯</i><i>≺</i><i>⊅</i><i>⊐</i><i>⊛</i><i>⊦</i><i>⊱</i><i>⊼</i><i>⋈</i><i>⋓</i><i>⋞</i><i>⋩</i><i>⋴</i><i>⋿</i></span><span class="cov-num"><span aria-hidden="true">256/256</span><span class="sr-only">256 de 256</span></span></li>
+      <li class="cov"><span class="cov-name">Traços de caixa</span><span class="cov-strip lfl" aria-hidden="true"><i>─</i><i>┆</i><i>┋</i><i>┑</i><i>┖</i><i>├</i><i>┡</i><i>┧</i><i>┬</i><i>┲</i><i>┷</i><i>┽</i><i>╂</i><i>╈</i><i>╍</i><i>╓</i><i>╘</i><i>╞</i><i>╣</i><i>╩</i><i>╮</i><i>╴</i><i>╹</i><i>╿</i></span><span class="cov-num"><span aria-hidden="true">128/128</span><span class="sr-only">128 de 128</span></span></li>
+      <li class="cov"><span class="cov-name">Elementos de bloco</span><span class="cov-strip lfl" aria-hidden="true"><i>▀</i><i>▁</i><i>▃</i><i>▄</i><i>▅</i><i>▇</i><i>█</i><i>▉</i><i>▋</i><i>▌</i><i>▍</i><i>▏</i><i>▐</i><i>▒</i><i>▓</i><i>▔</i><i>▖</i><i>▗</i><i>▘</i><i>▚</i><i>▛</i><i>▜</i><i>▞</i><i>▟</i></span><span class="cov-num"><span aria-hidden="true">32/32</span><span class="sr-only">32 de 32</span></span></li>
+      <li class="cov"><span class="cov-name">Formas geométricas</span><span class="cov-strip lfl" aria-hidden="true"><i>■</i><i>▤</i><i>▨</i><i>▬</i><i>▱</i><i>▵</i><i>▹</i><i>▽</i><i>◁</i><i>◅</i><i>◉</i><i>◍</i><i>◒</i><i>◖</i><i>◚</i><i>◞</i><i>◢</i><i>◦</i><i>◪</i><i>◮</i><i>◳</i><i>◷</i><i>◻</i><i>◿</i></span><span class="cov-num"><span aria-hidden="true">96/96</span><span class="sr-only">96 de 96</span></span></li>
+      <li class="cov"><span class="cov-name">Padrões braile</span><span class="cov-strip lfl" aria-hidden="true"><i>⠁</i><i>⠌</i><i>⠗</i><i>⠢</i><i>⠭</i><i>⠸</i><i>⡃</i><i>⡎</i><i>⡙</i><i>⡤</i><i>⡯</i><i>⡺</i><i>⢆</i><i>⢑</i><i>⢜</i><i>⢧</i><i>⢲</i><i>⢽</i><i>⣈</i><i>⣓</i><i>⣞</i><i>⣩</i><i>⣴</i><i>⣿</i></span><span class="cov-num"><span aria-hidden="true">256/256</span><span class="sr-only">256 de 256</span></span></li>
+    </ul>
+  </details>
+</section>
+
+<!-- 12 TESTER -->
+<section id="tester" class="sec sec-tester" aria-labelledby="tester-title" tabindex="-1">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§12</span><span>Teste de tipos</span></p>
+    <h2 id="tester-title" class="sec-title" data-scrub="weight">O seu texto, em qualquer estilo.</h2>
+    <span class="bignum" aria-hidden="true">12</span>
+    <p class="sec-lede">Digite o que quiser.<span class="js-only"> Cada controle aqui corresponde a um estilo de verdade ou a um recurso OpenType de verdade, e um estilo só é baixado quando você pede.</span><span class="static-only"> Aqui o texto fica na Regular, com os recursos padrão; para escolher outro estilo ou recurso, é preciso JavaScript.</span></p>
+  </div>
+  <div class="tester">
+    <div class="t-controls js-only">
+      <label class="t-field" for="t-size"><span>Tamanho <output id="t-size-out">56</output> px</span><input type="range" id="t-size" min="9" max="200" value="56"></label>
+      <label class="t-field" for="t-wght"><span>Peso <output id="t-wght-out" lang="en">Regular 400</output></span><input type="range" id="t-wght" min="100" max="900" step="100" value="400" aria-valuetext="Regular 400" lang="en"></label>
+      <label class="t-field" for="t-wdth"><span>Largura <output id="t-wdth-out" lang="en">Normal 600</output></span><input type="range" id="t-wdth" min="1" max="5" step="1" value="3" aria-valuetext="Normal 600" lang="en"></label>
+      <fieldset class="t-field t-slope">
+        <legend>Inclinação</legend>
+        <label><input type="radio" name="t-slope" value="normal" checked> Reta</label>
+        <label><input type="radio" name="t-slope" value="italic"> Itálica</label>
+        <label><input type="radio" name="t-slope" value="oblique"> Oblíqua</label>
+      </fieldset>
+      <fieldset class="t-field t-feats">
+        <legend>Recursos</legend>
+        <label><input type="checkbox" value="calt" checked> calt</label>
+        <label><input type="checkbox" value="dlig"> dlig</label>
+        <label><input type="checkbox" value="HSKL"> HSKL</label>
+        <label><input type="checkbox" value="zero"> zero</label>
+        <label><input type="checkbox" value="onum"> onum</label>
+        <label><input type="checkbox" value="frac"> frac</label>
+      </fieldset>
+      <label class="t-field"><span>Conjunto estilístico</span>
+        <select id="t-ss">
+          <option value="">Nenhum — as formas da Noctua</option>
+          <option value="ss01">ss01 · Andale Mono Style</option>
+          <option value="ss02">ss02 · Anonymous Pro Style</option>
+          <option value="ss03">ss03 · Consolas Style</option>
+          <option value="ss04">ss04 · Menlo Style</option>
+          <option value="ss05">ss05 · Fira Mono Style</option>
+          <option value="ss06">ss06 · Liberation Mono Style</option>
+          <option value="ss07">ss07 · Monaco Style</option>
+          <option value="ss08">ss08 · Pragmata Pro Style</option>
+          <option value="ss09">ss09 · Source Code Pro Style</option>
+          <option value="ss10">ss10 · Envy Code R Style</option>
+          <option value="ss11">ss11 · X Window Style</option>
+          <option value="ss12">ss12 · Ubuntu Mono Style</option>
+          <option value="ss13">ss13 · Lucida Style</option>
+          <option value="ss14">ss14 · JetBrains Mono Style</option>
+          <option value="ss15">ss15 · IBM Plex Mono Style</option>
+          <option value="ss16">ss16 · PT Mono Style</option>
+          <option value="ss17">ss17 · Recursive Mono Style</option>
+          <option value="ss18">ss18 · Input Mono Style</option>
+          <option value="ss20">ss20 · Curly Style</option>
+        </select>
+      </label>
+      <label class="t-check"><input type="checkbox" id="t-grid"> Mostrar a grade de células</label>
+    </div>
+    <div class="t-preview-wrap">
+      <label class="sr-only" for="t-text">Texto para visualizar</label>
+      <textarea id="t-text" class="t-preview" spellcheck="false">Um pequeno jabuti xereta viu dez cegonhas felizes.
+0O il1I| 5SZ2 -&gt; =&gt; != /= 1/2 1984</textarea>
+      <div class="t-css"><code id="t-css-out">font-family: "Noctua Iosevka"; font-size: 56px; font-weight: 400; font-stretch: 100%; font-style: normal;</code><button type="button" class="btn btn-small copy js-only" data-copy="#t-css-out" aria-describedby="t-css-out">Copiar o CSS</button></div>
+      <p class="t-face"><span class="t-face-label">Estilo:</span> <code class="t-face-file" lang="en">NoctuaIosevka-Regular.woff2</code> <span class="t-face-state" aria-live="polite"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 13 DOWNLOAD -->
+<section id="download" class="sec sec-download band band-pink" aria-labelledby="download-title" tabindex="-1" data-arm="d:800:1-5:u">
+  <div class="sec-head" data-reveal>
+    <p class="folio"><span>§13</span><span>Para baixar</span></p>
+    <h2 id="download-title" class="sec-title">Baixar e instalar.</h2>
+    <span class="bignum" aria-hidden="true">13</span>
+  </div>
+  <p class="sec-lede">A versão <a href="https://github.com/noctua-world/noctua-fonts/releases/tag/v1.0.0">v1.0.0</a> traz um arquivo compactado por largura e formato, cada um com as licenças dentro. Comece pela Normal; para o terminal, pegue a versão Nerd Font.</p>
+  <ul class="dl-grid">
+    <li class="dl-card dl-featured" data-reveal><h3><span class="lfd lw8 lx3" lang="en">Normal</span><small>600 · comece por aqui</small></h3><p class="dl-links"><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-ttf-normal.zip">Nerd Font TTF<span class="sr-only" lang="en">, Normal</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-ttf-normal.zip">TTF<span class="sr-only" lang="en">, Normal</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-woff2-normal.zip">WOFF2<span class="sr-only" lang="en">, Normal</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-woff2-normal.zip">Nerd Font WOFF2<span class="sr-only" lang="en">, Normal</span></a></p></li>
+    <li class="dl-card" data-reveal><h3><span class="lfd lw8 lx1" lang="en">Condensed</span><small>456</small></h3><p class="dl-links"><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-ttf-condensed.zip">Nerd Font TTF<span class="sr-only" lang="en">, Condensed</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-ttf-condensed.zip">TTF<span class="sr-only" lang="en">, Condensed</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-woff2-condensed.zip">WOFF2<span class="sr-only" lang="en">, Condensed</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-woff2-condensed.zip">Nerd Font WOFF2<span class="sr-only" lang="en">, Condensed</span></a></p></li>
+    <li class="dl-card" data-reveal><h3><span class="lfd lw8 lx2" lang="en">SemiCondensed</span><small>548</small></h3><p class="dl-links"><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-ttf-semicondensed.zip">Nerd Font TTF<span class="sr-only" lang="en">, SemiCondensed</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-ttf-semicondensed.zip">TTF<span class="sr-only" lang="en">, SemiCondensed</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-woff2-semicondensed.zip">WOFF2<span class="sr-only" lang="en">, SemiCondensed</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-woff2-semicondensed.zip">Nerd Font WOFF2<span class="sr-only" lang="en">, SemiCondensed</span></a></p></li>
+    <li class="dl-card" data-reveal><h3><span class="lfd lw8 lx4" lang="en">SemiExtended</span><small>658</small></h3><p class="dl-links"><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-ttf-semiextended.zip">Nerd Font TTF<span class="sr-only" lang="en">, SemiExtended</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-ttf-semiextended.zip">TTF<span class="sr-only" lang="en">, SemiExtended</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-woff2-semiextended.zip">WOFF2<span class="sr-only" lang="en">, SemiExtended</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-woff2-semiextended.zip">Nerd Font WOFF2<span class="sr-only" lang="en">, SemiExtended</span></a></p></li>
+    <li class="dl-card" data-reveal><h3><span class="lfd lw8 lx5" lang="en">Extended</span><small>720</small></h3><p class="dl-links"><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-ttf-extended.zip">Nerd Font TTF<span class="sr-only" lang="en">, Extended</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-ttf-extended.zip">TTF<span class="sr-only" lang="en">, Extended</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-woff2-extended.zip">WOFF2<span class="sr-only" lang="en">, Extended</span></a><a href="https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-woff2-extended.zip">Nerd Font WOFF2<span class="sr-only" lang="en">, Extended</span></a></p></li>
+  </ul>
+  <div class="install" data-reveal>
+    <div class="ins-tabs js-only" role="tablist" aria-label="Sistema operacional">
+      <button type="button" role="tab" id="os-linux" aria-controls="os-linux-p" aria-selected="true">Linux</button>
+      <button type="button" role="tab" id="os-mac" aria-controls="os-mac-p" aria-selected="false" tabindex="-1">macOS</button>
+      <button type="button" role="tab" id="os-win" aria-controls="os-win-p" aria-selected="false" tabindex="-1">Windows</button>
+    </div>
+    <div class="ins-panes">
+    <div class="ins-pane" role="group" id="os-linux-p" aria-labelledby="os-linux-p-name">
+      <p class="ins-name static-only" id="os-linux-p-name">Linux</p>
+      <ol class="steps">
+        <li><p>Descompacte o arquivo na sua pasta de fontes — sem precisar de root.</p><div class="cmd-block"><pre><code id="cmd-linux-1"><span class="cl">mkdir -p ~/<wbr>.local/<wbr>share/<wbr>fonts/<wbr>NoctuaIosevka</span><span class="cl">unzip noctua-iosevka-nerd-font-ttf-normal.zip -d ~/<wbr>.local/<wbr>share/<wbr>fonts/<wbr>NoctuaIosevka</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cmd-linux-1" aria-describedby="cmd-linux-1">Copiar</button></div></li>
+        <li><p>Atualize o cache de fontes e confira o nome exato da família.</p><div class="cmd-block"><pre><code id="cmd-linux-2"><span class="cl">fc-cache -f</span><span class="cl">fc-match "NoctuaIosevka Nerd Font Mono"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cmd-linux-2" aria-describedby="cmd-linux-2">Copiar</button></div></li>
+        <li><p>No NixOS ou no Guix, aponte o gerenciador de pacotes para os arquivos em vez de copiá-los para o <code>$HOME</code>: a cópia funciona, mas some na próxima recompilação que limpar o perfil.</p></li>
+      </ol>
+    </div>
+    <div class="ins-pane" role="group" id="os-mac-p" aria-labelledby="os-mac-p-name" hidden>
+      <p class="ins-name static-only" id="os-mac-p-name">macOS</p>
+      <ol class="steps">
+        <li><p>Descompacte o arquivo que você baixou.</p></li>
+        <li><p>Abra os arquivos <code>.ttf</code> no Catálogo de Fontes, ou coloque-os em <code>~/Library/Fonts/</code>:</p><div class="cmd-block"><pre><code id="cmd-mac-1"><span class="cl">unzip noctua-iosevka-nerd-font-ttf-normal.zip -d ~/<wbr>Library/<wbr>Fonts/<wbr>NoctuaIosevka</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cmd-mac-1" aria-describedby="cmd-mac-1">Copiar</button></div></li>
+        <li><p>Feche o terminal ou o editor por completo e abra de novo.</p></li>
+      </ol>
+    </div>
+    <div class="ins-pane" role="group" id="os-win-p" aria-labelledby="os-win-p-name" hidden>
+      <p class="ins-name static-only" id="os-win-p-name">Windows</p>
+      <ol class="steps">
+        <li><p>Descompacte o arquivo que você baixou.</p></li>
+        <li><p>Selecione todos os arquivos <code>.ttf</code>, clique com o botão direito e escolha <b>Instalar para todos os usuários</b> (ou <b>Instalar</b>).</p></li>
+        <li><p>Reinicie o aplicativo: muitos programas só procuram fontes quando abrem.</p></li>
+      </ol>
+    </div>
+    </div>
+    <div class="configs">
+      <p class="cfg-title">Depois, configure o seu terminal ou editor:</p>
+      <div class="cfg">
+        <p class="cfg-name">Ghostty <small>~/.config/ghostty/config</small></p>
+        <div class="cmd-block"><pre><code id="cfg-ghostty"><span class="cl">font-family = "NoctuaIosevka Nerd Font Mono"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-ghostty" aria-describedby="cfg-ghostty">Copiar</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">kitty <small>~/.config/kitty/kitty.conf</small></p>
+        <div class="cmd-block"><pre><code id="cfg-kitty"><span class="cl">font_family NoctuaIosevka Nerd Font Mono</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-kitty" aria-describedby="cfg-kitty">Copiar</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">Alacritty <small>~/.config/alacritty/alacritty.toml</small></p>
+        <div class="cmd-block"><pre><code id="cfg-alacritty"><span class="cl">[font.normal]</span><span class="cl">family = "NoctuaIosevka Nerd Font Mono"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-alacritty" aria-describedby="cfg-alacritty">Copiar</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">VS Code <small>settings.json</small></p>
+        <div class="cmd-block"><pre><code id="cfg-vscode"><span class="cl">"editor.fontFamily": "'NoctuaIosevka Nerd Font Mono', monospace",</span><span class="cl">"editor.fontLigatures": true,</span><span class="cl">"terminal.integrated.fontFamily": "'NoctuaIosevka Nerd Font Mono'"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-vscode" aria-describedby="cfg-vscode">Copiar</button></div>
+      </div>
+      <p class="note">Se a fonte não aparecer, confirme que o processo terminou mesmo — aplicativos de instância única continuam vivos com todas as janelas fechadas — antes de desconfiar de qualquer outra coisa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 LICENCE -->
+<section id="licence" class="sec sec-licence" aria-labelledby="licence-title">
+  <div class="sec-head head-split" data-reveal>
+    <p class="folio"><span>§14</span><span>Créditos</span></p>
+    <h2 id="licence-title" class="sec-title">Licença e créditos.</h2>
+    <span class="bignum" aria-hidden="true">14</span>
+    <p class="sec-lede">As fontes sob a SIL OFL 1.1, os ícones sob MIT, esta página sob MIT ou Apache 2.0: livres para usar, embutir e compartilhar, desde que as licenças acompanhem os arquivos.</p>
+  </div>
+  <div class="credits">
+    <article class="credit" data-reveal>
+      <h3>Iosevka</h3>
+      <p>Desenhada por <b>Renzhi Li</b> (Belleve Invis). A Noctua Iosevka é uma compilação sob medida dela — uma escolha de variantes e uma escada de larguras, sem nada redesenhado — publicada sob a <b>SIL Open Font License 1.1</b>. Copyright © 2015–2026 Renzhi Li. A licença acompanha as fontes, inclusive os subconjuntos que esta página serve.</p>
+      <p class="credit-links"><a href="../assets/fonts/licenses/OFL-Iosevka.txt">Ler a licença que acompanha estas fontes</a><a href="https://github.com/be5invis/Iosevka">A Iosevka no GitHub</a></p>
+    </article>
+    <article class="credit" data-reveal>
+      <h3>Nerd Fonts</h3>
+      <p>Os ícones da <b>NoctuaIosevka Nerd Font Mono</b> vêm da Nerd Fonts, que os distribui sob a sua <b>licença MIT</b>, copyright © 2014 Ryan L McIntyre. Os conjuntos de ícones que ela reúne mantêm as licenças de origem — Font Awesome e Codicons sob CC BY 4.0, Material Design Icons sob Apache 2.0, entre outros —, listadas no repositório da Nerd Fonts.</p>
+      <p class="credit-links"><a href="../assets/fonts/licenses/LICENSE-NerdFontsSymbolsOnly.txt">Ler a licença MIT</a><a href="https://github.com/ryanoasis/nerd-fonts">A Nerd Fonts no GitHub</a></p>
+    </article>
+    <article class="credit" data-reveal>
+      <h3>Esta página</h3>
+      <p>Composta inteiramente em Noctua Iosevka. HTML, CSS e JavaScript escritos à mão: cada efeito é desenhado pela própria página, e nada é buscado em nenhum outro lugar. O código-fonte fica no repositório, sob a licença MIT ou a Apache 2.0, à sua escolha.</p>
+      <p class="credit-links"><a href="https://github.com/noctua-world/noctua-fonts">O repositório</a></p>
+    </article>
+  </div>
+  <div class="colophon" data-reveal>
+    <p class="colophon-line js-only"><span class="colophon-k">Estilos carregados nesta visita</span><span class="colophon-v" id="faces-loaded">—</span></p>
+    <p class="colophon-line"><span class="colophon-k">Requisições a outros sites</span><span class="colophon-v">0</span></p>
+    <p class="colophon-line"><span class="colophon-k">Imagens bitmap</span><span class="colophon-v">0</span></p>
+    <p class="colophon-line"><span class="colophon-k">Tintas</span><span class="colophon-v colophon-inks"><i class="ink-a"></i><i class="ink-b"></i><i class="ink-c"></i></span></p>
+  </div>
+</section>
+</main>
+
+<footer class="footer" data-arm="d:100:3:i">
+  <p class="footer-mark" aria-hidden="true"><span data-kinetic="weight">Noctua</span><span class="lfd lw1 lsi">Iosevka</span></p>
+  <div class="footer-row">
+    <p><a href="https://github.com/noctua-world/noctua-fonts">github.com/noctua-world/noctua-fonts</a></p>
+    <nav class="lang" aria-label="Ler esta página em">
+      <a href="../" hreflang="en" lang="en">English</a>
+      <a href="./" hreflang="pt-BR" lang="pt-BR" aria-current="page">Português (Brasil)</a>
+    </nav>
+    <p>Fontes: SIL OFL 1.1 · Ícones: MIT · Site: MIT ou Apache 2.0</p>
+  </div>
+</footer>
+<p class="sr-only" id="announce" role="status"></p>
+</body>
+</html>
