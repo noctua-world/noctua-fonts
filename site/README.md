@@ -1,21 +1,23 @@
 # The Noctua Iosevka site
 
 The source of the repository's GitHub Pages site: one page whose only job is to show
-Noctua Iosevka. It is published from `docs/` on `main` ("Deploy from a branch", folder
-`/docs`), in two languages:
+Noctua Iosevka. It is published from `site/public/` on `main`, which
+[`.github/workflows/pages.yml`](../.github/workflows/pages.yml) deploys on every push that
+changes it (the repository's Pages source is "GitHub Actions"), in two languages:
 
 | page | URL | source of its strings |
 |---|---|---|
-| `docs/index.html` | https://noctua-world.github.io/noctua-fonts/ | `site/i18n/en.json` |
-| `docs/pt-BR/index.html` | https://noctua-world.github.io/noctua-fonts/pt-BR/ | `site/i18n/pt-BR.json` |
+| `site/public/index.html` | https://noctua-world.github.io/noctua-fonts/ | `site/i18n/en.json` |
+| `site/public/pt-BR/index.html` | https://noctua-world.github.io/noctua-fonts/pt-BR/ | `site/i18n/pt-BR.json` |
 
 Each URL names its language. There is no automatic redirect; the language switch is a pair of
 plain links, and the pages carry `hreflang` alternates for search engines. Both addresses, and
 every link to the repository and its release, come from the `repository` of
-`font-archives.json` (see below).
+`tools/font-archives.json` (see below).
 
-**`docs/` is generated output.** Edit `site/`, rebuild, and commit both. Never edit `docs/`
-by hand: `python3 site/build.py --check` (and the tests) fail when it drifts from the sources.
+**`site/public/` is generated output.** Edit the rest of `site/`, rebuild, and commit both.
+Never edit `site/public/` by hand: `python3 site/build.py --check` (and the tests) fail when it
+drifts from the sources, and the Pages workflow refuses to deploy it.
 
 ## What is in `site/`
 
@@ -23,18 +25,20 @@ by hand: `python3 site/build.py --check` (and the tests) fail when it drifts fro
 |---|---|
 | `template.html` | the one page template, for both languages |
 | `i18n/en.json`, `i18n/pt-BR.json` | every string a visitor sees, aria labels and metadata included |
-| `static/css/site.css` | the stylesheet (copied to `docs/assets/css/`) |
-| `static/js/*.js` | the page's ES modules, hand-written, no dependencies (copied to `docs/assets/js/`) |
+| `static/css/site.css` | the stylesheet (copied to `public/assets/css/`) |
+| `static/js/*.js` | the page's ES modules, hand-written, no dependencies (copied to `public/assets/js/`) |
 | `static/favicon.svg` | the icon |
-| `build.py` | renders the pages and writes `docs/` — standard library only |
-| `subset-fonts.py` | writes the subset WOFF2 faces into `docs/assets/fonts/` — fontTools and brotli |
+| `build.py` | renders the pages and writes `public/` — standard library only |
+| `subset-fonts.py` | writes the subset WOFF2 faces into `public/assets/fonts/` — fontTools and brotli |
+| `public/` | the generated site, committed as it is deployed; never edited by hand |
 
-`build.py` also generates three files from data it holds: `docs/assets/css/fonts.css` (one
-`@font-face` per subset face), `docs/assets/css/facts.css` (the measured values the stylesheet
-needs: the size that fits each one-line section title to its column and the width from which
-the hero's face pill fits beside the hint, per language, the share of the ASCII glyphs each
-stylistic set redraws, and the set the lens and the §06 title start in) and `docs/assets/js/strings.js` (the strings the scripts show, in both languages, plus the
-face matrix). The font facts the page states are constants at the top of `build.py`, measured
+`build.py` also generates three files from data it holds: `public/assets/css/fonts.css` (one
+`@font-face` per subset face), `public/assets/css/facts.css` (the measured values the
+stylesheet needs: the size that fits each one-line section title to its column and the width
+from which the hero's face pill fits beside the hint, per language, the share of the ASCII
+glyphs each stylistic set redraws, and the set the lens and the §06 title start in) and
+`public/assets/js/strings.js` (the strings the scripts show, in both languages, plus the face
+matrix). The font facts the page states are constants at the top of `build.py`, measured
 from the TTFs with fontTools and HarfBuzz: which glyphs each stylistic set redraws, how many
 character-variant features the font carries and how many shapes each one in the machine has,
 how many code points the italic redraws, the Unicode block counts and their sample strips, and
@@ -61,10 +65,10 @@ them out as such; so do the vertical metrics beside the guides.
 
 The release and the repository work the same way: the page names the release and links to
 its archives through `{tag}`, `{version}` and `{release_url}`, and to the repository through
-`{{@repo_url}}`, all read from `font-archives.json` (its `tag` and its `repository`, the ones
-`font-archives.py fetch` uses); the site's own address is `https://<owner>.github.io/<name>/`
-from the same `repository`. For a new release, change that tag, run `python3 site/build.py` and
-commit `docs/`; the tests fail if a source of the site names a tag, a version, a release URL or
+`{{@repo_url}}`, all read from `tools/font-archives.json` (its `tag` and its `repository`, the
+ones `tools/font-archives.py fetch` uses); the site's own address is
+`https://<owner>.github.io/<name>/` from the same `repository`. For a new release, change that
+tag, run `python3 site/build.py` and commit `site/public/`; the tests fail if a source of the site names a tag, a version, a release URL or
 the repository of its own.
 
 ### Template tags
@@ -105,14 +109,15 @@ standard library only:
 python3 site/build.py
 ```
 
-To check that `docs/` matches the sources, without writing anything (exit status 1 if not):
+To check that `site/public/` matches the sources, without writing anything (exit status 1 if
+not):
 
 ```bash
 python3 site/build.py --check
 ```
 
 The subset fonts need fontTools and brotli. Run the script with the Python of the virtual
-environment that [README.md](../README.md#tools) sets up:
+environment that [docs/README.md](../docs/README.md#tools) sets up:
 
 ```bash
 .venv/bin/python site/subset-fonts.py
@@ -121,7 +126,7 @@ environment that [README.md](../README.md#tools) sets up:
 With Nix, a one-off shell has both instead:
 `nix-shell -p 'python3.withPackages(ps: [ps.fonttools ps.brotli])' --run 'python3 site/subset-fonts.py'`.
 
-The tests of the site (`./check.py` runs them with all the others):
+The tests of the site (`./tools/check.py` runs them with all the others):
 
 ```bash
 python3 -m unittest discover -s tests -t . -p 'test_site.py' -v
@@ -129,8 +134,8 @@ python3 -m unittest discover -s tests -t . -p 'test_site.py' -v
 
 `subset-fonts.py` takes `--jobs N` (parallel workers, 6 by default) and `--only t,d,s,l,m` to
 rewrite some families only. A full run takes a few minutes. It reads the built fonts under
-`noctua-iosevka/` and never writes there; restore them first with `./font-archives.py fetch`
-if they are missing. Both scripts are deterministic: the same inputs give the same bytes.
+`noctua-iosevka/` and never writes there; restore them first with
+`./tools/font-archives.py fetch` if they are missing. Both scripts are deterministic: the same inputs give the same bytes.
 
 ## The fonts
 
@@ -186,7 +191,8 @@ Budgets, all checked by the tests or measured in the browser:
 
 The licences travel with the fonts, as the SIL OFL 1.1 requires even when a website serves
 them: `subset-fonts.py` copies `OFL-Iosevka.txt` and, because a Nerd Font face ships,
-`LICENSE-NerdFontsSymbolsOnly.txt` into `docs/assets/fonts/licenses/`, and the page links both.
+`LICENSE-NerdFontsSymbolsOnly.txt` into `site/public/assets/fonts/licenses/`, and the page
+links both.
 
 ## Content Security Policy
 

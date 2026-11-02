@@ -297,14 +297,14 @@ class RootLicenceTest(unittest.TestCase):
         self.text = (REPO / "LICENSE").read_text(encoding="utf-8")
 
     def test_the_three_files_exist(self):
-        for name in ("LICENSE", "LICENSE-MIT", "LICENSE-APACHE"):
+        for name in ("LICENSE", "licenses/LICENSE-MIT", "licenses/LICENSE-APACHE"):
             self.assertTrue((REPO / name).is_file(), name)
 
     def test_states_the_dual_licence(self):
         self.assertTrue(self.text.startswith(
             "noctua-fonts is dual-licensed, at your option, under either of:"))
-        self.assertIn("see LICENSE-APACHE", self.text)
-        self.assertIn("see LICENSE-MIT", self.text)
+        self.assertIn("see licenses/LICENSE-APACHE", self.text)
+        self.assertIn("see licenses/LICENSE-MIT", self.text)
 
     def test_keeps_the_fonts_out_of_it(self):
         self.assertIn("The fonts are NOT covered by it.", self.text)
@@ -324,7 +324,7 @@ class RootLicenceTest(unittest.TestCase):
             self.assertIn(list_, flat)
 
     def test_the_mit_text_names_the_noctua_project(self):
-        first = (REPO / "LICENSE-MIT").read_text(encoding="utf-8").splitlines()[0]
+        first = (REPO / "licenses" / "LICENSE-MIT").read_text(encoding="utf-8").splitlines()[0]
         self.assertEqual(first, "Copyright (c) 2026 The Noctua Project Contributors")
 
     def test_the_texts_match_the_sibling_repositories(self):
@@ -334,7 +334,7 @@ class RootLicenceTest(unittest.TestCase):
         for sibling in siblings:
             for name in ("LICENSE-APACHE", "LICENSE-MIT"):
                 with self.subTest(sibling=sibling.name, file=name):
-                    self.assertEqual((REPO / name).read_bytes(), (sibling / name).read_bytes())
+                    self.assertEqual((REPO / "licenses" / name).read_bytes(), (sibling / name).read_bytes())
 
 
 class NerdLicenceCopyTest(unittest.TestCase):

@@ -1,4 +1,4 @@
-# instantiate-variable-font.py output: a static/ directory next to the input font.
+# tools/instantiate-variable-font.py output: a static/ directory next to the input font.
 # Anchored to the font folders, so that site/static/ (the specimen site's own
 # stylesheets and scripts) is still tracked.
 /noctua-iosevka/**/static/
@@ -6,10 +6,10 @@
 /symbols-nerd-font/**/static/
 
 # Built fonts: published as GitHub Release assets, not kept in git. The committed
-# SHA256SUMS lists every one, and `./font-archives.py fetch` restores them.
+# SHA256SUMS lists every one, and `./tools/font-archives.py fetch` restores them.
 # Anchored to the three font folders, so fonts elsewhere (the subset fonts of the
-# site under docs/) are still tracked. The suffix is matched in any case, as
-# font-archives.py does, so the tool and git agree on what a built font is.
+# site under site/public/) are still tracked. The suffix is matched in any case, as
+# tools/font-archives.py does, so the tool and git agree on what a built font is.
 /noctua-iosevka/**/*.[tT][tT][fF]
 /noctua-iosevka/**/*.[wW][oO][fF][fF]2
 /noctua-noto/**/*.[tT][tT][fF]
@@ -17,7 +17,7 @@
 /symbols-nerd-font/**/*.[tT][tT][fF]
 /symbols-nerd-font/**/*.[wW][oO][fF][fF]2
 
-# font-archives.py temporary files, which a hard kill (power loss, the OOM killer)
+# tools/font-archives.py temporary files, which a hard kill (power loss, the OOM killer)
 # can leave behind: fetch stages each font as a hidden .part file next to its
 # destination (and moves a font that --force replaces aside as .orig.part), and
 # manifest writes SHA256SUMS through a hidden .tmp file.
@@ -26,10 +26,10 @@
 /symbols-nerd-font/**/.*.part
 /.SHA256SUMS.*.tmp
 
-# font-archives.py pack output (release assets, attached by hand)
+# tools/font-archives.py pack output (release assets, attached by hand)
 /dist/
 
-# Python (.venv is where the README installs fontTools and brotli)
+# Python (.venv is where docs/README.md installs fontTools and brotli)
 .venv/
 __pycache__/
 *.py[cod]

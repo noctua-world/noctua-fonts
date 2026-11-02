@@ -20,10 +20,10 @@ This tool recognises those faces and rewrites their names and style bits to
 exactly the convention the patcher used for the widths it did understand, then
 gives the file the name its siblings follow:
 
-    ./fix-nerd-semiextended-names.py [--dry-run] [--ttf-dir DIR] FONT [FONT ...]
-    ./fix-nerd-semiextended-names.py TTF-nerdfonts WOFF2-nerdfonts
-    ./fix-nerd-semiextended-names.py TTF-nerdfonts/*.ttf WOFF2-nerdfonts/*.woff2
-    ./fix-nerd-semiextended-names.py --ttf-dir TTF-nerdfonts WOFF2-nerdfonts/*.woff2
+    ./tools/fix-nerd-semiextended-names.py [--dry-run] [--ttf-dir DIR] FONT [FONT ...]
+    ./tools/fix-nerd-semiextended-names.py TTF-nerdfonts WOFF2-nerdfonts
+    ./tools/fix-nerd-semiextended-names.py TTF-nerdfonts/*.ttf WOFF2-nerdfonts/*.woff2
+    ./tools/fix-nerd-semiextended-names.py --ttf-dir TTF-nerdfonts WOFF2-nerdfonts/*.woff2
 
 Each FONT is a .ttf or .woff2 file, a directory -- which stands for the .ttf
 and .woff2 files directly inside it, not those of its subdirectories -- or a
@@ -205,7 +205,7 @@ files are left untouched -- the one exception, reported as such, is a fixed
 file in place whose old name could not be removed); 2 on bad usage.
 
 Requires: fonttools (plus brotli for .woff2 files), installed in a virtual
-environment: see README.md, Tools.
+environment: see docs/README.md, Tools.
 """
 
 import argparse
@@ -224,7 +224,7 @@ try:
     from fontTools.ttLib.tables.DefaultTable import DefaultTable
 except ImportError:
     sys.exit("error: fonttools not found.  "
-             "->  install fonttools and brotli in a virtual environment (README.md, Tools)")
+             "->  install fonttools and brotli in a virtual environment (docs/README.md, Tools)")
 
 # The only Nerd Fonts variant the convention below was derived from.
 NERD_FAMILY = "Nerd Font Mono"
@@ -1058,7 +1058,7 @@ def main(argv=None):
             process(path, run)
         except ImportError as exc:
             run.errors += 1
-            print(f"error        {path}: {exc}  ->  install brotli in a virtual environment (README.md, Tools)",
+            print(f"error        {path}: {exc}  ->  install brotli in a virtual environment (docs/README.md, Tools)",
                   file=sys.stderr)
         except Incomplete as exc:
             run.errors += 1

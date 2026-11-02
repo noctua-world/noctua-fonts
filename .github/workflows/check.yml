@@ -1,13 +1,14 @@
-# Runs check.py, the check every commit must pass, on each push to main and
-# each pull request: the test suite, docs/ against what site/ generates, and
+# Runs tools/check.py, the check every commit must pass, on each push to main
+# and each pull request: the test suite, site/public/ against what site/
+# generates, and
 # the fonts present against SHA256SUMS. A clone has no fonts, so here that last
 # step only proves that no font is stray; release-assets.yml checks the fonts
 # themselves, from the release.
 #
-# What runs is decided in check.py, not here, so CI and a contributor's machine
-# cannot drift apart. This file only decides where it runs. The one exception
-# is the oldest job: check.py refuses Python 3.9, so that job runs check.py's
-# three steps itself.
+# What runs is decided in tools/check.py, not here, so CI and a contributor's
+# machine cannot drift apart. This file only decides where it runs. The one
+# exception is the oldest job: check.py refuses Python 3.9, so that job runs
+# check.py's three steps itself.
 name: check
 
 on:
@@ -40,8 +41,8 @@ jobs:
         python: ["3.11", "3.14"]
     steps:
       # On Windows the runner's git turns text files into CRLF on checkout, as
-      # a Windows contributor's git does. .gitattributes keeps site/, docs/ and
-      # the licence texts byte for byte, and this is where that is proved:
+      # a Windows contributor's git does. .gitattributes keeps site/ (the
+      # generated site/public/ with it) and the licence texts byte for byte, and this is where that is proved:
       # site/build.py --check and the tests fail on a converted copy.
       # SHA256SUMS is read the same with or without that conversion; its
       # -text rule is checked on every system, by a test that reads
@@ -54,10 +55,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install fontTools and brotli
         run: 'python -m pip install --only-binary :all: fonttools==4.61.1 brotli==1.2.0'
-      - run: python check.py
+      - run: python tools/check.py
 
   newest:
-    # What README.md tells a reader to install, `pip install fonttools brotli`,
+    # What docs/README.md tells a reader to install, `pip install fonttools brotli`,
     # gives the newest of each: this job runs with those, on the newest Python,
     # so a release of either that breaks something shows up here first.
     name: check.py, newest Python, fontTools and brotli
@@ -74,10 +75,10 @@ jobs:
           python-version: "3.x"
       - name: Install fontTools and brotli
         run: 'python -m pip install --only-binary :all: fonttools brotli'
-      - run: python check.py
+      - run: python tools/check.py
 
   oldest:
-    # README.md says the tools run on Python 3.9. check.py itself refuses
+    # docs/README.md says the tools run on Python 3.9. check.py itself refuses
     # anything older than 3.11, because tests/test_licences.py reads the build
     # plan with tomllib, so this job runs check.py's three steps directly, with
     # fontTools 4.60.2, the last release that supports 3.9. On 3.9,
@@ -100,4 +101,4 @@ jobs:
       - name: Run the tests (tests/test_licences.py skips itself)
         run: python -m unittest discover -s tests -t .
       - run: python site/build.py --check
-      - run: python font-archives.py verify --allow-missing
+      - run: python tools/font-archives.py verify --allow-missing

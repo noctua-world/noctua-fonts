@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the subset WOFF2 faces of the specimen site into docs/assets/fonts/.
+"""Write the subset WOFF2 faces of the specimen site into site/public/assets/fonts/.
 
 The sources are the built fonts of this repository, read and never changed:
 
@@ -16,7 +16,7 @@ family names live in site/build.py, which writes the @font-face rules):
                                               the coverage strips
     term/       3 faces  "NoctuaIosevka Nerd Font Mono"  the terminal
 
-and the licences travel with them, into docs/assets/fonts/licenses/: the SIL OFL 1.1 of
+and the licences travel with them, into site/public/assets/fonts/licenses/: the SIL OFL 1.1 of
 Iosevka, and the Nerd Fonts MIT licence because a Nerd Font face ships too.
 
 The Unicode repertoire of each family is written below, and must cover every character
@@ -47,7 +47,7 @@ from pathlib import Path
 SITE = Path(__file__).resolve().parent
 REPO = SITE.parent
 SOURCES = REPO / "noctua-iosevka"
-OUT = REPO / "docs" / "assets" / "fonts"
+OUT = SITE / "public" / "assets" / "fonts"
 LICENCES = {
     "OFL-Iosevka.txt": REPO / "noctua-iosevka" / "licenses" / "OFL-Iosevka.txt",
     "LICENSE-NerdFontsSymbolsOnly.txt": REPO / "symbols-nerd-font" / "licenses" / "LICENSE-NerdFontsSymbolsOnly.txt",
@@ -104,6 +104,7 @@ TERM_ICONS = {
     0xF013, 0xF1C0, 0xF15B, 0xF004, 0xF005, 0xF240, 0xF1EB, 0xF035B, 0xF03D2, 0xE615, 0xE777, 0xE626,
     0xE628, 0xF031, 0xF308, 0xF015, 0xF2DB, 0xF489, 0xF487, 0xF0AC, 0xF2C9, 0xF4A5, 0xF02D, 0xF121,
     0xF061, 0xF071, 0xF05A, 0xF0A0, 0xF417, 0xF401, 0xF490, 0xF02CA, 0xF08AE, 0xF0238, 0xF073, 0xF02B,
+    0xE5FF, 0xF00BA, 0xF086F,  # eza's folder, README and checksum icons
 }
 TERM = BASIC_LATIN | LATIN_1 | PUNCTUATION | ARROWS | BOX_BLOCKS_SHAPES | BRAILLE | MISC | TERM_ICONS
 

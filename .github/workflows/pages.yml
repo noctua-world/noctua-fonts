@@ -1,0 +1,46 @@
+# Deploys the specimen site to GitHub Pages: site/public/, as committed. site/build.py
+# writes it, and nothing is built here; the job only refuses to deploy a site/public/
+# that differs from what site/ generates (site/build.py --check, standard library
+# only). Runs on each push to main that changes site/public/ or this file, and by
+# hand from the Actions tab.
+#
+# The repository's Pages source must be "GitHub Actions" (Settings > Pages).
+name: pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/public/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions: {}
+
+# One deployment at a time. A newer push waits for the running one instead of
+# cancelling it midway, which could leave a deployment half done.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Refuse a site/public/ that differs from its sources
+        run: python3 site/build.py --check
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site/public
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

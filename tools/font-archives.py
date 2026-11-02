@@ -3,7 +3,7 @@
 
 The built fonts (every *.ttf and *.woff2 under noctua-iosevka/, noctua-noto/
 and symbols-nerd-font/) are not kept in git. They are published as GitHub
-Release assets, split into the zip archives that font-archives.json describes,
+Release assets, split into the zip archives that tools/font-archives.json describes,
 and git keeps SHA256SUMS instead: one SHA-256 per built font, committed at the
 repository root in the GNU coreutils format, so a tree can be checked with no
 tool at all, with `sha256sum -c SHA256SUMS` on Linux or
@@ -11,20 +11,20 @@ tool at all, with `sha256sum -c SHA256SUMS` on Linux or
 
 Download and unpack every archive, or only some:
 
-    ./font-archives.py fetch
-    ./font-archives.py fetch --archive noctua-noto-ttf.zip symbols-nerd-font.zip
+    ./tools/font-archives.py fetch
+    ./tools/font-archives.py fetch --archive noctua-noto-ttf.zip symbols-nerd-font.zip
 
 Check the tree against SHA256SUMS, or only the fonts that are present:
 
-    ./font-archives.py verify
-    ./font-archives.py verify --allow-missing
+    ./tools/font-archives.py verify
+    ./tools/font-archives.py verify --allow-missing
 
 Show the archives with file counts and sizes; rewrite SHA256SUMS from the tree;
 write dist/*.zip and dist/SHA256SUMS for a release:
 
-    ./font-archives.py list
-    ./font-archives.py manifest
-    ./font-archives.py pack
+    ./tools/font-archives.py list
+    ./tools/font-archives.py manifest
+    ./tools/font-archives.py pack
 
 (No command above carries a trailing comment: interactive zsh, the default
 shell on macOS, passes "# ..." to the command as arguments.)
@@ -57,11 +57,11 @@ Commands:
             an archive that fails leaves the tree as it was (see Security for
             the one case where the file system can prevent that).
 
-Data files:
-  font-archives.json  The repository, the release tag, and the archives: for
-                      each one its name, a description, "include" and optional
-                      "exclude" globs matched against repo-relative POSIX
-                      paths ("*" and "?" never cross a "/"; matching is
+Data files, both relative to the repository root (the folder above this script's):
+  tools/font-archives.json  The repository, the release tag, and the archives:
+                      for each one its name, a description, "include" and
+                      optional "exclude" globs matched against repo-relative
+                      POSIX paths ("*" and "?" never cross a "/"; matching is
                       case-sensitive), and the licence files that travel in it.
   SHA256SUMS          The checksum manifest described above.
 
@@ -216,7 +216,7 @@ from pathlib import Path
 # Constants. Tests lower the two caps; every function reads them at call time.
 
 MANIFEST_NAME = "SHA256SUMS"
-CONFIG_NAME = "font-archives.json"
+CONFIG_NAME = "tools/font-archives.json"  # relative to the repository root
 FONT_DIRS = ("noctua-iosevka", "noctua-noto", "symbols-nerd-font")
 FONT_SUFFIXES = (".ttf", ".woff2")
 
@@ -249,7 +249,7 @@ _FLAG_STRONG_ENCRYPTION = 0x40
 _UNREADABLE_ZIP = (zipfile.BadZipFile, zipfile.LargeZipFile, zlib.error, EOFError,
                    RuntimeError, ValueError, struct.error)
 
-DEFAULT_ROOT = Path(__file__).resolve().parent
+DEFAULT_ROOT = Path(__file__).resolve().parent.parent  # this script lives in tools/
 HELP = (__doc__ or "").split("\nSecurity\n")[0]  # __doc__ is None under python -OO
 
 
@@ -1528,7 +1528,7 @@ def build_parser():
         epilog="The security reasoning behind every refusal is in the module docstring.",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=DEFAULT_ROOT, metavar="DIR",
-                        help="the repository root (default: the directory that holds this script)")
+                        help="the repository root (default: the folder above this script's)")
     sub = parser.add_subparsers(dest="command", metavar="COMMAND", required=True)
 
     p = sub.add_parser("manifest", help="hash the built fonts in the tree and write SHA256SUMS",

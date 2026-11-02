@@ -7,8 +7,8 @@ carries different family names in different places -- common with fonts patched
 by Nerd Fonts, where each person who runs the patcher may rename the output --
 text quietly renders in the wrong font. This aligns files onto one chosen name.
 
-    ./rename-font-family.py FROM TO FONT [FONT ...]
-    ./rename-font-family.py "MyFont Mono Nerd Font" "MyFontM Nerd Font" *.ttf
+    ./tools/rename-font-family.py FROM TO FONT [FONT ...]
+    ./tools/rename-font-family.py "MyFont Mono Nerd Font" "MyFontM Nerd Font" *.ttf
 
 What changes
   Only the identifier name records (IDs 1/3/4/6/16/18/20/21). Copyright,
@@ -101,7 +101,7 @@ Exit status: 0 when every file was handled (or had nothing to do), 1 when the
 batch was refused or stopped, 2 on a usage error.
 
 Requires: fonttools (plus brotli if .woff2 files are present), installed in a
-virtual environment: see README.md, Tools.
+virtual environment: see docs/README.md, Tools.
 """
 
 # Security and safety, decided at design time:
@@ -170,7 +170,7 @@ try:
     from fontTools.ttLib import TTFont
 except ImportError:
     sys.exit("error: fonttools not found.  "
-             "->  install fonttools and brotli in a virtual environment (README.md, Tools)")
+             "->  install fonttools and brotli in a virtual environment (docs/README.md, Tools)")
 
 # Name IDs that identify the font. Never 0/7/13/14 -- those are legal text and
 # may legitimately contain the old name.
@@ -569,7 +569,7 @@ def open_font(path, data):
     except ImportError:
         raise RenameError(
             f"{path}: brotli not found (needed for WOFF2)  "
-            "->  install brotli in a virtual environment (README.md, Tools)") from None
+            "->  install brotli in a virtual environment (docs/README.md, Tools)") from None
     except Exception as exc:  # fontTools raises many types on bad input
         raise RenameError(
             f"{path}: not a font this tool can read ({exc})") from None

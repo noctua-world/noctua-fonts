@@ -1,11 +1,11 @@
-"""Tests for the GitHub Pages site: site/ (the sources) and docs/ (the generated output).
+"""Tests for the GitHub Pages site: site/ (the sources) and site/public/ (the generated output).
 
 What they guard:
 
-  * docs/ is exactly what site/build.py produces (`build.py --check` passes).
+  * site/public/ is exactly what site/build.py produces (`build.py --check` passes).
   * Both locales carry the same keys, and every key is used by the template, a generated
     fragment or a script.
-  * Every relative href, src and url() in docs/ resolves to a file, and every JavaScript
+  * Every relative href, src and url() in site/public/ resolves to a file, and every JavaScript
     module import resolves too.
   * Nothing is fetched from another origin: no absolute http(s) URL in any src, srcset,
     url(), @import, import statement or <link rel=stylesheet|preload|icon|modulepreload>.
@@ -16,7 +16,7 @@ What they guard:
     without new).
   * <html lang>, the hreflang alternates, the canonical URLs and the language switch agree.
   * Every @font-face src exists; the licence of every font family shipped sits in
-    docs/assets/fonts/licenses/, byte for byte the repository's copy; the site fonts stay
+    site/public/assets/fonts/licenses/, byte for byte the repository's copy; the site fonts stay
     within their 15 MB budget.
   * Every subset covers every character the two pages set with it: the text faces everything
     outside the terminal and the lab face, the terminal face what the terminal prints (the
@@ -73,9 +73,9 @@ sys.dont_write_bytecode = True
 
 REPO = Path(__file__).resolve().parent.parent
 SITE = REPO / "site"
-DOCS = REPO / "docs"
+DOCS = SITE / "public"  # the generated site, which .github/workflows/pages.yml deploys
 PAGES = {"en": DOCS / "index.html", "pt-BR": DOCS / "pt-BR" / "index.html"}
-ARCHIVES = json.loads((REPO / "font-archives.json").read_text(encoding="utf-8"))
+ARCHIVES = json.loads((REPO / "tools" / "font-archives.json").read_text(encoding="utf-8"))
 REPOSITORY = ARCHIVES["repository"]
 SITE_URL = "https://{}.github.io/{}/".format(REPOSITORY.split("/")[0].lower(), REPOSITORY.split("/")[1])
 CSP = (
@@ -219,8 +219,12 @@ class TestBuild(unittest.TestCase):
     def test_check_flag_exits_zero(self):
         self.assertEqual(build.main(["--check"]), 0)
 
-    def test_nojekyll(self):
-        self.assertTrue((DOCS / ".nojekyll").is_file())
+    def test_pages_deploys_the_generated_site(self):
+        # GitHub Pages serves what the workflow uploads, site/public/ as it is: no Jekyll build.
+        workflow = (REPO / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
+        self.assertIn("path: site/public", workflow)
+        self.assertIn("actions/deploy-pages@", workflow)
+        self.assertFalse((DOCS / ".nojekyll").exists(), "Jekyll never runs on an uploaded artifact")
 
     def test_build_is_deterministic(self):
         self.assertEqual(build.build(), build.build())

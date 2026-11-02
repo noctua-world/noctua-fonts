@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Build the Noctua Iosevka specimen site into docs/, for GitHub Pages.
+"""Build the Noctua Iosevka specimen site into site/public/, which GitHub Pages serves.
 
 Standard library only. One template, two locales:
 
-    site/template.html + site/i18n/en.json     ->  docs/index.html
-    site/template.html + site/i18n/pt-BR.json  ->  docs/pt-BR/index.html
+    site/template.html + site/i18n/en.json     ->  site/public/index.html
+    site/template.html + site/i18n/pt-BR.json  ->  site/public/pt-BR/index.html
 
-plus the static assets (site/static/ -> docs/assets/), the @font-face sheet
-(docs/assets/css/fonts.css), the measured values the stylesheet needs
-(docs/assets/css/facts.css: the fitted titles and the stylistic-set bars) and the strings
-the scripts show (docs/assets/js/strings.js), all generated here, and docs/.nojekyll.
+plus the static assets (site/static/ -> site/public/assets/), the @font-face sheet
+(site/public/assets/css/fonts.css), the measured values the stylesheet needs
+(site/public/assets/css/facts.css: the fitted titles and the stylistic-set bars) and the
+strings the scripts show (site/public/assets/js/strings.js), all generated here.
+.github/workflows/pages.yml deploys site/public/ as it is.
 
-The subset fonts under docs/assets/fonts/ are written by site/subset-fonts.py,
+The subset fonts under site/public/assets/fonts/ are written by site/subset-fonts.py,
 not by this script. This script only names them in fonts.css, from the face
 matrix below, which subset-fonts.py reads too.
 
@@ -24,9 +25,9 @@ Template tags:
 
 A locale string the template renders may name a fact as a {placeholder}: the measured
 {codepoints}, {sets}, {variants}, {italic_redrawn} and the other counts of facts(), formatted
-for the locale, and the release, read from font-archives.json ({tag}, {version},
+for the locale, and the release, read from tools/font-archives.json ({tag}, {version},
 {release_url}). The build fills it in, so each is typed once. The repository the page links to
-and the site's own address come from font-archives.json too.
+and the site's own address come from tools/font-archives.json too.
 
 Without JavaScript the page is a static specimen: the template marks what only a script can
 drive .js-only, and the build writes what a script would otherwise draw (the terminal's still
@@ -40,8 +41,8 @@ strings.js, and every one of them must be read by some script as t("name").
 
 Usage:
 
-    python3 site/build.py            write docs/
-    python3 site/build.py --check    rebuild in memory; exit 1 if docs/ differs
+    python3 site/build.py            write site/public/
+    python3 site/build.py --check    rebuild in memory; exit 1 if site/public/ differs
 
 The build is deterministic: the same sources always give the same bytes.
 """
@@ -60,7 +61,7 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent
 REPO = SITE.parent
-DOCS = REPO / "docs"
+PUBLIC = SITE / "public"
 TEMPLATE = SITE / "template.html"
 I18N = SITE / "i18n"
 STATIC = SITE / "static"
@@ -70,9 +71,9 @@ LOCALES = ("en", "pt-BR")
 
 def _archives_config() -> tuple[str, str]:
     """The repository ("owner/name") and the tag of the release the downloads point at, both
-    from font-archives.json, the file font-archives.py fetches from, so that the repository and
-    a new release are each named in one place."""
-    data = json.loads((REPO / "font-archives.json").read_text(encoding="utf-8"))
+    from tools/font-archives.json, the file tools/font-archives.py fetches from, so that the
+    repository and a new release are each named in one place."""
+    data = json.loads((REPO / "tools" / "font-archives.json").read_text(encoding="utf-8"))
     repository, tag = data.get("repository"), data.get("tag")
     # The same rules font-archives.py applies to the two fields.
     if not isinstance(repository, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9._-]+", repository):
@@ -91,7 +92,7 @@ SITE_URL = f"https://{_OWNER.lower()}.github.io/{_NAME}/"
 RELEASE_URL = f"{REPO_URL}/releases/tag/{RELEASE_TAG}"
 DOWNLOAD_URL = f"{REPO_URL}/releases/download/{RELEASE_TAG}/"
 
-# docs/ paths that subset-fonts.py owns. --check and the stale-file sweep leave them alone.
+# site/public/ paths that subset-fonts.py owns. --check and the stale-file sweep leave them alone.
 FONTS_DIR = "assets/fonts/"
 
 # ---------------------------------------------------------------------------
@@ -140,7 +141,7 @@ ALL_FACES = tuple((w, x, s) for x in range(5) for w in range(9) for s in range(3
 
 # key:     short code used by the data-arm attributes in the template
 # css:     the CSS font-family name
-# folder:  docs/assets/fonts/<folder>/
+# folder:  site/public/assets/fonts/<folder>/
 # source:  the folder under noctua-iosevka/ that holds the TTF sources
 # prefix:  the file-name prefix of the source faces
 # faces:   (weight, width, slope) index triples
@@ -291,7 +292,7 @@ def facts(code: str) -> dict[str, str]:
         "blocks": num(len(COVERAGE)),
         "strip": num(STRIP),
         "slant": num(SLANT),
-        # The release, from font-archives.json: its tag ("v1.2.3"), version ("1.2.3") and page.
+        # The release, from tools/font-archives.json: its tag ("v1.2.3"), version ("1.2.3") and page.
         "tag": RELEASE_TAG,
         "version": RELEASE_TAG.removeprefix("v"),
         "release_url": RELEASE_URL,
@@ -693,7 +694,7 @@ TI = {
     "os": "", "folder": "", "open": "", "branch": "", "check": "",
     "md": "", "py": "", "config": "", "sep": "", "sep_l": "",
     "round_r": "", "round_l": "", "term": "", "emacs": "", "cpu": "",
-    "mem": "\U000f035b", "clock": "", "bolt": "", "font": "", "lock": "",
+    "mem": "\U000f035b", "file": "\uf15b", "clock": "", "bolt": "", "font": "", "lock": "",
 }
 
 TERM_PROMPT = (
@@ -726,22 +727,27 @@ TERM_INFO = (
     tuple((f"blk-{i}", "███") for i in range(1, 8)),
 )
 # The repository in treemacs: noctua-iosevka/ open, with everything it holds. treemacs draws no
-# guides by default; it indents each level by two spaces (treemacs-indentation).
+# guides by default; it indents each level by two spaces (treemacs-indentation), and sorts each
+# folder's directories, then its files, by name, capitals first (treemacs-sorting).
 TERM_TREE = (
     (("k-b k-bold", f"{TI['open']} noctua-fonts"),),
+    (("", "  "), ("k-b", f"{TI['folder']} docs")),
+    (("", "  "), ("k-b", f"{TI['folder']} licenses")),
     (("", "  "), ("k-b", f"{TI['open']} noctua-iosevka")),
-    (("", "    "), ("k-b", f"{TI['folder']} licenses")),
     (("", "    "), ("k-b", f"{TI['folder']} TTF")),
     (("", "    "), ("k-b", f"{TI['folder']} TTF-nerdfonts")),
     (("", "    "), ("k-b", f"{TI['folder']} WOFF2")),
     (("", "    "), ("k-b", f"{TI['folder']} WOFF2-nerdfonts")),
+    (("", "    "), ("k-b", f"{TI['folder']} licenses")),
     (("", "    "), ("k-w", f"{TI['config']} private-build-plans.toml")),
-    (("", "  "), ("k-b", f"{TI['folder']} symbols-nerd-font")),
+    (("", "  "), ("k-b", f"{TI['folder']} noctua-noto")),
     (("", "  "), ("k-b", f"{TI['folder']} site")),
-    (("", "  "), ("k-b", f"{TI['folder']} docs")),
+    (("", "  "), ("k-b", f"{TI['folder']} symbols-nerd-font")),
     (("", "  "), ("k-b", f"{TI['folder']} tests")),
+    (("", "  "), ("k-b", f"{TI['folder']} tools")),
+    (("", "  "), ("k-w", f"{TI['file']} LICENSE")),
     (("", "  "), ("k-w", f"{TI['md']} README.md")),
-    (("", "  "), ("k-y", f"{TI['py']} font-archives.py")),
+    (("", "  "), ("k-w", f"{TI['file']} SHA256SUMS")),
 )
 # The ghostty config open in Emacs, its comments in the locale's words.
 TERM_BUF_ROWS = (
@@ -1052,7 +1058,7 @@ def page_values(code: str) -> dict[str, str]:
         "codepoints": facts(code)["codepoints"],
         "sets": facts(code)["sets"],
         "variants": facts(code)["variants"],
-        # The repository, from font-archives.json: its page, and its name as the footer shows it.
+        # The repository, from tools/font-archives.json: its page, and its name as the footer shows it.
         "repo_url": REPO_URL,
         "repo_label": REPO_URL.removeprefix("https://"),
         # The squint slider's first reading, with the language's decimal separator.
@@ -1195,7 +1201,7 @@ def script_keys(files: dict[str, bytes]) -> set[str]:
 
 
 def build() -> dict[str, bytes]:
-    """Every file this script owns under docs/, as relative path -> bytes."""
+    """Every file this script owns under site/public/, as relative path -> bytes."""
     template = TEMPLATE.read_text(encoding="utf-8")
     locales = load_locales()
     check_term_strings(locales)
@@ -1208,7 +1214,6 @@ def build() -> dict[str, bytes]:
     files["assets/css/fonts.css"] = fonts_css().encode("utf-8")
     files["assets/css/facts.css"] = facts_css(locales).encode("utf-8")
     files["assets/js/strings.js"] = strings_js(locales).encode("utf-8")
-    files[".nojekyll"] = b""
 
     # Every key must be read somewhere: by the template, a fragment, or a script.
     js_used = script_keys(statics)
@@ -1228,39 +1233,40 @@ def owned(rel: str) -> bool:
     return not rel.startswith(FONTS_DIR)
 
 
-def docs_files(docs: Path) -> dict[str, Path]:
-    if not docs.is_dir():
+def public_files(public: Path) -> dict[str, Path]:
+    if not public.is_dir():
         return {}
-    return {p.relative_to(docs).as_posix(): p for p in sorted(docs.rglob("*")) if p.is_file()}
+    return {p.relative_to(public).as_posix(): p for p in sorted(public.rglob("*")) if p.is_file()}
 
 
-def check(docs: Path = DOCS) -> list[str]:
-    """Differences between a fresh build and docs/, as human-readable lines (empty = in sync)."""
+def check(public: Path = PUBLIC) -> list[str]:
+    """Differences between a fresh build and site/public/, as human-readable lines (empty = in
+    sync)."""
     want = build()
-    have = docs_files(docs)
+    have = public_files(public)
     problems = []
     for rel, data in sorted(want.items()):
         if rel not in have:
-            problems.append(f"missing: docs/{rel}")
+            problems.append(f"missing: site/public/{rel}")
         elif have[rel].read_bytes() != data:
-            problems.append(f"differs: docs/{rel}")
+            problems.append(f"differs: site/public/{rel}")
     for rel in sorted(have):
         if owned(rel) and rel not in want:
-            problems.append(f"not produced by the build: docs/{rel}")
+            problems.append(f"not produced by the build: site/public/{rel}")
     return problems
 
 
-def write(docs: Path = DOCS) -> list[str]:
+def write(public: Path = PUBLIC) -> list[str]:
     want = build()
     written = []
     for rel, data in sorted(want.items()):
-        dest = docs / rel
+        dest = public / rel
         if dest.is_file() and dest.read_bytes() == data:
             continue
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(data)
         written.append(rel)
-    for rel, path in docs_files(docs).items():
+    for rel, path in public_files(public).items():
         if owned(rel) and rel not in want:
             path.unlink()
             written.append(f"{rel} (removed)")
@@ -1269,7 +1275,7 @@ def write(docs: Path = DOCS) -> list[str]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--check", action="store_true", help="rebuild in memory and exit 1 if docs/ differs")
+    parser.add_argument("--check", action="store_true", help="rebuild in memory and exit 1 if site/public/ differs")
     args = parser.parse_args(argv)
     try:
         if args.check:
@@ -1277,12 +1283,12 @@ def main(argv: list[str] | None = None) -> int:
             for line in problems:
                 print(line, file=sys.stderr)
             if problems:
-                print(f"docs/ is out of date: {len(problems)} difference(s). Run python3 site/build.py.", file=sys.stderr)
+                print(f"site/public/ is out of date: {len(problems)} difference(s). Run python3 site/build.py.", file=sys.stderr)
                 return 1
-            print("docs/ matches the sources.")
+            print("site/public/ matches the sources.")
             return 0
         written = write()
-        print(f"wrote {len(written)} file(s) under docs/" + "".join(f"\n  {w}" for w in written))
+        print(f"wrote {len(written)} file(s) under site/public/" + "".join(f"\n  {w}" for w in written))
         return 0
     except BuildError as err:
         print(f"build failed: {err}", file=sys.stderr)

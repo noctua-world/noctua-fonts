@@ -12,11 +12,11 @@ specific set instead; every axis you do not name stays at its default.
 --weights and --widths take one or more values and may be repeated (the
 values add up); one file is written per combination of the values given.
 
-    ./instantiate-variable-font.py FONT.ttf --list
-    ./instantiate-variable-font.py FONT.ttf
-    ./instantiate-variable-font.py FONT.ttf --weights 400 700 --woff2
-    ./instantiate-variable-font.py FONT.ttf --weights 400 --widths 62.5 100
-    ./instantiate-variable-font.py FONT.ttf --axis opsz=14 --weights 400
+    ./tools/instantiate-variable-font.py FONT.ttf --list
+    ./tools/instantiate-variable-font.py FONT.ttf
+    ./tools/instantiate-variable-font.py FONT.ttf --weights 400 700 --woff2
+    ./tools/instantiate-variable-font.py FONT.ttf --weights 400 --widths 62.5 100
+    ./tools/instantiate-variable-font.py FONT.ttf --axis opsz=14 --weights 400
 
 Output goes to a static/ directory next to the input unless --out names
 another. Each instance is written in the input's own format, chosen from its
@@ -73,7 +73,7 @@ variation data are malformed can still fail part-way: the error then says
 how many files were complete before it.
 
 Requires: fonttools (plus brotli for WOFF2), installed in a virtual
-environment: see README.md, Tools.
+environment: see docs/README.md, Tools.
 
 Safety notes
 ------------
@@ -137,7 +137,7 @@ try:
     from fontTools.varLib.instancer import names as instancer_names
 except ImportError:
     sys.exit("error: fonttools not found.  "
-             "->  install fonttools and brotli in a virtual environment (README.md, Tools)")
+             "->  install fonttools and brotli in a virtual environment (docs/README.md, Tools)")
 
 
 # --help shows the docstring up to the safety notes; those are for maintainers.
@@ -286,7 +286,7 @@ class Source:
             raise
         except ImportError:
             raise ToolError("brotli not found (needed to read WOFF2).  "
-                            "->  install brotli in a virtual environment (README.md, Tools)") from None
+                            "->  install brotli in a virtual environment (docs/README.md, Tools)") from None
         except Exception as exc:  # fontTools raises many types on malformed input
             raise ToolError(f"{where}: {error_text(exc)}") from None
 
@@ -643,7 +643,7 @@ def plan(source, targets, out_dir, want_woff2):
         formats.append((".woff2", "woff2"))
     if any(flavor == "woff2" for _, flavor in formats) and not woff2_support.haveBrotli:
         raise ToolError("brotli not found (needed for WOFF2).  "
-                        "->  install brotli in a virtual environment (README.md, Tools)")
+                        "->  install brotli in a virtual environment (docs/README.md, Tools)")
 
     for target in targets:
         try:

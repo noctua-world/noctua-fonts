@@ -6,8 +6,8 @@ Base typeface for the projects, in two forms: the **plain Noto** families (varia
 Google Fonts) and the same families **patched with Nerd Fonts 3.4.0** — icon glyphs baked into the
 text font, which removes the need for a separate icon font.
 
-The files belong in [`noctua-noto/`](noctua-noto/), but git does not hold them: they come from the
-release archives (next section). Inventory taken on 2026-07-27 and measured again on 2026-11-01;
+The files belong in [`noctua-noto/`](../noctua-noto/), but git does not hold them: they come from
+the release archives (next section). Inventory taken on 2026-07-27 and measured again on 2026-11-01;
 the numbers (sizes, counts) describe those files.
 
 ---
@@ -16,27 +16,28 @@ the numbers (sizes, counts) describe those files.
 
 A fresh clone has no fonts. They are assets of the GitHub release
 [`v1.0.0`](https://github.com/noctua-world/noctua-fonts/releases/tag/v1.0.0), in zip archives that
-[`font-archives.json`](font-archives.json) describes, and git keeps [`SHA256SUMS`](SHA256SUMS)
-instead: one SHA-256 per font. Two of the 23 archives hold this document's fonts:
+[`font-archives.json`](../tools/font-archives.json) describes, and git keeps
+[`SHA256SUMS`](../SHA256SUMS) instead: one SHA-256 per font. Two of the 23 archives hold this
+document's fonts:
 
 | archive | holds | download |
 |---|---|---|
-| `noctua-noto-ttf.zip` | the 49 TTF, plus the 20 licence files of [`noctua-noto/licenses/`](noctua-noto/licenses/) | about 79 MiB (150 MiB unpacked) |
+| `noctua-noto-ttf.zip` | the 49 TTF, plus the 20 licence files of [`noctua-noto/licenses/`](../noctua-noto/licenses/) | about 79 MiB (150 MiB unpacked) |
 | `noctua-noto-woff2.zip` | the 49 WOFF2, plus the same 20 licence files | about 58 MiB (about the same unpacked) |
 
 ```bash
 git clone https://github.com/noctua-world/noctua-fonts.git
 cd noctua-fonts
-./font-archives.py fetch --archive noctua-noto-ttf.zip noctua-noto-woff2.zip
-./font-archives.py verify --allow-missing
+./tools/font-archives.py fetch --archive noctua-noto-ttf.zip noctua-noto-woff2.zip
+./tools/font-archives.py verify --allow-missing
 ```
 
-`font-archives.py` needs Python 3.9 or later and nothing else (on Windows, run it as
-`python font-archives.py …`). `fetch` writes a font only when its SHA-256 matches `SHA256SUMS`, and
-an archive is all or nothing: one that fails leaves the tree as it was. It does not download an
-archive whose fonts are already present and correct. The licence files are already in git; `fetch`
-checks that the archive's copies are identical to them and does not write them. Without `--archive`
-it fetches all 23 archives (Noctua Iosevka and Symbols Nerd Font as well). `verify --allow-missing`
+`font-archives.py` needs Python 3.9 or later and nothing else (on Windows, run it as `python
+tools/font-archives.py …`). `fetch` writes a font only when its SHA-256 matches `SHA256SUMS`, and an
+archive is all or nothing: one that fails leaves the tree as it was. It does not download an archive
+whose fonts are already present and correct. The licence files are already in git; `fetch` checks
+that the archive's copies are identical to them and does not write them. Without `--archive` it
+fetches all 23 archives (Noctua Iosevka and Symbols Nerd Font as well). `verify --allow-missing`
 checks the fonts that are present and only counts the missing ones.
 
 The same check works with nothing but the system's checksum command. On Linux:
@@ -115,12 +116,12 @@ The last line is the variable face itself, on top of the 9 named ones.
 
 </details>
 
-[`noctua-noto/licenses/`](noctua-noto/licenses/) holds 20 licence files: the SIL Open Font License
-1.1 of each of the 19 Noto families, and the MIT license that [Nerd Fonts](symbols-nerd-font-en.md)
-ships its icons with (`LICENSE-NerdFontsSymbolsOnly.txt`), for the icons in the 27 patched faces.
-The icon sets that Nerd Fonts gathers keep their own upstream licences, and not all of them are MIT;
-[`LICENSE`](LICENSE) names those that are not and points to Nerd Fonts' list of every set.
-**Redistribution requires shipping these files alongside the
+[`noctua-noto/licenses/`](../noctua-noto/licenses/) holds 20 licence files: the SIL Open Font
+License 1.1 of each of the 19 Noto families, and the MIT license that [Nerd
+Fonts](symbols-nerd-font-en.md) ships its icons with (`LICENSE-NerdFontsSymbolsOnly.txt`), for the
+icons in the 27 patched faces. The icon sets that Nerd Fonts gathers keep their own upstream
+licences, and not all of them are MIT; [`LICENSE`](../LICENSE) names those that are not and points
+to Nerd Fonts' list of every set. **Redistribution requires shipping these files alongside the
 fonts**; both archives carry all 20. The repository's own licence (MIT OR Apache-2.0) covers its
 scripts and documents, not the fonts.
 
@@ -144,8 +145,8 @@ practical compatibility risk. Three concrete reasons to keep the variable files 
 3. **You lose the intermediate weights** and gain nothing: 9 files where there was 1.
 
 Generate static faces **on demand** with
-[`instantiate-variable-font.py`](instantiate-variable-font.py), and only for the targets that need
-them (§3).
+[`instantiate-variable-font.py`](../tools/instantiate-variable-font.py), and only for the targets
+that need them (§3).
 
 ---
 
@@ -237,7 +238,7 @@ wants a `weight:` mapping per declared face. The path of least friction is to in
 weights you use and declare each file:
 
 ```bash
-./instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
+./tools/instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
   --weights 400 500 700 --out ~/noto-static
 ```
 
@@ -267,7 +268,7 @@ The patch runs in Docker (to install it, see Step 1 of
 `/out`. `-u` makes the output yours rather than root's; `:ro` mounts the input read-only.
 
 ```bash
-./instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
+./tools/instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
   --weights 300 400 500 600 700 --out ~/noto-static
 mkdir -p ~/noto-patched
 docker run --rm -u "$(id -u):$(id -g)" \
@@ -282,9 +283,9 @@ docker run --rm -u "$(id -u):$(id -g)" \
   patches the faces in parallel: here the whole block above, the five instances included, took
   about 70 seconds.
 - **The image is pinned by digest.** It is the one pinned for the Noctua Iosevka Nerd faces in
-  [`noctua-iosevka/private-build-plans.toml`](noctua-iosevka/private-build-plans.toml), whose header
-  says why: its tag has been re-pushed once. `nerdfonts/patcher` without a tag is the latest build
-  (4.27.3 on 2026-11-01), which stamps a later Nerd Fonts version.
+  [`noctua-iosevka/private-build-plans.toml`](../noctua-iosevka/private-build-plans.toml), whose
+  header says why: its tag has been re-pushed once. `nerdfonts/patcher` without a tag is the latest
+  build (4.27.3 on 2026-11-01), which stamps a later Nerd Fonts version.
 - **It does not reproduce the 27 faces here.** It stamps Nerd Fonts 3.4.0, as they do, but they
   carry 10,410 icon codepoints, exactly the set of Symbols Nerd Font in this repository. The image
   adds those 10,410 and 109 more Private Use Area codepoints (U+E6B9 to U+F385): 10,519 on a
@@ -308,10 +309,10 @@ any font.
 
 | script | what it does |
 |---|---|
-| [`font-archives.py`](font-archives.py) | fetch the fonts from the release (`fetch`) and check a tree against `SHA256SUMS` (`verify`); `list` shows each archive with its file count and size. Standard library only |
-| [`instantiate-variable-font.py`](instantiate-variable-font.py) | variable → static. With no options it generates the *named instances* the font itself declares. `--weights` and `--widths` take several values and may be repeated (the values add up); `--axis TAG=VALUE` pins an axis by its tag. `--list` shows the axes, the file each named instance would be written to, and which rule names it (`stat`, `fvar` or `coords`). A value outside an axis range is refused before anything is written, never clamped |
-| [`rename-font-family.py`](rename-font-family.py) | align the family name recorded inside the files — this is what fixed §5b. In `noctua-noto/` each `.ttf` has its `.woff2` beside it, under the same stem: renaming the `.ttf` rebuilds and renames that web copy too, as long as the copy's names match the font's. If they do not, the batch is refused and nothing changes |
-| [`check.py`](check.py) | runs the test suite, `site/build.py --check` and `font-archives.py verify --allow-missing`. Run it before a commit |
+| [`font-archives.py`](../tools/font-archives.py) | fetch the fonts from the release (`fetch`) and check a tree against `SHA256SUMS` (`verify`); `list` shows each archive with its file count and size. Standard library only |
+| [`instantiate-variable-font.py`](../tools/instantiate-variable-font.py) | variable → static. With no options it generates the *named instances* the font itself declares. `--weights` and `--widths` take several values and may be repeated (the values add up); `--axis TAG=VALUE` pins an axis by its tag. `--list` shows the axes, the file each named instance would be written to, and which rule names it (`stat`, `fvar` or `coords`). A value outside an axis range is refused before anything is written, never clamped |
+| [`rename-font-family.py`](../tools/rename-font-family.py) | align the family name recorded inside the files — this is what fixed §5b. In `noctua-noto/` each `.ttf` has its `.woff2` beside it, under the same stem: renaming the `.ttf` rebuilds and renames that web copy too, as long as the copy's names match the font's. If they do not, the batch is refused and nothing changes |
+| [`check.py`](../tools/check.py) | runs the test suite, `site/build.py --check` and `font-archives.py verify --allow-missing`. Run it before a commit |
 
 **Python.** `instantiate-variable-font.py`, `rename-font-family.py`, `pyftsubset`, the slicing
 script of §3 and `check.py`'s tests need fontTools, plus brotli for WOFF2. Install them in a
@@ -323,15 +324,15 @@ python3 -m venv .venv
 . .venv/bin/activate
 ```
 
-On Linux and macOS, once it is active, `./instantiate-variable-font.py`, `python3` and `pyftsubset`
-all use it. On Windows: `python -m venv .venv`, then
-`.venv\Scripts\python -m pip install fonttools brotli` and `.venv\Scripts\activate`. A Windows venv
-has `python`, not `python3`, so run the scripts through it: `python instantiate-variable-font.py …`.
-A bare `pip install` fails on the system Python of Debian, Ubuntu and Arch, and on Homebrew's: they
-mark it as externally managed (PEP 668). `pipx install fonttools`
-(then `pipx inject fonttools brotli`) gives you the `fonttools` and `pyftsubset` commands, but the
-scripts here import fontTools, and pipx does not make it importable for them. On NixOS, use a
-shell: `nix-shell -p 'python3.withPackages(ps: [ps.fonttools ps.brotli])'`.
+On Linux and macOS, once it is active, `./tools/instantiate-variable-font.py`, `python3` and
+`pyftsubset` all use it. On Windows: `python -m venv .venv`, then `.venv\Scripts\python -m pip
+install fonttools brotli` and `.venv\Scripts\activate`. A Windows venv has `python`, not `python3`,
+so run the scripts through it: `python tools/instantiate-variable-font.py …`. A bare `pip install`
+fails on the system Python of Debian, Ubuntu and Arch, and on Homebrew's: they mark it as externally
+managed (PEP 668). `pipx install fonttools` (then `pipx inject fonttools brotli`) gives you the
+`fonttools` and `pyftsubset` commands, but the scripts here import fontTools, and pipx does not make
+it importable for them. On NixOS, use a shell: `nix-shell -p 'python3.withPackages(ps: [ps.fonttools
+ps.brotli])'`.
 
 **Write generated fonts outside the font folders.** `instantiate-variable-font.py` writes to
 `static/` next to its input by default. Git ignores that folder, but `font-archives.py verify` (and

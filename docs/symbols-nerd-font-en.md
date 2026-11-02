@@ -10,8 +10,8 @@ The two `.ttf` files are **Nerd Fonts 3.4.0** as released, byte for byte the one
 `NerdFontsSymbolsOnly.zip`. The two `.woff2` files are web copies of them, with the same names,
 metrics and outlines.
 
-Git keeps only the license in [`symbols-nerd-font/`](symbols-nerd-font/). The fonts themselves are
-a release asset, `symbols-nerd-font.zip`; §4 shows how to get them.
+Git keeps only the license in [`symbols-nerd-font/`](../symbols-nerd-font/). The fonts themselves
+are a release asset, `symbols-nerd-font.zip`; §4 shows how to get them.
 
 ---
 
@@ -120,15 +120,15 @@ A clone of this repository does not hold these fonts. They come from the release
 clone:
 
 ```bash
-./font-archives.py fetch --archive symbols-nerd-font.zip
-./font-archives.py verify --allow-missing
+./tools/font-archives.py fetch --archive symbols-nerd-font.zip
+./tools/font-archives.py verify --allow-missing
 ```
 
-`fetch` writes a font only once its SHA-256 matches the committed `SHA256SUMS`.
-`verify --allow-missing` checks the fonts that are present against that file and counts the
-others as missing. The script needs Python 3.9 or newer and nothing outside its standard
-library; on Windows, run it as `python font-archives.py`. To check with no tool at all, from the
-same place, on Linux:
+`fetch` writes a font only once its SHA-256 matches the committed `SHA256SUMS`. `verify
+--allow-missing` checks the fonts that are present against that file and counts the others as
+missing. The script needs Python 3.9 or newer and nothing outside its standard library; on Windows,
+run it as `python tools/font-archives.py`. To check with no tool at all, from the same place, on
+Linux:
 
 ```bash
 sha256sum -c SHA256SUMS --ignore-missing
@@ -141,9 +141,10 @@ shasum -a 256 -c SHA256SUMS --ignore-missing
 ```
 
 Without a clone, download the archive from the release:
-<https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/symbols-nerd-font.zip>.
-It unpacks to `symbols-nerd-font/`, with the four fonts and the license. In a clone,
-`./font-archives.py list` names all 23 archives, and `font-archives.json` says what each one holds.
+<https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/symbols-nerd-font.zip>. It
+unpacks to `symbols-nerd-font/`, with the four fonts and the license. In a clone,
+`./tools/font-archives.py list` names all 23 archives, and `font-archives.json` says what each one
+holds.
 
 <details open>
 <summary><b>Linux</b> (fontconfig)</summary>
@@ -282,7 +283,7 @@ chose it. If they name a patched font, that font is serving your icons (see the 
 ## 6. License
 
 Nerd Fonts ships Symbols Nerd Font with its MIT license:
-[`symbols-nerd-font/licenses/LICENSE-NerdFontsSymbolsOnly.txt`](symbols-nerd-font/licenses/LICENSE-NerdFontsSymbolsOnly.txt),
+[`symbols-nerd-font/licenses/LICENSE-NerdFontsSymbolsOnly.txt`](../symbols-nerd-font/licenses/LICENSE-NerdFontsSymbolsOnly.txt),
 byte for byte the `LICENSE` in its 3.4.0 `NerdFontsSymbolsOnly.zip`. It requires its notice in all
 copies, so **redistributing the font means shipping that file alongside it**;
 `symbols-nerd-font.zip` carries it.
@@ -292,14 +293,14 @@ licenses, and not all of them are MIT: Codicons and Font Awesome are under CC BY
 Design Icons under Apache 2.0, Pomicons and Weather Icons under the SIL Open Font License 1.1, and
 Font Logos under the Unlicense. Nerd Fonts lists every set with its license in
 [`license-audit.md`](https://github.com/ryanoasis/nerd-fonts/blob/v3.4.0/license-audit.md), and the
-[`LICENSE`](LICENSE) at the root of this repository sums it up. As in Nerd Fonts' own release, no
+[`LICENSE`](../LICENSE) at the root of this repository sums it up. As in Nerd Fonts' own release, no
 archive here carries a separate text for each set.
 
 That root `LICENSE` puts this repository's own content (the scripts, their tests, the documentation,
 the build plan and the site) under MIT OR Apache-2.0. It does not reach the fonts: each keeps the
 license of its family.
 
-The same MIT file also sits, byte for byte, in [`noctua-noto/licenses/`](noctua-noto/licenses/) and
-[`noctua-iosevka/licenses/`](noctua-iosevka/licenses/), and that is not a duplicate by accident: the
-27 Nerd Font faces of Noto and the 135 of Noctua Iosevka (each as a `.ttf` and a `.woff2`) embed
-these icons, so they carry the same obligation.
+The same MIT file also sits, byte for byte, in [`noctua-noto/licenses/`](../noctua-noto/licenses/)
+and [`noctua-iosevka/licenses/`](../noctua-iosevka/licenses/), and that is not a duplicate by
+accident: the 27 Nerd Font faces of Noto and the 135 of Noctua Iosevka (each as a `.ttf` and a
+`.woff2`) embed these icons, so they carry the same obligation.

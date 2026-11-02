@@ -12,7 +12,7 @@
 // so are the side panel and the status line, whose clock this script keeps.
 import { register } from "./motion.js";
 
-const I = { folder: "", md: "", py: "", json: "" };
+const I = { folder: "\ue5ff", book: "\uf02d", readme: "\u{f00ba}", sums: "\u{f086f}" }; // eza's own icons
 const ROWS = 24;
 
 function braille(levels) {
@@ -68,10 +68,13 @@ function script(cols, still) {
     s.push({ t: "out", segs: [["k-w", ' "Regular"']] });
   } else s.push({ t: "out", segs: [["k-a", ' "NoctuaIosevka Nerd Font Mono"'], ["k-w", ' "Regular"']] });
   s.push({ t: "wait", d: 1.1 });
-  cmd("eza --icons -1");
+  // The repository's root, as eza lists it: by name, whatever the case.
+  cmd("eza --icons -1F");
   for (const [ico, cls, name] of [
-    [I.folder, "k-b", "noctua-iosevka/"], [I.folder, "k-b", "symbols-nerd-font/"], [I.folder, "k-b", "site/"], [I.folder, "k-b", "docs/"],
-    [I.md, "k-w", "README.md"], [I.py, "k-y", "font-archives.py"], [I.json, "k-c", "font-archives.json"],
+    [I.folder, "k-b", "docs/"], [I.book, "k-w", "LICENSE"], [I.folder, "k-b", "licenses/"],
+    [I.folder, "k-b", "noctua-iosevka/"], [I.folder, "k-b", "noctua-noto/"], [I.readme, "k-y", "README.md"],
+    [I.sums, "k-w", "SHA256SUMS"], [I.folder, "k-b", "site/"], [I.folder, "k-b", "symbols-nerd-font/"],
+    [I.folder, "k-b", "tests/"], [I.folder, "k-b", "tools/"],
   ]) s.push({ t: "out", segs: [[cls, `${ico} `], [cls === "k-b" ? "k-b k-bold" : cls, name]], d: 0.05 });
   s.push({ t: "wait", d: 1.1 });
   cmd("btop --preset glyphs");

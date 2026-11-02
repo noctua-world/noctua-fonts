@@ -6,8 +6,8 @@
 /SHA256SUMS -text
 /*/licenses/** -text
 
-# The specimen site: site/build.py --check compares docs/ byte for byte with what
-# site/ generates, and the build copies site/static/ into docs/ as it is, so a
-# converted line ending in either would fail ./check.py on a Windows clone.
+# The specimen site: site/build.py --check compares site/public/ byte for byte with
+# what the rest of site/ generates, and the build copies site/static/ into
+# site/public/ as it is, so a converted line ending would fail ./tools/check.py on a
+# Windows clone.
 /site/** -text
-/docs/** -text

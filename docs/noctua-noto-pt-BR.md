@@ -6,7 +6,7 @@ Tipografia base para os projetos, em duas formas: as famílias **Noto puras** (v
 Google Fonts) e as mesmas famílias **patchadas com Nerd Fonts 3.4.0** — os glifos de ícone embutidos
 na fonte de texto, o que dispensa uma fonte de ícones separada.
 
-O lugar dos arquivos é [`noctua-noto/`](noctua-noto/), mas o git não os guarda: eles vêm dos zips
+O lugar dos arquivos é [`noctua-noto/`](../noctua-noto/), mas o git não os guarda: eles vêm dos zips
 da release (próxima seção). Inventário levantado em 2026-07-27 e medido de novo em 2026-11-01; os
 números (tamanhos, contagens) descrevem esses arquivos.
 
@@ -16,24 +16,24 @@ números (tamanhos, contagens) descrevem esses arquivos.
 
 Um clone novo não traz fonte nenhuma. Elas são assets da release
 [`v1.0.0`](https://github.com/noctua-world/noctua-fonts/releases/tag/v1.0.0) do GitHub, em zips
-descritos por [`font-archives.json`](font-archives.json), e o git guarda no lugar delas o
-[`SHA256SUMS`](SHA256SUMS): um SHA-256 por fonte. Dos 23 zips, dois trazem as fontes deste
+descritos por [`font-archives.json`](../tools/font-archives.json), e o git guarda no lugar delas o
+[`SHA256SUMS`](../SHA256SUMS): um SHA-256 por fonte. Dos 23 zips, dois trazem as fontes deste
 documento:
 
 | zip | conteúdo | download |
 |---|---|---|
-| `noctua-noto-ttf.zip` | os 49 TTF, mais os 20 arquivos de licença de [`noctua-noto/licenses/`](noctua-noto/licenses/) | cerca de 79 MiB (150 MiB descompactado) |
+| `noctua-noto-ttf.zip` | os 49 TTF, mais os 20 arquivos de licença de [`noctua-noto/licenses/`](../noctua-noto/licenses/) | cerca de 79 MiB (150 MiB descompactado) |
 | `noctua-noto-woff2.zip` | os 49 WOFF2, mais os mesmos 20 arquivos de licença | cerca de 58 MiB (quase o mesmo descompactado) |
 
 ```bash
 git clone https://github.com/noctua-world/noctua-fonts.git
 cd noctua-fonts
-./font-archives.py fetch --archive noctua-noto-ttf.zip noctua-noto-woff2.zip
-./font-archives.py verify --allow-missing
+./tools/font-archives.py fetch --archive noctua-noto-ttf.zip noctua-noto-woff2.zip
+./tools/font-archives.py verify --allow-missing
 ```
 
 O `font-archives.py` só precisa de Python 3.9 ou mais novo (no Windows, rode-o como
-`python font-archives.py …`). O `fetch` só grava uma fonte quando o SHA-256 dela bate com o
+`python tools/font-archives.py …`). O `fetch` só grava uma fonte quando o SHA-256 dela bate com o
 `SHA256SUMS`, e cada zip é tudo ou nada: se um falhar, a árvore fica como estava. Ele não baixa um
 zip cujas fontes já estejam presentes e corretas. Os arquivos de licença já estão no git; o `fetch`
 confere se as cópias do zip são idênticas a eles e não os grava. Sem `--archive`, ele baixa os 23
@@ -116,11 +116,11 @@ A última linha é a própria face variável, além das 9 nomeadas.
 
 </details>
 
-[`noctua-noto/licenses/`](noctua-noto/licenses/) traz 20 arquivos de licença: a SIL Open Font
+[`noctua-noto/licenses/`](../noctua-noto/licenses/) traz 20 arquivos de licença: a SIL Open Font
 License 1.1 de cada uma das 19 famílias Noto, e a licença MIT com que o
 [Nerd Fonts](symbols-nerd-font-pt-BR.md) distribui seus ícones (`LICENSE-NerdFontsSymbolsOnly.txt`),
 para os ícones das 27 patchadas. Os conjuntos de ícones que o Nerd Fonts reúne mantêm as licenças de
-origem, e nem todas são MIT; o [`LICENSE`](LICENSE) cita as que não são e aponta para a lista
+origem, e nem todas são MIT; o [`LICENSE`](../LICENSE) cita as que não são e aponta para a lista
 completa do Nerd Fonts. **Redistribuir exige enviar
 esses arquivos junto com as fontes**; os dois zips trazem os 20. A licença do próprio repositório
 (MIT OR Apache-2.0) cobre os scripts e os documentos, não as fontes.
@@ -144,8 +144,9 @@ prático de compatibilidade. Três razões concretas para manter as variáveis c
    cegamente joga o Condensed fora.
 3. **Perde os pesos intermediários** sem ganhar nada: 9 arquivos onde havia 1.
 
-Gere estáticas **sob demanda**, com [`instantiate-variable-font.py`](instantiate-variable-font.py),
-só para os alvos que exigem (§3).
+Gere estáticas **sob demanda**, com
+[`instantiate-variable-font.py`](../tools/instantiate-variable-font.py), só para os alvos que exigem
+(§3).
 
 ---
 
@@ -238,7 +239,7 @@ Flutter **não lê WOFF2** → use TTF. Fontes variáveis funcionam (`FontVariat
 os pesos usados e declarar cada arquivo:
 
 ```bash
-./instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
+./tools/instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
   --weights 400 500 700 --out ~/noto-static
 ```
 
@@ -268,7 +269,7 @@ O patch roda no Docker (para instalá-lo, veja o Passo 1 da
 `/out`. O `-u` faz a saída ser sua, não do root; o `:ro` monta a entrada só para leitura.
 
 ```bash
-./instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
+./tools/instantiate-variable-font.py "noctua-noto/NotoSans-VariableFont_wdth,wght.ttf" \
   --weights 300 400 500 600 700 --out ~/noto-static
 mkdir -p ~/noto-patched
 docker run --rm -u "$(id -u):$(id -g)" \
@@ -283,7 +284,7 @@ docker run --rm -u "$(id -u):$(id -g)" \
   patchear a Noto Sans Mono. A imagem patcheia as faces em paralelo: aqui, o bloco inteiro acima,
   com as cinco instâncias, levou cerca de 70 segundos.
 - **A imagem é fixada pelo digest.** É a mesma fixada para as faces Nerd da Noctua Iosevka em
-  [`noctua-iosevka/private-build-plans.toml`](noctua-iosevka/private-build-plans.toml), cujo
+  [`noctua-iosevka/private-build-plans.toml`](../noctua-iosevka/private-build-plans.toml), cujo
   cabeçalho explica o motivo: a tag dela já foi republicada uma vez. `nerdfonts/patcher` sem tag é o
   build mais recente (4.27.3 em 2026-11-01), que carimba uma versão posterior do Nerd Fonts.
 - **Ela não reproduz as 27 faces daqui.** Carimba Nerd Fonts 3.4.0, como elas, mas elas trazem
@@ -310,10 +311,10 @@ para qualquer fonte.
 
 | script | para quê |
 |---|---|
-| [`font-archives.py`](font-archives.py) | baixar as fontes da release (`fetch`) e conferir uma árvore contra o `SHA256SUMS` (`verify`); o `list` mostra cada zip com a quantidade e o tamanho dos seus arquivos. Só biblioteca padrão |
-| [`instantiate-variable-font.py`](instantiate-variable-font.py) | variável → estáticas. Sem opções, gera as *instâncias nomeadas* que a própria fonte declara. `--weights` e `--widths` aceitam vários valores e podem se repetir (os valores se somam); `--axis TAG=VALUE` fixa um eixo pela tag. `--list` mostra os eixos, o arquivo em que cada instância nomeada seria gravada e qual regra a nomeia (`stat`, `fvar` ou `coords`). Um valor fora da faixa de um eixo é recusado antes de qualquer gravação, nunca ajustado ao limite |
-| [`rename-font-family.py`](rename-font-family.py) | alinhar o nome de família gravado nos arquivos — foi o que resolveu §5b. Em `noctua-noto/` cada `.ttf` tem o seu `.woff2` ao lado, com o mesmo nome-base: renomear o `.ttf` reconstrói e renomeia essa cópia web também, desde que os nomes da cópia batam com os da fonte. Se não baterem, o lote é recusado e nada muda |
-| [`check.py`](check.py) | roda a suíte de testes, o `site/build.py --check` e o `font-archives.py verify --allow-missing`. Rode antes de cada commit |
+| [`font-archives.py`](../tools/font-archives.py) | baixar as fontes da release (`fetch`) e conferir uma árvore contra o `SHA256SUMS` (`verify`); o `list` mostra cada zip com a quantidade e o tamanho dos seus arquivos. Só biblioteca padrão |
+| [`instantiate-variable-font.py`](../tools/instantiate-variable-font.py) | variável → estáticas. Sem opções, gera as *instâncias nomeadas* que a própria fonte declara. `--weights` e `--widths` aceitam vários valores e podem se repetir (os valores se somam); `--axis TAG=VALUE` fixa um eixo pela tag. `--list` mostra os eixos, o arquivo em que cada instância nomeada seria gravada e qual regra a nomeia (`stat`, `fvar` ou `coords`). Um valor fora da faixa de um eixo é recusado antes de qualquer gravação, nunca ajustado ao limite |
+| [`rename-font-family.py`](../tools/rename-font-family.py) | alinhar o nome de família gravado nos arquivos — foi o que resolveu §5b. Em `noctua-noto/` cada `.ttf` tem o seu `.woff2` ao lado, com o mesmo nome-base: renomear o `.ttf` reconstrói e renomeia essa cópia web também, desde que os nomes da cópia batam com os da fonte. Se não baterem, o lote é recusado e nada muda |
+| [`check.py`](../tools/check.py) | roda a suíte de testes, o `site/build.py --check` e o `font-archives.py verify --allow-missing`. Rode antes de cada commit |
 
 **Python.** O `instantiate-variable-font.py`, o `rename-font-family.py`, o `pyftsubset`, o script de
 fatiar da §3 e os testes do `check.py` precisam do fontTools, mais o brotli para WOFF2. Instale-os
@@ -325,15 +326,15 @@ python3 -m venv .venv
 . .venv/bin/activate
 ```
 
-No Linux e no macOS, com ele ativo, `./instantiate-variable-font.py`, `python3` e `pyftsubset`
-passam a usá-lo. No Windows: `python -m venv .venv`, depois
-`.venv\Scripts\python -m pip install fonttools brotli` e `.venv\Scripts\activate`. Um venv no
-Windows tem `python`, não `python3`, então rode os scripts por ele: `python instantiate-variable-font.py …`.
-Um `pip install` solto falha no Python do sistema no Debian, no Ubuntu e no Arch, e no do Homebrew:
-eles o marcam como gerenciado externamente (PEP 668).
-O `pipx install fonttools` (e depois `pipx inject fonttools brotli`) dá os comandos `fonttools` e
-`pyftsubset`, mas os scripts daqui importam o fontTools, e o pipx não o deixa importável para eles.
-No NixOS, use um shell: `nix-shell -p 'python3.withPackages(ps: [ps.fonttools ps.brotli])'`.
+No Linux e no macOS, com ele ativo, `./tools/instantiate-variable-font.py`, `python3` e `pyftsubset`
+passam a usá-lo. No Windows: `python -m venv .venv`, depois `.venv\Scripts\python -m pip install
+fonttools brotli` e `.venv\Scripts\activate`. Um venv no Windows tem `python`, não `python3`, então
+rode os scripts por ele: `python tools/instantiate-variable-font.py …`. Um `pip install` solto falha
+no Python do sistema no Debian, no Ubuntu e no Arch, e no do Homebrew: eles o marcam como gerenciado
+externamente (PEP 668). O `pipx install fonttools` (e depois `pipx inject fonttools brotli`) dá os
+comandos `fonttools` e `pyftsubset`, mas os scripts daqui importam o fontTools, e o pipx não o deixa
+importável para eles. No NixOS, use um shell: `nix-shell -p 'python3.withPackages(ps: [ps.fonttools
+ps.brotli])'`.
 
 **Grave as fontes geradas fora das pastas de fontes.** Por padrão, o `instantiate-variable-font.py`
 grava em `static/`, ao lado da entrada. O git ignora essa pasta, mas o `font-archives.py verify` (e,

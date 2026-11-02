@@ -26,7 +26,7 @@ from fontTools.ttLib.sfnt import SFNTWriter
 from fontTools.ttLib.tables.DefaultTable import DefaultTable
 
 ROOT = Path(__file__).resolve().parent.parent
-SCRIPT = ROOT / "rename-font-family.py"
+SCRIPT = ROOT / "tools" / "rename-font-family.py"
 REAL_FONT = ROOT / "noctua-iosevka" / "TTF" / "NoctuaIosevka-Regular.ttf"
 REAL_PAIR = ROOT / "noctua-noto" / "NotoMusic-Regular.ttf"
 

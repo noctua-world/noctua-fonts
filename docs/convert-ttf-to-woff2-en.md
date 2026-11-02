@@ -261,8 +261,8 @@ Font. None of them is in git. They are assets of the release `v1.0.0` of
 check what you have against the committed `SHA256SUMS`:
 
 ```bash
-./font-archives.py fetch --archive noctua-noto-woff2.zip
-./font-archives.py verify --allow-missing
+./tools/font-archives.py fetch --archive noctua-noto-woff2.zip
+./tools/font-archives.py verify --allow-missing
 ```
 
 With no `--archive`, `fetch` takes every archive that is missing a font: all 23 in a fresh clone.
@@ -291,17 +291,18 @@ wrote it:
   `woff2_compress` 1.0.2.
 
 Rebuilt with another of these commands, a file decodes to the same font (a Noctua Iosevka face
-without its `OVERLAP_SIMPLE` flag, if `woff2_compress` wrote it), but `./font-archives.py verify`
-reports it as a mismatch. Keep the fetched file.
+without its `OVERLAP_SIMPLE` flag, if `woff2_compress` wrote it), but `./tools/font-archives.py
+verify` reports it as a mismatch. Keep the fetched file.
 
-If a changed font is meant to stay, `./font-archives.py manifest` rewrites `SHA256SUMS`. It hashes
-the fonts present, and it refuses to run while a font that `SHA256SUMS` lists is missing, since the
-rewrite would drop it: fetch every archive first. Pass `--remove-missing` only for a font removed or
-renamed on purpose. Check that `./font-archives.py verify` passes without `--allow-missing` before
-you change the font. After one rebuilt font, `manifest` must report
-`0 added, 0 removed, 1 changed`.
+If a changed font is meant to stay, `./tools/font-archives.py manifest` rewrites `SHA256SUMS`. It
+hashes the fonts present, and it refuses to run while a font that `SHA256SUMS` lists is missing,
+since the rewrite would drop it: fetch every archive first. Pass `--remove-missing` only for a font
+removed or renamed on purpose. Check that `./tools/font-archives.py verify` passes without
+`--allow-missing` before you change the font. After one rebuilt font, `manifest` must report `0
+added, 0 removed, 1 changed`.
 
 A new hash in `SHA256SUMS` also needs new archives. `fetch` checks every font of an archive against
 `SHA256SUMS` and refuses the whole archive on a difference, so the `v1.0.0` archive that holds the
-old font can no longer be fetched. `./font-archives.py pack` writes all 23 archives into `dist/`.
-They become the assets of a new release, and its tag replaces `v1.0.0` in `font-archives.json`.
+old font can no longer be fetched. `./tools/font-archives.py pack` writes all 23 archives into
+`dist/`. They become the assets of a new release, and its tag replaces `v1.0.0` in
+`font-archives.json`.

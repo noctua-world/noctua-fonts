@@ -31,7 +31,7 @@ from pathlib import Path
 from unittest import mock
 
 REPO = Path(__file__).resolve().parent.parent
-SCRIPT = REPO / "font-archives.py"
+SCRIPT = REPO / "tools" / "font-archives.py"
 
 
 def _load_tool():
@@ -78,7 +78,7 @@ LICENSES = {
 OTHER_FILES = {
     "README.md": b"# fonts\n",
     "noctua-iosevka/private-build-plans.toml": b"[buildPlans]\n",
-    "docs/fonts/NoctuaIosevka-Subset.woff2": b"a subset font for the site",  # never listed
+    "site/public/fonts/NoctuaIosevka-Subset.woff2": b"a subset font for the site",  # never listed
 }
 IOSEVKA_OFL = ["noctua-iosevka/licenses/OFL.txt"]
 CONFIG = {
@@ -263,7 +263,7 @@ class PathRulesTest(unittest.TestCase):
         self.assertFalse(fa.glob_match("noctua-noto/*.ttf", "noctua-noto/X.TTF"))
 
     def test_manifest_paths_must_be_fonts_inside_the_font_folders(self):
-        self.assertIn("is not inside", fa.manifest_path_problem("docs/fonts/x.woff2"))
+        self.assertIn("is not inside", fa.manifest_path_problem("site/public/fonts/x.woff2"))
         self.assertIn("is not a", fa.manifest_path_problem("noctua-noto/licenses/OFL.txt"))
         self.assertIsNone(fa.manifest_path_problem(NOTO_WOFF2))
 
@@ -330,7 +330,7 @@ class ManifestTest(TempTree):
         make_tree(self.root)
         listed = fa.read_manifest(self.root)
         self.assertEqual(sorted(listed), sorted(FONT_SIZES))
-        self.assertNotIn("docs/fonts/NoctuaIosevka-Subset.woff2", listed)
+        self.assertNotIn("site/public/fonts/NoctuaIosevka-Subset.woff2", listed)
 
     def test_parse_round_trips(self):
         entries = {rel: sha(font_bytes(rel, size)) for rel, size in FONT_SIZES.items()}
@@ -471,7 +471,7 @@ class ManifestTest(TempTree):
             f"{'a' * 64} {NOTO_TTF}\n": "line 1",
             f"{'a' * 64}  noctua-noto/../../etc/x.ttf\n": "'..'",
             f"{'a' * 64}  /noctua-noto/x.ttf\n": "absolute",
-            f"{'a' * 64}  docs/x.woff2\n": "is not inside",
+            f"{'a' * 64}  site/public/x.woff2\n": "is not inside",
             f"{'a' * 64}  noctua-noto/A.ttf\n{'a' * 64}  noctua-noto/a.ttf\n": "differ only in case",
         }
         for text, fragment in cases.items():
@@ -1482,12 +1482,12 @@ class RealRepositoryTest(unittest.TestCase):
 
     def test_gitattributes_keeps_the_byte_exact_files_exact(self):
         """SHA256SUMS, the licence files and the site need -text, so that a Windows checkout
-        keeps their bytes (the site's: site/build.py --check compares docs/ byte for byte)."""
+        keeps their bytes (the site's: site/build.py --check compares site/public/ byte for byte)."""
         attributes = {}
         for line in rule_lines(REPO / ".gitattributes"):
             pattern, *values = line.split()
             attributes.setdefault(pattern, set()).update(values)
-        for pattern in ("/SHA256SUMS", "/*/licenses/**", "/site/**", "/docs/**"):
+        for pattern in ("/SHA256SUMS", "/*/licenses/**", "/site/**"):
             with self.subTest(pattern=pattern):
                 values = attributes.get(pattern, set())
                 self.assertTrue(values & {"-text", "binary"}, f"{pattern} must be marked -text")

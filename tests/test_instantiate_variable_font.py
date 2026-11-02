@@ -26,7 +26,7 @@ from fontTools.ttLib.woff2 import WOFF2FlavorData
 from fontTools.varLib import instancer
 
 REPO = Path(__file__).resolve().parent.parent
-SCRIPT = REPO / "instantiate-variable-font.py"
+SCRIPT = REPO / "tools" / "instantiate-variable-font.py"
 
 
 def load_tool():

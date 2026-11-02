@@ -6,7 +6,7 @@ An in-house **monospaced** typeface for terminals, editors and code. It is a cus
 [Iosevka](https://github.com/be5invis/Iosevka) — not a fork: nothing was redrawn. What exists is a
 deliberate selection among the variants Iosevka already offers, plus a remapped width ladder.
 
-The fonts belong in [`noctua-iosevka/`](noctua-iosevka/), but git does not hold them: they come
+The fonts belong in [`noctua-iosevka/`](../noctua-iosevka/), but git does not hold them: they come
 from the release archives (§3). The specimen site shows the typeface:
 <https://noctua-world.github.io/noctua-fonts/>, in Portuguese at
 <https://noctua-world.github.io/noctua-fonts/pt-BR/>.
@@ -105,10 +105,10 @@ rest are shared. Both exist separately.
 
 A clone of this repository holds none of these fonts. They are assets of the release
 [`v1.0.0`](https://github.com/noctua-world/noctua-fonts/releases/tag/v1.0.0), in zip archives that
-[`font-archives.json`](font-archives.json) describes, and git keeps [`SHA256SUMS`](SHA256SUMS)
-instead: one SHA-256 per font. Twenty of the 23 archives hold Noctua Iosevka, one per family,
-format and width. Each has the 27 faces of its width (9 weights × 3 slopes) and the licence files
-of §6.
+[`font-archives.json`](../tools/font-archives.json) describes, and git keeps
+[`SHA256SUMS`](../SHA256SUMS) instead: one SHA-256 per font. Twenty of the 23 archives hold Noctua
+Iosevka, one per family, format and width. Each has the 27 faces of its width (9 weights × 3 slopes)
+and the licence files of §6.
 
 | archive | holds | download, each |
 |---|---|---|
@@ -123,14 +123,14 @@ the normal width:
 ```bash
 git clone https://github.com/noctua-world/noctua-fonts.git
 cd noctua-fonts
-./font-archives.py fetch --archive noctua-iosevka-nerd-font-ttf-normal.zip
-./font-archives.py verify --allow-missing
+./tools/font-archives.py fetch --archive noctua-iosevka-nerd-font-ttf-normal.zip
+./tools/font-archives.py verify --allow-missing
 ```
 
 `--archive` takes several names. Every width of the Nerd Font, as TTF:
 
 ```bash
-./font-archives.py fetch --archive \
+./tools/font-archives.py fetch --archive \
   noctua-iosevka-nerd-font-ttf-normal.zip \
   noctua-iosevka-nerd-font-ttf-condensed.zip \
   noctua-iosevka-nerd-font-ttf-semicondensed.zip \
@@ -138,12 +138,12 @@ cd noctua-fonts
   noctua-iosevka-nerd-font-ttf-extended.zip
 ```
 
-`font-archives.py` needs Python 3.9 or later and nothing else (on Windows, run it as
-`python font-archives.py …`). `fetch` writes a font only when its SHA-256 matches `SHA256SUMS`, and
-an archive is all or nothing: one that fails leaves the tree as it was. `verify --allow-missing`
-checks the fonts that are present and only counts the missing ones. The fonts land in the folders
-of §1: `noctua-iosevka/TTF-nerdfonts/`, `noctua-iosevka/TTF/`, `noctua-iosevka/WOFF2-nerdfonts/`
-and `noctua-iosevka/WOFF2/`.
+`font-archives.py` needs Python 3.9 or later and nothing else (on Windows, run it as `python
+tools/font-archives.py …`). `fetch` writes a font only when its SHA-256 matches `SHA256SUMS`, and an
+archive is all or nothing: one that fails leaves the tree as it was. `verify --allow-missing` checks
+the fonts that are present and only counts the missing ones. The fonts land in the folders of §1:
+`noctua-iosevka/TTF-nerdfonts/`, `noctua-iosevka/TTF/`, `noctua-iosevka/WOFF2-nerdfonts/` and
+`noctua-iosevka/WOFF2/`.
 
 Without a clone, download an archive from the release, such as
 <https://github.com/noctua-world/noctua-fonts/releases/download/v1.0.0/noctua-iosevka-nerd-font-ttf-normal.zip>.
@@ -331,13 +331,13 @@ The group change takes effect at your next login. On NixOS this is declarative:
 `virtualisation.docker.enable = true;` plus the user in the `docker` group. On macOS, Docker
 Desktop takes the place of both commands: install it and start it once.
 
-**Python**, for Steps 8 to 10: install fontTools and brotli in a virtual environment at the root
-of your clone of this repository (git ignores `.venv/`). A bare `pip install` fails on the system
+**Python**, for Steps 8 to 10: install fontTools and brotli in a virtual environment at the root of
+your clone of this repository (git ignores `.venv/`). A bare `pip install` fails on the system
 Python of Debian, Ubuntu and Arch, and on Homebrew's, which mark it as externally managed (PEP 668);
 [Converting TTF to WOFF2](convert-ttf-to-woff2-en.md) has the details, Windows included. The
-`python3` that makes the environment must be 3.11 or later, because the tests that `./check.py`
-runs in Step 10 need it: an older one, such as Ubuntu 22.04's 3.10 or the 3.9 of macOS's
-command-line tools, runs the tools but not the tests.
+`python3` that makes the environment must be 3.11 or later, because the tests that
+`./tools/check.py` runs in Step 10 need it: an older one, such as Ubuntu 22.04's 3.10 or the 3.9 of
+macOS's command-line tools, runs the tools but not the tests.
 
 ```bash
 python3 -m venv .venv
@@ -353,7 +353,7 @@ again in each new shell. On NixOS,
 ### Step 2 — The build plan
 
 The entire design lives in one declarative file:
-[`noctua-iosevka/private-build-plans.toml`](noctua-iosevka/private-build-plans.toml). It is the
+[`noctua-iosevka/private-build-plans.toml`](../noctua-iosevka/private-build-plans.toml). It is the
 project's source of truth. Its header, in TOML comments, pins the toolchain to rebuild the fonts
 with: Iosevka v34.7.0 (commit `6828cb0bd569992bb19565a5e448540de3b50541`), the Nerd Fonts patcher
 image `nerdfonts/patcher:4.26.0` by digest, and ttfautohint 1.8.4. Changing any pin means
@@ -389,7 +389,7 @@ npm install
 
 Do not build from `main` or from another tag. That is a change of pin: record the new tag and
 commit in the plan's header and in `EXPECTED_PINS` in
-[`tests/test_licences.py`](tests/test_licences.py), rebuild every face, and update the Material
+[`tests/test_licences.py`](../tests/test_licences.py), rebuild every face, and update the Material
 Design fingerprints there if the new faces draw the icons differently (Step 7).
 
 ### Step 4 — Build
@@ -507,7 +507,7 @@ with font-patcher's own version (4.x), never with the Nerd Fonts version it stam
 images patch other icons: 4.25.0 draws 132 Material Design icons differently. Moving to another
 image, `nerdfonts/patcher:4.27.3` for instance, is a change of pin: record its tag, its digest and
 the Nerd Fonts version it stamps in the plan's header and in `EXPECTED_PINS` in
-[`tests/test_licences.py`](tests/test_licences.py), rebuild every face (Step 2), and update the
+[`tests/test_licences.py`](../tests/test_licences.py), rebuild every face (Step 2), and update the
 Material Design fingerprints in that file: `PINNED_PATCHER_MDI`, and `MDI_ICON_COUNT` if the count
 changes.
 
@@ -561,28 +561,28 @@ input of Step 9, which writes them again from the fixed TTFs.
 ### Step 9 — Fix the SemiExtended faces
 
 The patcher misreads the SemiExtended width (Iosevka spells it "Semi-Extended"): it glues "Semi" and
-the weight onto the family and keeps "Extended" as the style. Each SemiExtended weight then lands
-in a family of its own, such as `NoctuaIosevkaBoldSemi Nerd Font Mono`, style `Extended`, and
-asking for `NoctuaIosevka Nerd Font Mono` at semi-expanded width silently hands you the nearest
-other width. On the Bold weight it also clears the bold bits (OS/2 `fsSelection` bit 5, `head`
-`macStyle` bit 0) that the Bold faces of every other width carry.
-[`fix-nerd-semiextended-names.py`](fix-nerd-semiextended-names.py) repairs those 27 faces, as TTF
-and as WOFF2: 54 files. Preview first; `--dry-run` writes nothing:
+the weight onto the family and keeps "Extended" as the style. Each SemiExtended weight then lands in
+a family of its own, such as `NoctuaIosevkaBoldSemi Nerd Font Mono`, style `Extended`, and asking
+for `NoctuaIosevka Nerd Font Mono` at semi-expanded width silently hands you the nearest other
+width. On the Bold weight it also clears the bold bits (OS/2 `fsSelection` bit 5, `head` `macStyle`
+bit 0) that the Bold faces of every other width carry.
+[`fix-nerd-semiextended-names.py`](../tools/fix-nerd-semiextended-names.py) repairs those 27 faces,
+as TTF and as WOFF2: 54 files. Preview first; `--dry-run` writes nothing:
 
 ```bash
-./fix-nerd-semiextended-names.py --dry-run noctua-iosevka/TTF-nerdfonts noctua-iosevka/WOFF2-nerdfonts
+./tools/fix-nerd-semiextended-names.py --dry-run noctua-iosevka/TTF-nerdfonts noctua-iosevka/WOFF2-nerdfonts
 ```
 
 It must report 54 files as `would fix` and the other 216 as `skipped`. Then the real run:
 
 ```bash
-./fix-nerd-semiextended-names.py noctua-iosevka/TTF-nerdfonts noctua-iosevka/WOFF2-nerdfonts
+./tools/fix-nerd-semiextended-names.py noctua-iosevka/TTF-nerdfonts noctua-iosevka/WOFF2-nerdfonts
 ```
 
-On Windows, run it as `python fix-nerd-semiextended-names.py …`. It rewrites name IDs 1, 2, 3, 4, 6,
-16 and 17 to the convention the patcher used for the other widths (family
-`NoctuaIosevka Nerd Font Mono`, style `SemiExtended Bold` and so on), sets the bold bits exactly on
-the Bold weight, and gives each file its siblings' pattern of name,
+On Windows, run it as `python tools/fix-nerd-semiextended-names.py …`. It rewrites name IDs 1, 2, 3,
+4, 6, 16 and 17 to the convention the patcher used for the other widths (family `NoctuaIosevka Nerd
+Font Mono`, style `SemiExtended Bold` and so on), sets the bold bits exactly on the Bold weight, and
+gives each file its siblings' pattern of name,
 `NoctuaIosevkaNerdFontMono-SemiExtended[Weight][Slope]`. In a TTF, every other table is copied byte
 for byte. It handles the TTFs first, whatever the order of the arguments, and writes each
 SemiExtended WOFF2 again from its fixed TTF, so the pair stays identical in content. A TTF takes
@@ -602,14 +602,14 @@ changes nothing.
 ### Step 10 — Record the new fonts
 
 A rebuilt face differs in bytes from the shipped one, at least in the time stamp of its `head`
-table, so `./font-archives.py verify` reports it as a `MISMATCH`. To keep the rebuild, rewrite
+table, so `./tools/font-archives.py verify` reports it as a `MISMATCH`. To keep the rebuild, rewrite
 `SHA256SUMS`. `manifest` refuses while a font that `SHA256SUMS` lists is missing, so fetch the
 other three archives first:
 
 ```bash
-./font-archives.py fetch --archive noctua-noto-ttf.zip noctua-noto-woff2.zip symbols-nerd-font.zip
-./font-archives.py manifest
-./check.py --release
+./tools/font-archives.py fetch --archive noctua-noto-ttf.zip noctua-noto-woff2.zip symbols-nerd-font.zip
+./tools/font-archives.py manifest
+./tools/check.py --release
 ```
 
 `manifest` reports what it added, removed and changed: after a rebuild under the same pins it must
@@ -617,8 +617,8 @@ report `0 added, 0 removed`, with the Noctua Iosevka fonts among the changed. `c
 runs the tests (which check name ID 5 and the Material Design icons against the pins), the site
 check, a strict `verify` and `font-archives.py list` (every font in exactly one archive).
 
-The specimen site's subset fonts, under `docs/`, are cut from these faces: regenerate them as
-[`site/README.md`](site/README.md) explains. New hashes need new archives and a new release:
+The specimen site's subset fonts, under `site/public/`, are cut from these faces: regenerate them as
+[`site/README.md`](../site/README.md) explains. New hashes need new archives and a new release:
 [Maintaining the release](README.md#maintaining-the-release) has the whole procedure, the new tag
 included, and the end of
 [This repository's WOFF2 files](convert-ttf-to-woff2-en.md#this-repositorys-woff2-files) says why.
@@ -631,14 +631,14 @@ Then install the new faces from `noctua-iosevka/TTF-nerdfonts/` (§3) and run th
 <details>
 <summary><b>Known issues</b></summary>
 
-**The SemiExtended width, fixed here.** The patcher's renaming algorithm fragments
-the name "SemiExtended", exiling those faces into per-weight mini-families (e.g.
-`NoctuaIosevkaBoldSemi Nerd Font Mono Extended`), and it clears the bold bits of the Bold ones. The
-27 SemiExtended faces of the release archives, TTF and WOFF2, were repaired on 2026-11-01 by
-[`fix-nerd-semiextended-names.py`](fix-nerd-semiextended-names.py), names and bold bits both: they
-now sit in the main family with the other four widths, and
-`fc-match 'NoctuaIosevka Nerd Font Mono:width=113:weight=200'` returns
-`NoctuaIosevkaNerdFontMono-SemiExtendedBold.ttf`. A rebuild must run the tool again: Step 9.
+**The SemiExtended width, fixed here.** The patcher's renaming algorithm fragments the name
+"SemiExtended", exiling those faces into per-weight mini-families (e.g. `NoctuaIosevkaBoldSemi Nerd
+Font Mono Extended`), and it clears the bold bits of the Bold ones. The 27 SemiExtended faces of the
+release archives, TTF and WOFF2, were repaired on 2026-11-01 by
+[`fix-nerd-semiextended-names.py`](../tools/fix-nerd-semiextended-names.py), names and bold bits
+both: they now sit in the main family with the other four widths, and `fc-match 'NoctuaIosevka Nerd
+Font Mono:width=113:weight=200'` returns `NoctuaIosevkaNerdFontMono-SemiExtendedBold.ttf`. A rebuild
+must run the tool again: Step 9.
 
 **Guarding against memory exhaustion.** For heavy builds on limited machines, an early OOM killer
 (`earlyoom` or `systemd-oomd`) is worth installing: it turns the worst case from "frozen system, hold
@@ -653,7 +653,7 @@ machine survives.
 ## 6. License
 
 **SIL OFL 1.1**, Iosevka's licence —
-[`noctua-iosevka/licenses/OFL-Iosevka.txt`](noctua-iosevka/licenses/OFL-Iosevka.txt), © 2015-2026
+[`noctua-iosevka/licenses/OFL-Iosevka.txt`](../noctua-iosevka/licenses/OFL-Iosevka.txt), © 2015-2026
 Renzhi Li. **Redistribution requires shipping it alongside the fonts**, and that includes serving
 them from a website. Every Noctua Iosevka archive carries it.
 
@@ -666,15 +666,15 @@ Two consequences worth knowing:
   relicensed. That obligation does **not** reach documents or sites that merely *use* the font — only
   redistribution of the font software itself.
 
-**The Nerd Font faces also carry the Nerd Fonts icons.** Nerd Fonts ships them with its MIT
-license, kept in
-[`noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt`](noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt),
-byte for byte the one in [`symbols-nerd-font/licenses/`](symbols-nerd-font/licenses/); the Nerd
+**The Nerd Font faces also carry the Nerd Fonts icons.** Nerd Fonts ships them with its MIT license,
+kept in
+[`noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt`](../noctua-iosevka/licenses/LICENSE-NerdFontsSymbolsOnly.txt),
+byte for byte the one in [`symbols-nerd-font/licenses/`](../symbols-nerd-font/licenses/); the Nerd
 Font archives carry it beside the OFL. The icon sets that Nerd Fonts gathers keep their own upstream
 licences, and not all of them are MIT: Codicons and Font Awesome are under CC BY 4.0, Material
 Design Icons under Apache 2.0, Pomicons and Weather Icons under the SIL Open Font License 1.1, and
-Font Logos under the Unlicense. The [`LICENSE`](LICENSE) at the root of this repository sums it up
-and names Nerd Fonts' lists of every set. The rest of each patched face stays under the OFL.
+Font Logos under the Unlicense. The [`LICENSE`](../LICENSE) at the root of this repository sums it
+up and names Nerd Fonts' lists of every set. The rest of each patched face stays under the OFL.
 
 That root `LICENSE` puts this repository's own content (its tools and their tests, the
 documentation, the build plan and the site) under MIT OR Apache-2.0. It does not reach the fonts.

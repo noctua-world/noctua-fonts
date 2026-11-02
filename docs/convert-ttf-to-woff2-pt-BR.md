@@ -268,8 +268,8 @@ pelo `font-archives.json`, então um clone novo não tem nenhuma destas fontes. 
 depois confira o que você tem contra o `SHA256SUMS` commitado:
 
 ```bash
-./font-archives.py fetch --archive noctua-noto-woff2.zip
-./font-archives.py verify --allow-missing
+./tools/font-archives.py fetch --archive noctua-noto-woff2.zip
+./tools/font-archives.py verify --allow-missing
 ```
 
 Sem `--archive`, o `fetch` baixa todo pacote em que falta alguma fonte: os 23, num clone novo. Os
@@ -299,17 +299,17 @@ que o gravou:
 
 Refeito com outro destes comandos, um arquivo decodifica para a mesma fonte (uma face do Noctua
 Iosevka sem a flag `OVERLAP_SIMPLE`, se foi o `woff2_compress` que a gravou), mas o
-`./font-archives.py verify` o aponta como divergente. Fique com o arquivo baixado.
+`./tools/font-archives.py verify` o aponta como divergente. Fique com o arquivo baixado.
 
-Se uma fonte alterada for para ficar, o `./font-archives.py manifest` reescreve o `SHA256SUMS`. Ele
-calcula o hash das fontes presentes e se recusa a rodar enquanto faltar alguma fonte que o
-`SHA256SUMS` lista, porque a reescrita a descartaria: baixe todos os pacotes antes. Passe
-`--remove-missing` só para uma fonte removida ou renomeada de propósito. Confira que o
-`./font-archives.py verify` passa sem `--allow-missing` antes de alterar a fonte. Depois de uma
-fonte refeita, o `manifest` deve informar `0 added, 0 removed, 1 changed`.
+Se uma fonte alterada for para ficar, o `./tools/font-archives.py manifest` reescreve o
+`SHA256SUMS`. Ele calcula o hash das fontes presentes e se recusa a rodar enquanto faltar alguma
+fonte que o `SHA256SUMS` lista, porque a reescrita a descartaria: baixe todos os pacotes antes.
+Passe `--remove-missing` só para uma fonte removida ou renomeada de propósito. Confira que o
+`./tools/font-archives.py verify` passa sem `--allow-missing` antes de alterar a fonte. Depois de
+uma fonte refeita, o `manifest` deve informar `0 added, 0 removed, 1 changed`.
 
 Um hash novo no `SHA256SUMS` também exige pacotes novos. O `fetch` confere cada fonte de um pacote
 contra o `SHA256SUMS` e recusa o pacote inteiro se alguma diferir, então o pacote da `v1.0.0` que
-contém a fonte antiga não pode mais ser baixado. O `./font-archives.py pack` grava os 23 pacotes
-em `dist/`. Eles viram os assets de uma release nova, e a tag dela substitui `v1.0.0` no
+contém a fonte antiga não pode mais ser baixado. O `./tools/font-archives.py pack` grava os 23
+pacotes em `dist/`. Eles viram os assets de uma release nova, e a tag dela substitui `v1.0.0` no
 `font-archives.json`.

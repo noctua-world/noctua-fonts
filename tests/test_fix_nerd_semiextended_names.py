@@ -27,7 +27,7 @@ from fontTools.ttLib.tables._g_l_y_f import Glyph
 from fontTools.ttLib.tables.DefaultTable import DefaultTable
 
 REPO = Path(__file__).resolve().parent.parent
-SCRIPT = REPO / "fix-nerd-semiextended-names.py"
+SCRIPT = REPO / "tools" / "fix-nerd-semiextended-names.py"
 REAL_TTF = REPO / "noctua-iosevka" / "TTF-nerdfonts"
 REAL_WOFF2 = REPO / "noctua-iosevka" / "WOFF2-nerdfonts"
 
