@@ -5,3 +5,9 @@
 # licences mix CRLF and LF files, and both must come out unchanged.
 /SHA256SUMS -text
 /*/licenses/** -text
+
+# The specimen site: site/build.py --check compares docs/ byte for byte with what
+# site/ generates, and the build copies site/static/ into docs/ as it is, so a
+# converted line ending in either would fail ./check.py on a Windows clone.
+/site/** -text
+/docs/** -text

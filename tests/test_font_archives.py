@@ -1481,12 +1481,13 @@ class RealRepositoryTest(unittest.TestCase):
         self.assertIn("/dist/", rules)
 
     def test_gitattributes_keeps_the_byte_exact_files_exact(self):
-        """SHA256SUMS and the licence files need -text, so that a Windows checkout keeps their bytes."""
+        """SHA256SUMS, the licence files and the site need -text, so that a Windows checkout
+        keeps their bytes (the site's: site/build.py --check compares docs/ byte for byte)."""
         attributes = {}
         for line in rule_lines(REPO / ".gitattributes"):
             pattern, *values = line.split()
             attributes.setdefault(pattern, set()).update(values)
-        for pattern in ("/SHA256SUMS", "/*/licenses/**"):
+        for pattern in ("/SHA256SUMS", "/*/licenses/**", "/site/**", "/docs/**"):
             with self.subTest(pattern=pattern):
                 values = attributes.get(pattern, set())
                 self.assertTrue(values & {"-text", "binary"}, f"{pattern} must be marked -text")
