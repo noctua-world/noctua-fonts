@@ -11,3 +11,7 @@
 # site/public/ as it is, so a converted line ending would fail ./tools/check.py on a
 # Windows clone.
 /site/** -text
+
+# The README's art: tests/test_readme.py compares it byte for byte with what
+# tools/readme-art.py draws.
+/.github/readme/** -text

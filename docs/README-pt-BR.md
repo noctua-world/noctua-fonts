@@ -153,6 +153,7 @@ fontTools instalado até para isso.
 | [`fix-nerd-semiextended-names.py`](../tools/fix-nerd-semiextended-names.py) | devolve aos estilos SemiExtended de um build Nerd Fonts Mono a família e os bits de negrito, que o patcher erra nessa largura | fontTools; brotli para WOFF2 |
 | [`font-archives.py`](../tools/font-archives.py) | baixa e confere as fontes; para uma release, reescreve o `SHA256SUMS` e empacota os zips | Python 3.9 ou mais novo, só biblioteca padrão |
 | [`check.py`](../tools/check.py) | roda todas as conferências do repositório (ver [Conferir](#conferir)) | Python 3.11 ou mais novo, com fontTools e brotli (sem eles, não roda nada) |
+| [`readme-art.py`](../tools/readme-art.py) | desenha o título animado e o botão do README do repositório, em [`.github/readme/`](../.github/readme/), a partir dos contornos das fontes geradas | fontTools, e as fontes da Noctua Iosevka baixadas |
 
 Instale o fontTools e o brotli num ambiente virtual, na raiz do repositório:
 

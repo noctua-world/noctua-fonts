@@ -151,6 +151,7 @@ installed even for that.
 | [`fix-nerd-semiextended-names.py`](../tools/fix-nerd-semiextended-names.py) | gives the SemiExtended faces of a Nerd Fonts Mono build back their family and bold bits, which the patcher gets wrong for that width | fontTools; brotli for WOFF2 |
 | [`font-archives.py`](../tools/font-archives.py) | fetches and verifies the fonts; for a release, rewrites `SHA256SUMS` and packs the archives | Python 3.9 or later, standard library only |
 | [`check.py`](../tools/check.py) | runs every check of the repository (see [Checking](#checking)) | Python 3.11 or later, with fontTools and brotli (without them it runs nothing) |
+| [`readme-art.py`](../tools/readme-art.py) | draws the animated title and the button of the repository's README, into [`.github/readme/`](../.github/readme/), from the outlines of the built fonts | fontTools, and the Noctua Iosevka fonts fetched |
 
 Install fontTools and brotli in a virtual environment, at the repository root:
 
