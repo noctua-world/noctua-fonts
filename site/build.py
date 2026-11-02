@@ -584,9 +584,10 @@ def gen_downloads(loc: Locale, page: dict) -> str:
         lower = name.lower()
         featured = name == "Normal"
         # Each link names its width too, so twenty links never read as five identical lists.
+        lang_en = "" if loc.code == "en" else ' lang="en"'
         links = "".join(
             f'<a href="{DOWNLOAD_URL}noctua-iosevka-{part}-{lower}.zip">{loc.t(fmt)}'
-            f'<span class="sr-only"{"" if loc.code == "en" else ' lang="en"'}>, {esc(name)}</span></a>' for fmt, part in ARCHIVE_FORMATS
+            f'<span class="sr-only"{lang_en}>, {esc(name)}</span></a>' for fmt, part in ARCHIVE_FORMATS
         )
         small = loc.fmt("dl.recommended", adv=adv) if featured else str(adv)
         out.append(
