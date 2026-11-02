@@ -1382,6 +1382,10 @@ html:not(.js) .ins-pane { border-radius: 8px; }
 html:not(.js) .cmd-block { grid-template-columns: minmax(0, 1fr); }
 @media (max-width: 520px) { .cmd-block { grid-template-columns: minmax(0, 1fr); } .cmd-block .copy { justify-self: start; margin-top: 0; } }
 .configs { grid-area: cfg; display: grid; gap: 14px; }
+/* A setting is one line of a config file. In the narrow column beside the install steps it
+   wraps at every width, with the phone's hanging indent, rather than scroll for a few cells. */
+.configs .cmd-block pre { white-space: pre-wrap; overflow-x: visible; }
+.configs .cl { padding-left: 2ch; text-indent: -2ch; overflow-wrap: anywhere; }
 .cfg-title { margin: 0; font-weight: 700; }
 .cfg-name { margin: 0; font-size: 13px; font-weight: 700; }
 .cfg-name small { font-weight: 400; color: var(--fg-2); margin-left: 6px; overflow-wrap: anywhere; }
