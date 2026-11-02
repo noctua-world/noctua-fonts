@@ -31,9 +31,9 @@ by hand: `python3 site/build.py --check` (and the tests) fail when it drifts fro
 
 `build.py` also generates three files from data it holds: `docs/assets/css/fonts.css` (one
 `@font-face` per subset face), `docs/assets/css/facts.css` (the measured values the stylesheet
-needs: the size that fits each one-line section title to its column, per language, the share
-of the ASCII glyphs each stylistic set redraws, and the set the lens and the §06 title start
-in) and `docs/assets/js/strings.js` (the strings the scripts show, in both languages, plus the
+needs: the size that fits each one-line section title to its column and the width from which
+the hero's face pill fits beside the hint, per language, the share of the ASCII glyphs each
+stylistic set redraws, and the set the lens and the §06 title start in) and `docs/assets/js/strings.js` (the strings the scripts show, in both languages, plus the
 face matrix). The font facts the page states are constants at the top of `build.py`, measured
 from the TTFs with fontTools and HarfBuzz: which glyphs each stylistic set redraws, how many
 character-variant features the font carries and how many shapes each one in the machine has,
@@ -86,8 +86,8 @@ is any row of the terminal the build draws that does not fit its session or its 
 The terminal's still frame is written by the build (`term_still` in `build.py`): btop's two
 panels, fastfetch and its owl, and the prompt, 24 rows, with btop's panels drawn for both
 widths of the session (46 cells, and 38 in a terminal under 560 px, a phone; a container query
-shows the right ones). The neo-tree and nvim split of the wide terminal and the tmux status
-line are written there too. The page shows that frame without scripts and with motion off;
+shows the right ones). The Emacs frame of the wide terminal (treemacs, a buffer, its mode
+line and the echo area) and the tmux status line are written there too. The page shows that frame without scripts and with motion off;
 `terminal.js` plays the session on from it and comes back to it, taking the prompt, btop's
 panels and fastfetch's rows from the page, and keeps the status line's clock.
 
@@ -165,7 +165,7 @@ headings keep their own shapes, and wearing a set fetches nothing.
 
 Budgets, all checked by the tests or measured in the browser:
 
-* **All site fonts ≤ 15 MB.** 13.8 MB today (13,847,008 bytes in 409 faces: text 135 × ~82 KB,
+* **All site fonts ≤ 15 MB.** 13.8 MB today (13,847,636 bytes in 409 faces: text 135 × ~82 KB,
   display 135 × ~16 KB, swatch 135 × ~1.4 KB, lab 63 KB, terminal 3 × ~35 KB);
   `tests/test_site.py` fails above 15,000,000 bytes.
 * **Fonts fetched by the first view ≤ 600 KB.** About 408–439 KB (20–23 faces, measured in
@@ -240,7 +240,7 @@ template and the build put on elements: `.js-only` (not shown without scripts) a
   and the tester's (the text box stays in the Regular).
 * **The page is laid out whole**: `content-visibility: auto` applies only with scripts, because
   without `ui.js` laying out the sections before a jump, an in-page link would be aimed at their
-  guessed heights. A link lands on its section: clear of the fixed masthead above 1240 px, and
+  guessed heights. A link lands on its section: clear of the fixed masthead above 1264 px, and
   12 px below the top of the window up to that width, where the masthead scrolls away with the
   page.
   So every face the page shows is fetched with it — about 170 faces, 1.1 MB on a phone and
@@ -305,20 +305,21 @@ And the rest:
   three screens is instant; a shorter one glides. Once the page has come to rest the target is
   held in place for a moment, because faces arriving and blocks arming above it, or in it (a
   section's title takes its own faces and grows), can still change their height; the hold ends
-  as soon as the visitor scrolls, types or touches. Below
-  1240 px the section list folds into a menu button.
+  as soon as the visitor scrolls, types or touches. Up to
+  1264 px the section list folds into a menu button.
 * Live regions speak only when the visitor changes something: the build writes their first
   reading (the character-variant count, the squint value in the page's number format), the
   scripts write a region only when its text changes, and the type tester says only its short
   state ("real face, loaded"), after the controls have been still for a moment. Copy buttons
   announce through one status region.
-* Day (paper and three riso inks) and night (the same inks as phosphor light) are both
-  designed; the choice is remembered, and the system setting is the default. By day each
-  section carries a halftone field of its ink, a dot screen at that ink's angle; by night a
-  soft glow, with the lime kept faint. Fields sit below the section heads. Three sections are
-  printed on a solid plate — the ligatures on yellow (lime by night), the terminal on black,
-  the download on pink — with the controls on them knocked out to the paper (the config copy
-  buttons stay on the band, in its ink).
+* The light theme (paper and three riso inks) and the dark one (the same inks as phosphor
+  light) are both designed; the button names the theme it switches to ("Dark", "Light"), the
+  choice is remembered, and the system setting is the default. In the light theme each
+  section carries a halftone field of its ink, a dot screen at that ink's angle; in the dark
+  one a soft glow, with the lime kept faint. Fields sit below the section heads. Three
+  sections are printed on a solid plate — the ligatures on yellow (lime in the dark theme),
+  the terminal on black, the download on pink — with the controls on them knocked out to the
+  paper (the config copy buttons stay on the band, in its ink).
 * Section heads take three layouts: a title fitted to the column on one line (§02, §06, §11,
   sized by `facts.css`), the lede beside a title set right (§04, §08, §10, §12, §14), and the
   title over the lede.

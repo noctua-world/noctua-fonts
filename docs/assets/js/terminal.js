@@ -1,7 +1,8 @@
 // A terminal set in NoctuaIosevka Nerd Font Mono. A Powerline prompt types real commands and
 // prints Nerd Fonts icons, a block-character owl and Braille graphs in box-drawn panels; what
 // the commands print about this repository is true (135 files in noctua-iosevka/TTF). A tmux
-// status line keeps the time. In a wide container a neo-tree and nvim split sits beside it.
+// status line keeps the time. In a wide container an Emacs frame (treemacs and a buffer) sits
+// beside it.
 // Every icon is exactly one cell, which is the point.
 // The still frame is written into the page by the build (site/build.py): btop's two panels,
 // then fastfetch and its owl, then the prompt — 24 rows, which the aria-label describes, with

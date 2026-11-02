@@ -18,13 +18,12 @@
   "nav.lang": "Language",
   "nav.lang_footer": "Read this page in",
   "ctl.theme": "Theme",
-  "ctl.theme_aria": "switch between day and night",
+  "ctl.theme_aria": "switch between light and dark",
   "ctl.motion": "Pause motion",
   "copy": "Copy",
 
   "hero.meta_build": "A custom build of Iosevka",
   "hero.meta_release": "Release {tag}",
-  "hero.now": "Now rendering",
   "hero.lede": "A monospace for terminals, editors and code. Nine weights, five widths, three slopes — every one a real face, none of them synthesized.",
   "hero.flap_faces": "faces",
   "hero.flap_weights": "weights",
@@ -248,6 +247,8 @@
   "dl.win_2": "Select every <code>.ttf</code> file, right-click and choose <b>Install for all users</b> (or <b>Install</b>).",
   "dl.win_3": "Restart the application: many programs look for fonts only when they start.",
   "dl.cfg_title": "Then tell your terminal or editor:",
+  "dl.cfg_emacs": "Every frame takes it, the ones <code>emacsclient</code> opens included. In a terminal, <code>emacs -nw</code> draws with the terminal’s font.",
+  "dl.cfg_neovim": "For a graphical front end such as Neovide. In a terminal, Neovim draws with the terminal’s font: set that one above.",
   "dl.cfg_note": "If the font does not show up, make sure the process really ended — single-instance apps stay alive with every window closed — before suspecting anything else.",
 
   "lic.folio": "Credits",
@@ -269,10 +270,10 @@
 
   "footer.licences": "Fonts: SIL OFL 1.1 · Icons: MIT · Site: MIT or Apache 2.0",
 
-  "js.theme_to_dark": "switch to the night theme",
-  "js.theme_to_light": "switch to the day theme",
-  "js.theme_night": "Night",
-  "js.theme_day": "Day",
+  "js.theme_to_dark": "switch to the dark theme",
+  "js.theme_to_light": "switch to the light theme",
+  "js.theme_dark": "Dark",
+  "js.theme_light": "Light",
   "js.motion_pause": "Pause motion",
   "js.motion_play": "Play motion",
   "js.copied": "Copied",

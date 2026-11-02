@@ -674,13 +674,15 @@ def gen_title_legibility(loc: Locale, page: dict) -> str:
 # from it, so each is written once, here. The session is TERM_COLS cells wide, and TERM_NARROW
 # in a terminal under 560 px (a phone), where btop's panels are drawn narrower (the page holds
 # both, and the stylesheet shows the one that fits); every other row fits both. In a wide
-# terminal, the neo-tree and nvim split beside the session and the tmux status line under it
-# come from here too.
+# terminal, the Emacs frame beside the session (emacs -nw, treemacs and a buffer) and the tmux
+# status line under it come from here too.
 TERM_COLS, TERM_NARROW = 46, 38
 TERM_ROWS = 24
 TERM_OWL = 13  # cells of fastfetch's owl
-TERM_BUF = 49  # cells of the nvim buffer in the wide terminal, its line numbers included
-# The neo-tree window is 22 cells wide and, like nvim's, cuts a longer name at its edge.
+TERM_BUF = 49  # cells of the Emacs buffer in the wide terminal, its line numbers included
+# Cells of text in the treemacs window. treemacs truncates its lines, and a terminal Emacs marks
+# a cut line with a "$" in its last cell.
+TERM_TREE_COLS = 21
 
 class Key(str):
     """A locale key that stands for its string in a row of the terminal."""
@@ -690,7 +692,7 @@ class Key(str):
 TI = {
     "os": "", "folder": "", "open": "", "branch": "", "check": "",
     "md": "", "py": "", "config": "", "sep": "", "sep_l": "",
-    "round_r": "", "round_l": "", "term": "", "nvim": "", "cpu": "",
+    "round_r": "", "round_l": "", "term": "", "emacs": "", "cpu": "",
     "mem": "\U000f035b", "clock": "", "bolt": "", "font": "", "lock": "",
 }
 
@@ -699,7 +701,7 @@ TERM_PROMPT = (
     ("pl-bc", TI["sep"]), ("pl-c k-bold", f" {TI['branch']} main {TI['check']} "), ("pl-cf", TI["sep"]),
 )
 # btop's process panel: two rows (name, icon), so the still frame is exactly one screen.
-TERM_PROCS = (("ghostty", "term"), ("nvim", "nvim"))
+TERM_PROCS = (("ghostty", "term"), ("emacs", "emacs"))
 TERM_OWL_ROWS = (
     (("k-g", " ▄▄       ▄▄ "),),
     (("k-g", " █▀█▄▄▄▄▄█▀█ "),),
@@ -723,24 +725,25 @@ TERM_INFO = (
     (("k-b k-bold", "Lic   "), ("k-w", "SIL OFL 1.1")),
     tuple((f"blk-{i}", "███") for i in range(1, 8)),
 )
-# The repository in neo-tree: noctua-iosevka/ open, with everything it holds.
+# The repository in treemacs: noctua-iosevka/ open, with everything it holds. treemacs draws no
+# guides by default; it indents each level by two spaces (treemacs-indentation).
 TERM_TREE = (
     (("k-b k-bold", f"{TI['open']} noctua-fonts"),),
-    (("k-dim", "├ "), ("k-b", f"{TI['open']} noctua-iosevka")),
-    (("k-dim", "│ ├ "), ("k-b", f"{TI['folder']} licenses")),
-    (("k-dim", "│ ├ "), ("k-b", f"{TI['folder']} TTF")),
-    (("k-dim", "│ ├ "), ("k-b", f"{TI['folder']} TTF-nerdfonts")),
-    (("k-dim", "│ ├ "), ("k-b", f"{TI['folder']} WOFF2")),
-    (("k-dim", "│ ├ "), ("k-b", f"{TI['folder']} WOFF2-nerdfonts")),
-    (("k-dim", "│ └ "), ("k-w", f"{TI['config']} private-build-plans.toml")),
-    (("k-dim", "├ "), ("k-b", f"{TI['folder']} symbols-nerd-font")),
-    (("k-dim", "├ "), ("k-b", f"{TI['folder']} site")),
-    (("k-dim", "├ "), ("k-b", f"{TI['folder']} docs")),
-    (("k-dim", "├ "), ("k-b", f"{TI['folder']} tests")),
-    (("k-dim", "├ "), ("k-w", f"{TI['md']} README.md")),
-    (("k-dim", "└ "), ("k-y", f"{TI['py']} font-archives.py")),
+    (("", "  "), ("k-b", f"{TI['open']} noctua-iosevka")),
+    (("", "    "), ("k-b", f"{TI['folder']} licenses")),
+    (("", "    "), ("k-b", f"{TI['folder']} TTF")),
+    (("", "    "), ("k-b", f"{TI['folder']} TTF-nerdfonts")),
+    (("", "    "), ("k-b", f"{TI['folder']} WOFF2")),
+    (("", "    "), ("k-b", f"{TI['folder']} WOFF2-nerdfonts")),
+    (("", "    "), ("k-w", f"{TI['config']} private-build-plans.toml")),
+    (("", "  "), ("k-b", f"{TI['folder']} symbols-nerd-font")),
+    (("", "  "), ("k-b", f"{TI['folder']} site")),
+    (("", "  "), ("k-b", f"{TI['folder']} docs")),
+    (("", "  "), ("k-b", f"{TI['folder']} tests")),
+    (("", "  "), ("k-w", f"{TI['md']} README.md")),
+    (("", "  "), ("k-y", f"{TI['py']} font-archives.py")),
 )
-# The ghostty config open in nvim, its comments in the locale's words.
+# The ghostty config open in Emacs, its comments in the locale's words.
 TERM_BUF_ROWS = (
     (("k-dim k-it", "# ~/.config/ghostty/config"),),
     (("k-dim k-it", "# "), ("k-dim k-it", Key("term.c1"))),
@@ -751,15 +754,22 @@ TERM_BUF_ROWS = (
     (("k-dim k-it", "# font-feature = -calt"),),
     (),
     (("k-dim k-it", "# "), ("k-dim k-it", Key("term.c3"))),
-    (("k-c", " ".join(TI[k] for k in ("os", "folder", "branch", "check", "md", "py", "term", "nvim", "cpu", "mem", "clock", "font", "lock", "bolt"))),),
+    (("k-c", " ".join(TI[k] for k in ("os", "folder", "branch", "check", "md", "py", "term", "emacs", "cpu", "mem", "clock", "font", "lock", "bolt"))),),
     (("k-dim", " ".join("▔" * 14)),),
     (("pl-a", " a "), ("pl-ab", TI["sep"]), ("pl-b", " b "), ("pl-bc", TI["sep"]), ("pl-c", " c "), ("pl-cf", TI["sep"]),
      ("k-dim", " "), ("pl-cf", TI["round_l"]), ("pl-c", " round "), ("pl-cf", TI["round_r"])),
 )
-TERM_NVIM = (("pl-a k-bold", " NORMAL "), ("pl-ab", TI["sep"]), ("pl-b", f" {TI['branch']} main "), ("pl-bd", TI["sep"]),
-             ("pl-d", " config "), ("pl-df", TI["sep"]))
+# Emacs gives each window its own mode line. The buffer's, in the prompt's Powerline segments:
+# the buffer, its major mode (the one Emacs 30 picks for this file, conf-unix-mode), the branch
+# and where point is. treemacs's, as treemacs draws it beside a Powerline mode line (spaceline):
+# its major mode, here in the inactive window's colours.
+TERM_TREE_MODE = (("pl-d", " Treemacs "), ("pl-df", TI["sep"]))
+TERM_MODE = (("pl-a k-bold", f" {TI['emacs']} config "), ("pl-ab", TI["sep"]), ("pl-b", " Conf[Unix] "), ("pl-bd", TI["sep"]),
+             ("pl-d", f" {TI['branch']} main  All L3 "), ("pl-df", TI["sep"]))
+# The echo area, across the frame, with what Emacs says when it starts on a file.
+TERM_ECHO = (("k-dim", "For information about GNU Emacs and the GNU system, type C-h C-a."),)
 TERM_STATUS = (("pl-a k-bold", f" {TI['term']} 0 "), ("pl-ab", TI["sep"]), ("pl-b", " 1:zsh* "), ("pl-bd", TI["sep"]),
-               ("pl-d tmux-more", " 2:nvim 3:btop "), ("pl-df", TI["sep"]))
+               ("pl-d tmux-more", " 2:emacs 3:btop "), ("pl-df", TI["sep"]))
 # The time a still frame shows btop's graphs at, and the seed of their noise: the same every time.
 TERM_STILL_AT, TERM_SEED = 5.4, 7
 
@@ -875,7 +885,7 @@ def term_still(loc: Locale) -> list[tuple[str, tuple, dict]]:
 
 def check_term_frame(locales: dict[str, "Locale"]) -> None:
     """Every row of the still frame fits the session (btop's panels fill it exactly), in both
-    widths, and every line of the nvim buffer fits the buffer."""
+    widths, and every line of the Emacs buffer fits the buffer."""
     for code, loc in locales.items():
         rows = term_still(loc)
         for cols in (TERM_COLS, TERM_NARROW):
@@ -887,7 +897,22 @@ def check_term_frame(locales: dict[str, "Locale"]) -> None:
                     raise BuildError(f"{code}: a {kind} row of the terminal is {_cells(segs)} cells; the session has {cols}")
         for segs in TERM_BUF_ROWS:
             if 4 + _cells(_term_text(loc, segs)) > TERM_BUF:
-                raise BuildError(f"{code}: a line of the terminal's nvim buffer is too long for its {TERM_BUF} cells")
+                raise BuildError(f"{code}: a line of the terminal's Emacs buffer is too long for its {TERM_BUF} cells")
+    if _cells(TERM_TREE_MODE) > TERM_TREE_COLS:
+        raise BuildError(f"the treemacs mode line is too long for its {TERM_TREE_COLS} cells")
+
+
+def _truncated(segs, cols: int) -> tuple:
+    """A row cut at a window's edge, as a terminal Emacs cuts a truncated line: the text fills
+    all but the last cell, which shows a "$"."""
+    if _cells(segs) <= cols:
+        return tuple(segs)
+    out, room = [], cols - 1
+    for c, t in segs:
+        if room > 0:
+            out.append((c, t[:room]))
+            room -= len(t[:room])
+    return tuple(out) + (("k-dim", "$"),)
 
 
 def gen_term_still(loc: Locale, page: dict) -> str:
@@ -898,11 +923,14 @@ def gen_term_still(loc: Locale, page: dict) -> str:
 
 
 def gen_term_side(loc: Locale, page: dict) -> str:
-    """The neo-tree and nvim split of the wide terminal."""
-    tree = "".join(_term_line(segs) for segs in TERM_TREE)
+    """The Emacs frame of the wide terminal: treemacs and the buffer, each with its mode line,
+    and the echo area."""
+    spans = lambda segs: "".join(f'<span class="{c}">{esc(t)}</span>' for c, t in segs)  # noqa: E731
+    tree = "".join(_term_line(_truncated(segs, TERM_TREE_COLS)) for segs in TERM_TREE)
     buf = "".join(_term_line((("k-dim", f"{i + 1:>3} "),) + _term_text(loc, segs)) for i, segs in enumerate(TERM_BUF_ROWS))
-    nvim = "".join(f'<span class="{c}">{esc(t)}</span>' for c, t in TERM_NVIM)
-    return f'<div class="term-tree">{tree}</div><div class="term-buf">{buf}</div><div class="term-nvim">{nvim}</div>'
+    return (f'<div class="term-tree">{tree}</div><div class="term-buf">{buf}</div>'
+            f'<div class="term-tree-mode">{spans(TERM_TREE_MODE)}</div><div class="term-mode">{spans(TERM_MODE)}</div>'
+            f'<div class="term-echo">{spans(TERM_ECHO)}</div>')
 
 
 def gen_term_status(loc: Locale, page: dict) -> str:
@@ -937,11 +965,40 @@ FIT_TITLES = (
     ("scripts-title", scripts_title_visible),
 )
 
+# --- The hero's meta row -----------------------------------------------------------------
+# Pills over the title: the build, the release and the licence, then the face the hero is
+# showing (cycler.js names its file, up to META_FILE_CHARS characters) and, at the right, the
+# hint. The face pill is shown only where the whole row holds on one line with the longest
+# name, so the hint never drops to a second row. Every pill is set in the 0.6 em monospace at
+# META_PX, so its width is known here: its characters × (0.6 em plus its tracking), plus its
+# padding and borders in px. These are site.css's sizes (.hero-meta, .now, .hero-hint).
+META_PX = 11
+META_PILL = (0.6 + 0.14, 2 * 12 + 2)
+META_FILE = (0.6 + 0.02, 39 + 8 + 4 + 12 + 2)  # the "Ag" disc, the gap, padding, borders
+META_FILE_GAP = 12  # the face pill's left margin
+META_HINT = (0.6 + 0.08, 8 + 8 + 2 * 11 + 2)  # the dot, the gap, padding, borders
+META_FILE_CHARS = max(len(file_stem(*face)) for face in ALL_FACES) + len(".woff2")
+
+
+def meta_pills(loc: "Locale") -> tuple[str, ...]:
+    """The text of the pills before the face pill, as the template writes them."""
+    return (loc.text("hero.meta_build"), loc.text("hero.meta_release"), "SIL OFL 1.1")
+
+
+def meta_row_width(loc: "Locale") -> int:
+    """The px the hero's meta row needs to hold every pill on one line, the longest file name
+    in the face pill. Each pill but the hint overlaps the next by 1 px."""
+    em, px = META_PILL
+    width = sum(len(text) * em * META_PX + px for text in meta_pills(loc))
+    width += META_FILE_GAP + META_FILE_CHARS * META_FILE[0] * META_PX + META_FILE[1]
+    width += len(loc.text("hero.hint")) * META_HINT[0] * META_PX + META_HINT[1]
+    return math.ceil(width - len(meta_pills(loc)) - 1)
+
 
 def facts_css(locales: dict[str, "Locale"]) -> str:
-    """The stylesheet's measured values: the fitted titles, per language, the share of the
-    ASCII glyphs each stylistic set redraws (the bars under the set cards), and the set the
-    page starts in."""
+    """The stylesheet's measured values: the fitted titles and the width the hero's face pill
+    needs, per language, the share of the ASCII glyphs each stylistic set redraws (the bars
+    under the set cards), and the set the page starts in."""
     lines = [
         "/* Generated by site/build.py from the locale strings and the font facts. Do not edit. */",
     ]
@@ -952,6 +1009,10 @@ def facts_css(locales: dict[str, "Locale"]) -> str:
                 f"@container head (min-width: {round(em * FIT_MIN)}px) {{ html[lang=\"{code}\"] #{el_id} "
                 f"{{ white-space: nowrap; max-width: none; font-size: calc(100cqi / {em}); }} }}"
             )
+        lines.append(
+            f"@container meta (min-width: {meta_row_width(loc)}px) {{ html[lang=\"{code}\"] .hero-meta .now "
+            f"{{ display: inline-flex; }} }}"
+        )
     for tag, _, changed in STYLISTIC_SETS:
         lines.append(f'.set[data-ss="{tag}"] {{ --k: {len(changed) / ASCII_VISIBLE:.3f}; }}')
     # The set the lens and the §06 title start in (sets.js changes it on a pick).

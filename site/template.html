@@ -81,7 +81,7 @@
       <span class="hm-build">{{hero.meta_build}}</span>
       <span>{{hero.meta_release}}</span>
       <span>SIL OFL 1.1</span>
-      <span class="now" aria-hidden="true"><span class="now-label">{{hero.now}}</span><span class="now-ag f-w8">Ag</span><span class="now-file">NoctuaIosevka-ExtraBold.woff2</span></span>
+      <span class="now" aria-hidden="true"><span class="now-ag f-w8">Ag</span><span class="now-file">NoctuaIosevka-ExtraBold.woff2</span></span>
       <span class="hero-hint js-only" aria-hidden="true"><span class="hint-dot"></span>{{hero.hint}}</span>
     </p>
     <h1 id="hero-title" class="hero-title">
@@ -649,6 +649,16 @@
       <div class="cfg">
         <p class="cfg-name">VS Code <small>settings.json</small></p>
         <div class="cmd-block"><pre><code id="cfg-vscode"><span class="cl">"editor.fontFamily": "'NoctuaIosevka Nerd Font Mono', monospace",</span><span class="cl">"editor.fontLigatures": true,</span><span class="cl">"terminal.integrated.fontFamily": "'NoctuaIosevka Nerd Font Mono'"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-vscode" aria-describedby="cfg-vscode">{{copy}}</button></div>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">Emacs <small>init.el</small></p>
+        <div class="cmd-block"><pre><code id="cfg-emacs"><span class="cl">(add-to-list 'default-frame-alist '(font . "NoctuaIosevka Nerd Font Mono-13"))</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-emacs" aria-describedby="cfg-emacs">{{copy}}</button></div>
+        <p class="cfg-note">{{&dl.cfg_emacs}}</p>
+      </div>
+      <div class="cfg">
+        <p class="cfg-name">Neovim <small>init.lua</small></p>
+        <div class="cmd-block"><pre><code id="cfg-neovim"><span class="cl">vim.o.guifont = "NoctuaIosevka Nerd Font Mono:h13"</span></code></pre><button type="button" class="btn btn-small copy js-only" data-copy="#cfg-neovim" aria-describedby="cfg-neovim">{{copy}}</button></div>
+        <p class="cfg-note">{{&dl.cfg_neovim}}</p>
       </div>
       <p class="note">{{&dl.cfg_note}}</p>
     </div>

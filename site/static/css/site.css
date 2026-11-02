@@ -289,7 +289,11 @@ html[data-motion="off"] .ico-motion::after { display: none; }
 .ico-menu::before { top: 2.5px; box-shadow: 0 4px 0 currentColor; }
 .ico-menu::after { bottom: 2.5px; }
 .toc-btn[aria-expanded="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-@media (max-width: 1240px) {
+/* The masthead is one row that never wraps. Its two breakpoints were measured in Chrome with the
+   longest labels the switches show (pt-BR: "Escuro", "Retomar animações") and a classic 15 px
+   scrollbar, which the media queries count and the fixed masthead does not get: the section list
+   needs more than 1258 px beside the controls, and the labels more than 675 px. */
+@media (max-width: 1264px) {
   /* html.js is set by boot.js before the first paint; without scripts the list stays a row. */
   html.js .toc { display: none; }
   html:not(.js) .masthead { position: relative; height: auto; flex-wrap: wrap; row-gap: 6px; padding-block: 10px; }
@@ -309,7 +313,7 @@ html[data-motion="off"] .ico-motion::after { display: none; }
   .toc.is-open li:last-child a { border-bottom: 0; }
   .toc.is-open a:hover, .toc.is-open a:focus-visible { background: color-mix(in srgb, var(--ink-c) 45%, transparent); color: var(--fg); }
 }
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .ctl { padding: 0 10px; }
   .ctl .ctl-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .brand-word { display: none; }
@@ -358,21 +362,22 @@ html[data-motion="off"] .trail { display: none; }
 :root[data-theme="dark"] .hero-title .line { text-shadow: 0 0 0.05em color-mix(in srgb, currentColor 55%, transparent); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero-title .line { text-shadow: 0 0 0.05em color-mix(in srgb, currentColor 55%, transparent); } }
 .hero-inner { flex: 1; width: 100%; max-width: var(--maxw); margin: 0 auto; display: flex; flex-direction: column; gap: clamp(10px, 2.2vh, 28px); }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 6px 0; margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; }
+/* The meta row's sizes are build.py's META_* too: it works out from them where the face pill fits. */
+.hero-meta { container: meta / inline-size; display: flex; flex-wrap: wrap; gap: 6px 0; margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; }
 .hero-meta > span { padding: 5px 12px; background: var(--bg); border: 1px solid var(--fg); margin-right: -1px; }
 .hero-meta > span:first-child { background: var(--fg); color: var(--bg); }
+/* The face the hero is showing, named by its file (cycler.js). It is shown only where the whole
+   row, with the longest file name, holds on one line, so the hint never drops to a second
+   row: facts.css sets that width per language. */
 .hero-meta .now {
-  display: inline-flex; align-items: center; gap: 8px; margin-left: 12px; text-transform: none; letter-spacing: 0.02em;
+  display: none; align-items: center; gap: 8px; margin-left: 12px; text-transform: none; letter-spacing: 0.02em;
   border-style: dashed; border-radius: 999px; padding: 2px 12px 2px 4px;
 }
-.now-label { text-transform: uppercase; letter-spacing: 0.14em; color: var(--fg-2); padding-left: 8px; }
 .now-ag {
   display: inline-grid; place-items: center; min-width: 2.6em; height: 22px; padding: 0 4px; border-radius: 999px;
   font-family: "NI Display", var(--f-text); font-size: 15px; line-height: 1; background: var(--fg); color: var(--bg);
 }
 .now-file { font-family: var(--f-display); font-weight: 800; }
-@media (max-width: 700px) { .hero-meta .now { margin-left: 0; margin-top: 2px; } .now-label { display: none; } }
-@media (max-width: 400px) { .hero-meta .now { display: none; } }
 .hero-title {
   --hero-fs: min(calc((100vw - 2 * var(--gutter)) / 4.32), 28.5vh, 560px);
   margin: auto 0 0; font-family: var(--f-display); font-weight: 800; font-size: var(--hero-fs);
@@ -1206,15 +1211,22 @@ html:not(.js) .ed-body { grid-template-columns: minmax(0, 1fr); }
   display: grid; grid-template-columns: minmax(0, 1fr); padding: 14px 18px 10px;
   font-size: var(--fs); line-height: 1.24; text-shadow: 0 0 10px rgba(214, 255, 58, 0.07);
 }
-.term-lines { height: calc(24 * 1.24em); overflow: hidden; }
+/* The session replaces its rows as it plays (a row in, the top one out). None of them may
+   anchor the page's scroll: with the terminal cut by the top of the window, the browser would
+   keep the anchored row in place and move the whole page down a row with every line. */
+.term-lines { height: calc(24 * 1.24em); overflow: hidden; overflow-anchor: none; }
 .term-line { display: block; height: 1.24em; white-space: pre; }
 .term-side { display: none; }
 @container (min-width: 1000px) {
   .term-body { --cols: 124; grid-template-columns: 48ch minmax(0, 1fr); gap: 0 2ch; }
-  .term-side { display: grid; grid-template-columns: 22ch minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; border-left: 1px solid rgba(255, 255, 255, 0.12); padding-left: 2ch; height: calc(24 * 1.24em); }
+  /* An Emacs frame: treemacs beside the buffer, each window with its own mode line under it, and
+     the echo area across the frame. The tree's column holds 21 cells of text (TERM_TREE_COLS),
+     its 1 ch of padding and its 1 px border. */
+  .term-side { display: grid; grid-template-columns: calc(22ch + 1px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto auto; border-left: 1px solid rgba(255, 255, 255, 0.12); padding-left: 2ch; height: calc(24 * 1.24em); }
   .term-tree { border-right: 1px solid rgba(255, 255, 255, 0.12); padding-right: 1ch; overflow: hidden; }
   .term-buf { padding-left: 1ch; overflow: hidden; }
-  .term-nvim { grid-column: 1 / -1; display: flex; white-space: pre; }
+  .term-tree-mode, .term-mode { display: flex; white-space: pre; overflow: hidden; }
+  .term-echo { grid-column: 1 / -1; white-space: pre; overflow: hidden; }
 }
 .term-status { display: flex; white-space: pre; overflow: hidden; font-size: clamp(7.5px, calc((100cqi - 36px) / (var(--cols) * 0.6)), 15px); line-height: 1.6; background: #1a1721; padding: 0 18px; }
 .term-status .sp { flex: 1; }
@@ -1389,6 +1401,7 @@ html:not(.js) .cmd-block { grid-template-columns: minmax(0, 1fr); }
 .cfg-title { margin: 0; font-weight: 700; }
 .cfg-name { margin: 0; font-size: 13px; font-weight: 700; }
 .cfg-name small { font-weight: 400; color: var(--fg-2); margin-left: 6px; overflow-wrap: anywhere; }
+.cfg-note { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--fg-2); }
 @media (max-width: 960px) { .install { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; grid-template-areas: "tabs" "pane" "cfg"; gap: 0; } .configs { margin-top: 24px; } }
 .ins-panes, .ins-pane, .configs, .cfg, .cmd-block, .steps li { min-width: 0; }
 

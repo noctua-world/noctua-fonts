@@ -1,5 +1,6 @@
-// "Now rendering": a pill in the hero that steps through the faces the hero has already
-// loaded, naming each file. It never asks for a face that is not there yet.
+// A pill in the hero that steps through the faces the hero has already loaded, naming each
+// file. It never asks for a face that is not there yet. The stylesheet shows it only where the
+// hero's meta row holds it, with the longest file name, on one line beside the hint (facts.css).
 import { register, motion } from "./motion.js";
 
 const W = ["Thin", "ExtraLight", "Light", "Regular", "Medium", "SemiBold", "Bold", "ExtraBold", "Heavy"];

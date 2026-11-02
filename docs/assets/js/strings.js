@@ -20,10 +20,10 @@ const TABLE = {
   "slope_upright": "Upright",
   "tester_loaded": "real face, loaded",
   "tester_loading": "loading the face…",
-  "theme_day": "Day",
-  "theme_night": "Night",
-  "theme_to_dark": "switch to the night theme",
-  "theme_to_light": "switch to the day theme",
+  "theme_dark": "Dark",
+  "theme_light": "Light",
+  "theme_to_dark": "switch to the dark theme",
+  "theme_to_light": "switch to the light theme",
   "wear_on": "This page’s text is wearing {name} ({tag})."
  },
  "pt-BR": {
@@ -46,10 +46,10 @@ const TABLE = {
   "slope_upright": "Reta",
   "tester_loaded": "estilo de verdade, carregado",
   "tester_loading": "carregando o estilo…",
-  "theme_day": "Dia",
-  "theme_night": "Noite",
-  "theme_to_dark": "mudar para o tema noturno",
-  "theme_to_light": "mudar para o tema diurno",
+  "theme_dark": "Escuro",
+  "theme_light": "Claro",
+  "theme_to_dark": "mudar para o tema escuro",
+  "theme_to_light": "mudar para o tema claro",
   "wear_on": "O texto da página está vestindo o {tag} — {name}."
  }
 };

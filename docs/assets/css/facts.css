@@ -2,9 +2,11 @@
 @container head (min-width: 537px) { html[lang="en"] #faces-title { white-space: nowrap; max-width: none; font-size: calc(100cqi / 12.21); } }
 @container head (min-width: 682px) { html[lang="en"] #sets-title { white-space: nowrap; max-width: none; font-size: calc(100cqi / 15.5); } }
 @container head (min-width: 558px) { html[lang="en"] #scripts-title { white-space: nowrap; max-width: none; font-size: calc(100cqi / 12.68); } }
+@container meta (min-width: 1284px) { html[lang="en"] .hero-meta .now { display: inline-flex; } }
 @container head (min-width: 661px) { html[lang="pt-BR"] #faces-title { white-space: nowrap; max-width: none; font-size: calc(100cqi / 15.03); } }
 @container head (min-width: 827px) { html[lang="pt-BR"] #sets-title { white-space: nowrap; max-width: none; font-size: calc(100cqi / 18.79); } }
 @container head (min-width: 558px) { html[lang="pt-BR"] #scripts-title { white-space: nowrap; max-width: none; font-size: calc(100cqi / 12.68); } }
+@container meta (min-width: 1409px) { html[lang="pt-BR"] .hero-meta .now { display: inline-flex; } }
 .set[data-ss="ss01"] { --k: 0.383; }
 .set[data-ss="ss02"] { --k: 0.511; }
 .set[data-ss="ss03"] { --k: 0.383; }

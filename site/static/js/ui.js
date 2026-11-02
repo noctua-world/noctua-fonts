@@ -1,5 +1,5 @@
 // Masthead controls and small shared widgets: the theme switch (a circular reveal plus a
-// riso drum pass going to Day, an LED mask powering on going to Night), the pause-motion
+// riso drum pass going to light, an LED mask powering on going to dark), the pause-motion
 // switch, the section menu of narrow screens, magnetic buttons, in-page links (which land
 // exactly and move focus), copy buttons and tab lists.
 import { motion } from "./motion.js";
@@ -10,9 +10,9 @@ const root = document.documentElement;
 
 function syncTheme(btn) {
   const dark = isDark();
-  // The accessible name starts with the visible word ("Night: switch to the night theme"),
+  // The accessible name starts with the visible word ("Dark: switch to the dark theme"),
   // so voice control finds the button by what it shows.
-  btn.querySelector(".ctl-label").textContent = dark ? t("theme_day") : t("theme_night");
+  btn.querySelector(".ctl-label").textContent = dark ? t("theme_light") : t("theme_dark");
   const more = btn.querySelector(".ctl-more");
   if (more) more.textContent = `: ${dark ? t("theme_to_light") : t("theme_to_dark")}`;
   const bg = getComputedStyle(root).getPropertyValue("--bg").trim();
@@ -24,7 +24,7 @@ function syncMotion(btn) {
 }
 
 // The physical-media pass that follows a theme change. Three plates go down one after
-// another (day), or a dot mask lights up from a line (night). Both stay faint and slow:
+// another (to light), or a dot mask lights up from a line (to dark). Both stay faint and slow:
 // one sweep, far below three flashes a second, with no full-screen black or white flash.
 function mediaPass(toDark) {
   const el = document.createElement("div");
@@ -213,7 +213,7 @@ function whenScrollEnds(fn) {
   const cap = setTimeout(finish, 4000);
 }
 
-// Below 1240 px the section list folds into a menu button in the masthead.
+// Up to 1264 px the section list folds into a menu button in the masthead.
 function sectionMenu() {
   const btn = document.getElementById("toc-btn");
   const toc = document.getElementById("toc");

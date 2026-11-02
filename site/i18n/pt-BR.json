@@ -18,13 +18,12 @@
   "nav.lang": "Idioma",
   "nav.lang_footer": "Ler esta página em",
   "ctl.theme": "Tema",
-  "ctl.theme_aria": "alternar entre dia e noite",
+  "ctl.theme_aria": "alternar entre claro e escuro",
   "ctl.motion": "Pausar animações",
   "copy": "Copiar",
 
   "hero.meta_build": "Uma compilação sob medida da Iosevka",
   "hero.meta_release": "Versão {version}",
-  "hero.now": "Renderizando agora",
   "hero.lede": "Uma monoespaçada para terminais, editores e código. Nove pesos, cinco larguras, três inclinações — cada um é um estilo de verdade, nenhum sintetizado pelo navegador.",
   "hero.flap_faces": "estilos",
   "hero.flap_weights": "pesos",
@@ -248,6 +247,8 @@
   "dl.win_2": "Selecione todos os arquivos <code>.ttf</code>, clique com o botão direito e escolha <b>Instalar para todos os usuários</b> (ou <b>Instalar</b>).",
   "dl.win_3": "Reinicie o aplicativo: muitos programas só procuram fontes quando abrem.",
   "dl.cfg_title": "Depois, configure o seu terminal ou editor:",
+  "dl.cfg_emacs": "Vale para todas as janelas, inclusive as que o <code>emacsclient</code> abre. No terminal, o <code>emacs -nw</code> usa a fonte do terminal.",
+  "dl.cfg_neovim": "Para uma interface gráfica como o Neovide. No terminal, o Neovim usa a fonte do terminal: configure-a acima.",
   "dl.cfg_note": "Se a fonte não aparecer, confirme que o processo terminou mesmo — aplicativos de instância única continuam vivos com todas as janelas fechadas — antes de desconfiar de qualquer outra coisa.",
 
   "lic.folio": "Créditos",
@@ -269,10 +270,10 @@
 
   "footer.licences": "Fontes: SIL OFL 1.1 · Ícones: MIT · Site: MIT ou Apache 2.0",
 
-  "js.theme_to_dark": "mudar para o tema noturno",
-  "js.theme_to_light": "mudar para o tema diurno",
-  "js.theme_night": "Noite",
-  "js.theme_day": "Dia",
+  "js.theme_to_dark": "mudar para o tema escuro",
+  "js.theme_to_light": "mudar para o tema claro",
+  "js.theme_dark": "Escuro",
+  "js.theme_light": "Claro",
   "js.motion_pause": "Pausar animações",
   "js.motion_play": "Retomar animações",
   "js.copied": "Copiado",

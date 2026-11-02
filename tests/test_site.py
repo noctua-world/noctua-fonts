@@ -762,6 +762,34 @@ class TestTerminalStrings(unittest.TestCase):
                 self.assertLessEqual(len(loc.strings[key]), room, f"{loc.code} {key}")
 
 
+class TestHeroMeta(unittest.TestCase):
+    """The face pill of the hero's meta row is shown only from the width that holds the whole
+    row on one line (build.py counts it), so the hint never drops to a second row."""
+
+    def test_the_counted_pills_are_the_pills_on_the_page(self):
+        for code, loc in build.load_locales().items():
+            html = PAGES[code].read_text(encoding="utf-8")
+            meta = re.search(r'<p class="hero-meta">(.*?)</p>', html, re.S).group(1)
+            pills = re.findall(r'<span(?: class="hm-build")?>([^<]*)</span>', meta)
+            self.assertEqual(tuple(unescape(p) for p in pills), build.meta_pills(loc), code)
+            self.assertIn('<span class="now" aria-hidden="true"><span class="now-ag', meta, code)
+            self.assertIn('<span class="hero-hint js-only"', meta, code)
+
+    def test_the_pill_is_hidden_until_the_row_holds_it(self):
+        css = (SITE / "static" / "css" / "site.css").read_text(encoding="utf-8")
+        self.assertRegex(css, r"\.hero-meta \{ container: meta / inline-size;")
+        self.assertRegex(css, r"\.hero-meta \.now \{\s*display: none;")
+        facts = (DOCS / "assets" / "css" / "facts.css").read_text(encoding="utf-8")
+        for code, loc in build.load_locales().items():
+            rule = (f"@container meta (min-width: {build.meta_row_width(loc)}px) "
+                    f'{{ html[lang="{code}"] .hero-meta .now {{ display: inline-flex; }} }}')
+            self.assertIn(rule, facts, code)
+
+    def test_the_longest_file_name(self):
+        # cycler.js names any face of the display family; the widest of the 135 file names.
+        self.assertEqual(build.META_FILE_CHARS, len("NoctuaIosevka-SemiCondensedExtraLightOblique.woff2"))
+
+
 LABELABLE = {"button", "input", "meter", "output", "progress", "select", "textarea"}
 
 
@@ -893,10 +921,18 @@ class TestWithoutScripts(unittest.TestCase):
                     if 'data-row="panel"' in attrs:
                         self.assertEqual(len(text), cols, f"{code}: {text!r}")
                 self.assertIn("term-cursor", block)
-            side = re.search(r'<div class="term-side" id="term-side">(.*?<div class="term-nvim">.*?</div>)</div>', html, re.S)
-            self.assertIsNotNone(side, f"{code}: the neo-tree and nvim split")
-            for name in ("TTF", "TTF-nerdfonts", "WOFF2", "WOFF2-nerdfonts", "licenses", "private-build-plans.toml"):
+            side = re.search(r'<div class="term-side" id="term-side">(.*?<div class="term-tree-mode">.*?</div>'
+                             r'<div class="term-mode">.*?</div><div class="term-echo">.*?</div>)</div>', html, re.S)
+            self.assertIsNotNone(side, f"{code}: the Emacs frame beside the session")
+            self.assertIn(" Treemacs </span>", side.group(1), f"{code}: treemacs's mode line")
+            self.assertIn("Conf[Unix]", side.group(1), f"{code}: the buffer's mode line")
+            for name in ("TTF", "TTF-nerdfonts", "WOFF2", "WOFF2-nerdfonts", "licenses"):
                 self.assertIn(f" {name}</span>", side.group(1), f"{code}: noctua-iosevka/{name} in the tree")
+            # A line longer than the treemacs window is cut at its edge, a "$" in its last cell.
+            self.assertIn(' private-build-</span><span class="k-dim">$</span>', side.group(1), code)
+            tree = re.search(r'<div class="term-tree">(.*?)</div><div class="term-buf">', side.group(1), re.S).group(1)
+            for row in re.findall(r'<div class="term-line">(.*?)</div>', tree):
+                self.assertLessEqual(len(unescape(re.sub(r"<[^>]+>", "", row))), build.TERM_TREE_COLS, f"{code}: {row}")
 
 
 def _fonttools():
