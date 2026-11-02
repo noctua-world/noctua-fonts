@@ -186,7 +186,8 @@ same, and SHA256SUMS is what checks them.
 
 Portability: standard library only (no fontTools); pathlib throughout, no
 shelling out, os.replace for every atomic write, "/" inside archives. Written
-for Python 3.9 or newer; tested on 3.11 and 3.13.
+for Python 3.9 or newer; CI tests it on 3.9, 3.11, 3.14 and the newest Python
+(.github/workflows/check.yml).
 """
 
 import argparse

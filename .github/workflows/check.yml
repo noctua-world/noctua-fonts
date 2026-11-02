@@ -1,0 +1,103 @@
+# Runs check.py, the check every commit must pass, on each push to main and
+# each pull request: the test suite, docs/ against what site/ generates, and
+# the fonts present against SHA256SUMS. A clone has no fonts, so here that last
+# step only proves that no font is stray; release-assets.yml checks the fonts
+# themselves, from the release.
+#
+# What runs is decided in check.py, not here, so CI and a contributor's machine
+# cannot drift apart. This file only decides where it runs. The one exception
+# is the oldest job: check.py refuses Python 3.9, so that job runs check.py's
+# three steps itself.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Read-only: no job here writes anything to GitHub.
+permissions: {}
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    # The three systems the documents give commands for, each with the oldest
+    # Python that check.py accepts and a current one, and the fontTools and
+    # brotli that the repository's tests and WOFF2 files were made with.
+    name: check.py, ${{ matrix.os }}, Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.11", "3.14"]
+    steps:
+      # On Windows the runner's git turns text files into CRLF on checkout, as
+      # a Windows contributor's git does. .gitattributes keeps site/, docs/ and
+      # the licence texts byte for byte, and this is where that is proved:
+      # site/build.py --check and the tests fail on a converted copy.
+      # SHA256SUMS is read the same with or without that conversion; its
+      # -text rule is checked on every system, by a test that reads
+      # .gitattributes.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install fontTools and brotli
+        run: 'python -m pip install --only-binary :all: fonttools==4.61.1 brotli==1.2.0'
+      - run: python check.py
+
+  newest:
+    # What README.md tells a reader to install, `pip install fonttools brotli`,
+    # gives the newest of each: this job runs with those, on the newest Python,
+    # so a release of either that breaks something shows up here first.
+    name: check.py, newest Python, fontTools and brotli
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.x"
+      - name: Install fontTools and brotli
+        run: 'python -m pip install --only-binary :all: fonttools brotli'
+      - run: python check.py
+
+  oldest:
+    # README.md says the tools run on Python 3.9. check.py itself refuses
+    # anything older than 3.11, because tests/test_licences.py reads the build
+    # plan with tomllib, so this job runs check.py's three steps directly, with
+    # fontTools 4.60.2, the last release that supports 3.9. On 3.9,
+    # tests/test_licences.py reports itself skipped; every other module runs.
+    name: the tools on Python 3.9
+    # GitHub builds Python 3.9 for Ubuntu up to 24.04, not for anything later.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.9"
+      - name: Install fontTools and brotli
+        run: 'python -m pip install --only-binary :all: fonttools==4.60.2 brotli==1.2.0'
+      - name: Run the tests (tests/test_licences.py skips itself)
+        run: python -m unittest discover -s tests -t .
+      - run: python site/build.py --check
+      - run: python font-archives.py verify --allow-missing

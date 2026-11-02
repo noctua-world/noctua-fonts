@@ -30,9 +30,15 @@ is missing, duplicated, or malformed is an error, never a silent pass.
 import hashlib
 import io
 import re
-import tomllib
 import unittest
 from pathlib import Path
+
+try:
+    import tomllib
+except ModuleNotFoundError:
+    # Before 3.11. check.py refuses such a Python; CI's oldest job runs the other modules on 3.9,
+    # and unittest reports this one as skipped.
+    raise unittest.SkipTest("needs Python 3.11 or later, for tomllib")
 
 from fontTools.fontBuilder import FontBuilder
 from fontTools.misc.roundTools import otRound

@@ -184,10 +184,19 @@ It runs, in order, the test suite; `site/build.py --check`, which fails when `do
 what `site/` generates; and `./font-archives.py verify --allow-missing`, which fails when a font
 present does not match `SHA256SUMS` or is not listed there, while a missing font is not an error.
 It needs Python 3.11 or later, with fontTools and brotli (see [Tools](#tools)): without them it
-runs no step at all, says what is missing and exits with status 1. Otherwise every step runs even when an earlier one fails,
-and the exit status is 0 only when all of them pass. `./check.py --release` also requires every
-font in `SHA256SUMS` to be present and every font to belong to exactly one archive
-(`./font-archives.py list`): run it before packing a release.
+runs no step at all, says what is missing and exits with status 1. Otherwise every step runs even
+when an earlier one fails, and the exit status is 0 only when all of them pass.
+`./check.py --release` also requires every font in `SHA256SUMS` to be present and every font to
+belong to exactly one archive (`./font-archives.py list`): run it before packing a release.
+
+GitHub Actions runs the same check on each push to `main` and each pull request
+([`.github/workflows/check.yml`](.github/workflows/check.yml)): `check.py` on Linux, macOS and
+Windows, with Python 3.11 and 3.14 and the fontTools and brotli this repository was made with, and
+once more with the newest Python, fontTools and brotli; and every test but
+`tests/test_licences.py`, which needs 3.11, on Python 3.9, the oldest the tools support. When a
+release is published, [`.github/workflows/release-assets.yml`](.github/workflows/release-assets.yml)
+downloads its 23 archives on the three systems and checks every font, with `font-archives.py` and
+with the `sha256sum` and `shasum` commands above.
 
 ## Maintaining the release
 
@@ -225,16 +234,23 @@ renamed) needs a new release:
    git ignores. It leaves any other file there alone, and step 8 attaches everything in `dist/`:
    delete any other file first.
 7. Commit the change, `SHA256SUMS` and `font-archives.json` included, and push it.
-8. Create the release with the new tag on that commit, and attach every file in `dist/`. With the
-   GitHub CLI, run this after the push, since the commit must be on GitHub:
+8. Tag that commit with a signed tag, push the tag, and create the release from it with every file
+   in `dist/` attached. With the GitHub CLI, after the push of step 7:
 
    ```bash
-   gh release create v1.1.0 --target "$(git rev-parse HEAD)" dist/*
+   git tag -s v1.1.0 -m v1.1.0
+   git push origin v1.1.0
+   gh release create v1.1.0 --verify-tag dist/*
    ```
 
-   `--target` puts the new tag on the commit you pushed; without it, gh would put it on whatever
-   commit is the latest of the default branch when it runs. In a terminal, gh asks for a title and
-   release notes before it creates the release.
+   The tag is signed like the commits, so `git verify-tag v1.1.0` checks it once the signer's
+   public SSH key is in the file that gpg.ssh.allowedSignersFile names, as for
+   `git verify-commit`. `--verify-tag` makes gh refuse to run unless that tag is already on
+   GitHub; without it, a mistyped tag would make GitHub create an unsigned one on whatever commit
+   is the latest of the default branch. In a terminal, gh asks for a title and release notes
+   before it creates the release. Publishing it starts
+   [`release-assets.yml`](.github/workflows/release-assets.yml), which downloads the 23 archives
+   on Linux, macOS and Windows and checks every font: wait for it to pass.
 
 Why a new tag: `fetch` refuses an archive unless it holds exactly the fonts that
 `font-archives.json` assigns to it from `SHA256SUMS`, and its licence files, and it refuses the

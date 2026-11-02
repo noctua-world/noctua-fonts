@@ -159,13 +159,13 @@ A última linha põe o Python do ambiente na frente do `PATH` deste shell, para 
 as ferramentas encontrem o fontTools; rode-a de novo em cada shell novo. O git ignora `.venv/`. As
 ferramentas rodam no Python 3.9 ou mais novo, mas os testes que o `./check.py` roda precisam do 3.11
 ou mais novo (eles leem o plano de build com o `tomllib`), então crie o ambiente com um `python3`
-assim. Um `pip install` solto falha no Python do sistema no Debian, no Ubuntu, no Arch e no Homebrew, que o
-marcam como gerenciado externamente (PEP 668), e no Debian e no Ubuntu o `python3 -m venv` também
-precisa do pacote `python3-venv`. No Windows: `python -m venv .venv`, depois
-`.venv\Scripts\python -m pip install fonttools brotli`, e rode cada script com o Python do ambiente,
-como em `.venv\Scripts\python check.py`. Isso dispensa a ativação, então funciona tanto no cmd.exe
-quanto no PowerShell; o PowerShell recusa o `.venv\Scripts\activate`, a não ser que a política de
-execução dele permita scripts. Com Nix, o shell que aparece em *Instalando* no
+assim. Um `pip install` solto falha no Python do sistema no Debian, no Ubuntu, no Arch e no
+Homebrew, que o marcam como gerenciado externamente (PEP 668), e no Debian e no Ubuntu o
+`python3 -m venv` também precisa do pacote `python3-venv`. No Windows: `python -m venv .venv`,
+depois `.venv\Scripts\python -m pip install fonttools brotli`, e rode cada script com o Python do
+ambiente, como em `.venv\Scripts\python check.py`. Isso dispensa a ativação, então funciona tanto no
+cmd.exe quanto no PowerShell; o PowerShell recusa o `.venv\Scripts\activate`, a não ser que a
+política de execução dele permita scripts. Com Nix, o shell que aparece em *Instalando* no
 [Converter TTF para WOFF2](convert-ttf-to-woff2-pt-BR.md#escolher-a-ferramenta) tem os dois pacotes.
 
 Converter TTF para WOFF2 para a web: [pt-BR](convert-ttf-to-woff2-pt-BR.md) ·
@@ -185,10 +185,21 @@ Ele roda, em ordem, a suíte de testes; o `site/build.py --check`, que falha qua
 que `site/` gera; e o `./font-archives.py verify --allow-missing`, que falha quando uma fonte
 presente não bate com o `SHA256SUMS` ou não está listada nele, enquanto uma fonte faltando não é
 erro. Ele precisa do Python 3.11 ou mais novo, com o fontTools e o brotli (ver
-[Ferramentas](#ferramentas)): sem eles, não roda etapa nenhuma, diz o que falta e sai com código 1. Fora isso, toda etapa roda mesmo quando uma
-anterior falha, e o código de saída só é 0 quando todas passam. O `./check.py --release` exige
-também que toda fonte do `SHA256SUMS` esteja presente e que toda fonte pertença a exatamente um zip
-(`./font-archives.py list`): rode-o antes de empacotar uma release.
+[Ferramentas](#ferramentas)): sem eles, não roda etapa nenhuma, diz o que falta e sai com código 1.
+Fora isso, toda etapa roda mesmo quando uma anterior falha, e o código de saída só é 0 quando todas
+passam. O `./check.py --release` exige também que toda fonte do `SHA256SUMS` esteja presente e que
+toda fonte pertença a exatamente um zip (`./font-archives.py list`): rode-o antes de empacotar uma
+release.
+
+O GitHub Actions roda a mesma conferência a cada push no `main` e a cada pull request
+([`.github/workflows/check.yml`](.github/workflows/check.yml)): o `check.py` no Linux, no macOS e no
+Windows, com o Python 3.11 e o 3.14 e o fontTools e o brotli com que este repositório foi feito, e
+mais uma vez com as versões mais novas do Python, do fontTools e do brotli; e todos os testes menos
+o `tests/test_licences.py`, que precisa do 3.11, no Python 3.9, o mais antigo que as ferramentas
+aceitam. Quando uma release é publicada, o
+[`.github/workflows/release-assets.yml`](.github/workflows/release-assets.yml) baixa os 23 zips dela
+nos três sistemas e confere cada fonte, com o `font-archives.py` e com os comandos `sha256sum` e
+`shasum` acima.
 
 ## Manter a release
 
@@ -227,16 +238,23 @@ removida ou renomeada) exige uma release nova:
    ignora. Ele não mexe em nenhum outro arquivo dali, e o passo 8 anexa tudo o que está em `dist/`:
    apague antes qualquer outro arquivo.
 7. Faça o commit da mudança, com o `SHA256SUMS` e o `font-archives.json`, e dê push.
-8. Crie a release com a tag nova nesse commit e anexe todos os arquivos de `dist/`. Com o GitHub
-   CLI, rode isto depois do push, já que o commit precisa estar no GitHub:
+8. Marque esse commit com uma tag assinada, dê push na tag e crie a release a partir dela, com
+   todos os arquivos de `dist/` anexados. Com o GitHub CLI, depois do push do passo 7:
 
    ```bash
-   gh release create v1.1.0 --target "$(git rev-parse HEAD)" dist/*
+   git tag -s v1.1.0 -m v1.1.0
+   git push origin v1.1.0
+   gh release create v1.1.0 --verify-tag dist/*
    ```
 
-   O `--target` põe a tag nova no commit que você enviou; sem ele, o gh a poria no commit que fosse
-   o mais recente do branch padrão no momento em que roda. Num terminal, o gh pergunta o título e as
-   notas da release antes de criá-la.
+   A tag é assinada como os commits, então o `git verify-tag v1.1.0` a confere quando a chave SSH
+   pública de quem assinou está no arquivo que o gpg.ssh.allowedSignersFile indica, como no
+   `git verify-commit`. O `--verify-tag` faz o gh se recusar a rodar se essa tag ainda não estiver
+   no GitHub; sem ele, uma tag digitada errado faria o GitHub criar uma, sem assinatura, no commit
+   que fosse o mais recente do branch padrão. Num terminal, o gh pergunta o título e as notas da
+   release antes de criá-la. Publicá-la dispara o
+   [`release-assets.yml`](.github/workflows/release-assets.yml), que baixa os 23 zips no Linux, no
+   macOS e no Windows e confere cada fonte: espere ele passar.
 
 Por que uma tag nova: o `fetch` recusa um zip que não traga exatamente as fontes que o
 `font-archives.json` atribui a ele a partir do `SHA256SUMS`, mais os arquivos de licença dele, e

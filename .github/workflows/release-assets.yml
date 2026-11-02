@@ -1,0 +1,55 @@
+# Downloads every archive of the release with font-archives.py and checks every
+# font against SHA256SUMS, on the three systems the documents give commands
+# for, with the commands README.md gives for each: what a reader does after
+# cloning. Runs when a release is published, at that release's tag, and by
+# hand from the Actions tab, at the branch or tag picked there, to check a
+# release again. Each run downloads about 1.9 GiB per system.
+name: release assets
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+# Read-only: the release assets are public, and nothing here writes to GitHub.
+permissions: {}
+
+jobs:
+  fetch:
+    name: fetch and verify, ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # font-archives.py needs only the standard library.
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.x"
+
+      - name: Fetch every archive
+        if: runner.os != 'Windows'
+        run: ./font-archives.py fetch
+      - name: Fetch every archive, through Python as on Windows
+        if: runner.os == 'Windows'
+        run: python font-archives.py fetch
+
+      - run: python font-archives.py verify
+      - run: python font-archives.py list
+
+      # The checks README.md gives for a tree unpacked without Python, as
+      # written there. Every font is present here, so --ignore-missing changes
+      # nothing; it stays to prove that each system's tool accepts it.
+      - name: Check every font with sha256sum
+        if: runner.os == 'Linux'
+        run: sha256sum -c --ignore-missing SHA256SUMS
+      - name: Check every font with shasum
+        if: runner.os == 'macOS'
+        run: shasum -a 256 -c --ignore-missing SHA256SUMS
