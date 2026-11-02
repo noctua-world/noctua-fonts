@@ -14,9 +14,12 @@ under noctua-iosevka/, and the motion is CSS inside each SVG, which an image doe
                                      of the third ink; a tape of symbols and Nerd Fonts icons
   button-light.svg, button-dark.svg  the button that links to the specimen site
 
-The light pair is the site's paper and riso inks, multiplied; the dark pair its phosphor inks,
-added as light. The README picks one per colour scheme with <picture>. Motion stops under
-prefers-reduced-motion, on the resting ExtraBold.
+The light pair is the site's riso inks, multiplied; the dark pair its phosphor inks, added as
+light. The README picks one per colour scheme with <picture>, and GitHub serves each of its
+themes the pair of its scheme. Neither has a ground: the art lies on whatever page GitHub draws,
+and every texture fades to nothing before the frame's edge, so no box ever shows. (A renderer
+that ignores <picture>'s sources shows the light pair, which wants a light page.) Motion stops
+under prefers-reduced-motion, on the resting ExtraBold.
 
 Needs fontTools and the built fonts (./tools/font-archives.py fetch restores them): the nine
 Normal Upright faces of noctua-iosevka/TTF/ and NoctuaIosevkaNerdFontMono-Regular.ttf. The
@@ -39,14 +42,15 @@ REST = 7  # ExtraBold, the weight the site's hero sets its title in
 UPM = 1000
 ADVANCE = 600  # every glyph of the Normal width, in font units
 
-# The site's colours (site/static/css/site.css), per scheme.
+# The site's colours (site/static/css/site.css), per scheme. The paper is no ground here, only
+# the ink of letters knocked out of a solid shape.
 THEMES = {
     "light": {
-        "bg": "#f3eee3", "fg": "#17151c", "fg2": "#48434f", "line1": "#e3176c", "line2": "#2a50ff",
+        "paper": "#f3eee3", "fg": "#17151c", "fg2": "#48434f", "line1": "#e3176c", "line2": "#2a50ff",
         "plate": "#ffcc00", "dot_a": "#ff3d8f", "dot_b": "#2a50ff", "blend": "multiply", "shadow": "#ff3d8f",
     },
     "dark": {
-        "bg": "#0b0a10", "fg": "#f1ede4", "fg2": "#b4aebd", "line1": "#ff4fa0", "line2": "#3fc8ff",
+        "paper": "#0b0a10", "fg": "#f1ede4", "fg2": "#b4aebd", "line1": "#ff4fa0", "line2": "#3fc8ff",
         "plate": "#d6ff3a", "dot_a": "#ff4fa0", "dot_b": "#3fc8ff", "blend": "screen", "shadow": "#d6ff3a",
     },
 }
@@ -60,6 +64,7 @@ BASE1, BASE2 = 302, 462  # baselines: the site's line height of 0.8 em
 META = ("A CUSTOM BUILD OF IOSEVKA", "135 FACES", "SIL OFL 1.1")
 META_SIZE, META_TRACK = 15, 0.14  # px, em: the site's meta pills
 TAPE_SIZE = 28
+TAPE_GONE, TAPE_RAMP = 24, 144  # px: the tape is wholly gone this near each edge, and fades in over this
 TAPE = (
     "135 faces ◆ 9 weights ◆ 5 widths ◆ 3 slopes ◆ "
     "\uf313 \uf17c \uf179 \uf17a \ue725 \uf09b \ue7a8 \ue606 \ue626 \ue777 \ue628 \uf48a \uf4bc \uf0e7 \U000f03d2 ◆ "
@@ -143,6 +148,19 @@ def width(text: str, size: float, track: float = 0.0) -> float:
     return len(text) * (ADVANCE / UPM + track) * size - track * size
 
 
+def cloud(id_: str, cx: float, cy: float, rx: float, ry: float, colour: str, peak: float = 1.0) -> str:
+    """A gradient for a soft ellipse of `colour`: `peak` opaque at its centre, nothing at its rim
+    and beyond. The rim lies inside the frame, since the art has no ground: anything that reached
+    the edge would be cut there in a straight line, and show the frame as a box."""
+    if not (0 < cx - rx and cx + rx < W and 0 < cy - ry and cy + ry < H):
+        raise ValueError(f"cloud {id_} reaches the edge of the frame")
+    return (f'<radialGradient id="{id_}" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" '
+            f'gradientTransform="translate({fmt(cx)} {fmt(cy)}) scale({fmt(rx)} {fmt(ry)})">'
+            f'<stop offset="0" stop-color="{colour}" stop-opacity="{fmt(peak, 3)}"/>'
+            f'<stop offset="0.5" stop-color="{colour}" stop-opacity="{fmt(peak * 0.6, 3)}"/>'
+            f'<stop offset="1" stop-color="{colour}" stop-opacity="0"/></radialGradient>')
+
+
 def ripple_keyframes() -> str:
     """One set of keyframes per weight: shown while the ripple is at that weight, and the
     resting weight between ripples. step-end holds each value until the next keyframe."""
@@ -172,7 +190,9 @@ def hero(theme: str, title, meta, tape) -> str:
         f".ink{{mix-blend-mode:{c['blend']}}}",
         ".tape{animation:tape 40s linear infinite}",
         f"@keyframes tape{{to{{transform:translateX(-{fmt(copy)}px)}}}}",
-        "@media (prefers-reduced-motion:reduce){.r use,.plate,.tape{animation:none}}",
+        # Held still, the tape starts where its fade is over, so its first words read whole.
+        "@media (prefers-reduced-motion:reduce){.r use,.plate,.tape{animation:none}"
+        f".tape{{transform:translateX({TAPE_GONE + TAPE_RAMP}px)}}}}",
     ]
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t">',
@@ -184,50 +204,56 @@ def hero(theme: str, title, meta, tape) -> str:
         *defs("k", tape),
         *(p for w in range(len(WEIGHTS)) for p in defs(f"w{w}-", title[w])),
     ]
-    # The ground: the site's paper with two halftone screens, or its screen with scanlines.
+    # No ground: the art lies on GitHub's own page. In its place, the site's two halftone
+    # screens, in the corners the two lines leave empty, or two of its glows, behind the lines:
+    # each a soft cloud that fades out inside the frame.
     if theme == "light":
         out += [
             '<pattern id="sa" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">'
             f'<circle cx="5" cy="5" r="1.7" fill="{c["dot_a"]}"/></pattern>',
             '<pattern id="sb" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(75)">'
             f'<circle cx="5" cy="5" r="1.5" fill="{c["dot_b"]}"/></pattern>',
-            '<radialGradient id="fa" cx="0.92" cy="0.12" r="0.75"><stop offset="0" stop-color="#fff"/>'
-            '<stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>',
-            '<radialGradient id="fb" cx="0.06" cy="0.95" r="0.7"><stop offset="0" stop-color="#fff"/>'
-            '<stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>',
+            cloud("fa", 950, 170, 225, 140, "#fff"),
+            cloud("fb", 200, 405, 180, 95, "#fff"),
             f'<mask id="ma"><rect width="{W}" height="{H}" fill="url(#fa)"/></mask>',
             f'<mask id="mb"><rect width="{W}" height="{H}" fill="url(#fb)"/></mask>',
         ]
     else:
         out += [
-            '<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">'
-            '<rect width="4" height="1" fill="#fff" fill-opacity="0.035"/></pattern>',
-            f'<radialGradient id="ga" cx="0.18" cy="0.42" r="0.55"><stop offset="0" stop-color="{c["dot_a"]}" '
-            'stop-opacity="0.16"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>',
-            f'<radialGradient id="gb" cx="0.82" cy="0.72" r="0.5"><stop offset="0" stop-color="{c["dot_b"]}" '
-            'stop-opacity="0.14"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>',
+            cloud("ga", 330, 245, 300, 190, c["dot_a"], 0.16),
+            cloud("gb", 870, 395, 300, 165, c["dot_b"], 0.14),
             '<filter id="glow" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="5" '
             'result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>',
         ]
-    out += [f'<clipPath id="tc"><rect y="508" width="{W}" height="{H - 508}"/></clipPath>', "</defs>",
-            f'<rect width="{W}" height="{H}" fill="{c["bg"]}"/>']
+    ramp = TAPE_RAMP / (W - 2 * TAPE_GONE)
+    out += [
+        f'<clipPath id="tc"><rect y="508" width="{W}" height="{H - 508}"/></clipPath>',
+        # The tape and its rule fade in from one edge and out at the other.
+        f'<linearGradient id="tf" gradientUnits="userSpaceOnUse" x1="{TAPE_GONE}" x2="{W - TAPE_GONE}">'
+        f'<stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="{fmt(ramp, 4)}" stop-color="#fff"/>'
+        f'<stop offset="{fmt(1 - ramp, 4)}" stop-color="#fff"/><stop offset="1" stop-color="#fff" '
+        'stop-opacity="0"/></linearGradient>',
+        f'<mask id="mt" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}"><rect width="{W}" height="{H}" '
+        'fill="url(#tf)"/></mask>',
+        "</defs>",
+    ]
     if theme == "light":
-        out += [f'<rect class="ink" width="{W}" height="{H}" fill="url(#sa)" opacity="0.32" mask="url(#ma)"/>',
-                f'<rect class="ink" width="{W}" height="{H}" fill="url(#sb)" opacity="0.22" mask="url(#mb)"/>']
+        out += [f'<rect class="ink" width="{W}" height="{H}" fill="url(#sa)" opacity="0.42" mask="url(#ma)"/>',
+                f'<rect class="ink" width="{W}" height="{H}" fill="url(#sb)" opacity="0.32" mask="url(#mb)"/>']
     else:
         out += [f'<rect width="{W}" height="{H}" fill="url(#ga)"/>', f'<rect width="{W}" height="{H}" fill="url(#gb)"/>']
 
-    # The meta pills, as the site's hero opens: the first one inverted.
+    # The meta pills, as the site's hero opens: the first one inverted, the others outlined.
     x, top, h = MARGIN, 34, 32
     for i, text in enumerate(META):
         w_ = width(text, META_SIZE, META_TRACK) + 26
-        fill, ink = (c["fg"], c["bg"]) if i == 0 else (c["bg"], c["fg"])
+        fill, ink = (c["fg"], c["paper"]) if i == 0 else ("none", c["fg"])
         out.append(f'<rect x="{fmt(x)}" y="{top}" width="{fmt(w_)}" height="{h}" fill="{fill}" stroke="{c["fg"]}"/>')
         out.append(run("m", text, x + 13, top + 21, META_SIZE, META_TRACK, f' fill="{ink}"'))
-        x += w_ - 1
+        x += w_  # the next pill's left edge on this one's right: centred strokes, one line
 
     # The title: a misregistered plate of the third ink behind each line, at the resting
-    # weight, printed onto the ground; then the line itself over it, in its own ink, its
+    # weight; then the line itself over it, in its own ink, its
     # letters rippling through the nine weights. As a letter thins, the plate shows round it.
     x1 = MARGIN
     x2 = W - MARGIN - width(LINE2, EM)
@@ -247,11 +273,12 @@ def hero(theme: str, title, meta, tape) -> str:
 
     # The tape: symbols and icons, every one a single cell, running left for ever. Two turns,
     # from the left edge, cover the frame at every moment, and the second takes the first's
-    # place when the loop restarts.
-    out += [f'<path d="M0 508.5H{W}" stroke="{c["fg"]}" stroke-opacity="0.18"/>',
+    # place when the loop restarts. It and its rule fade out towards both edges.
+    out += ['<g mask="url(#mt)">',
+            f'<path d="M0 508.5H{W}" stroke="{c["fg"]}" stroke-opacity="0.18"/>',
             f'<g clip-path="url(#tc)"><g class="tape" fill="{c["fg2"]}">',
             run("k", TAPE, 0, 565, TAPE_SIZE), run("k", TAPE, copy, 565, TAPE_SIZE),
-            "</g></g>"]
+            "</g></g></g>"]
     out.append("</svg>")
     return "\n".join(out) + "\n"
 
@@ -287,8 +314,8 @@ def button(theme: str, bold) -> str:
         f'<rect x="{x0 + 9}" y="{y0 + 9}" width="{fmt(pill_w)}" height="{pill_h}" rx="{pill_h // 2}" fill="{c["shadow"]}"/>',
         f'<rect x="{x0}" y="{y0}" width="{fmt(pill_w)}" height="{pill_h}" rx="{pill_h // 2}" fill="{c["fg"]}"/>',
         f'<g clip-path="url(#pc)"><rect class="sheen" x="{x0}" y="{y0}" width="{fmt(pill_w)}" height="{pill_h}" fill="url(#sg)"/></g>',
-        run("b", label, x0 + 44, y0 + 47, size, attrs=f' fill="{c["bg"]}"'),
-        '<g class="arrow">' + run("b", BUTTON_TEXT[-1], arrow_x, y0 + 47, size, attrs=f' fill="{c["bg"]}"') + "</g>",
+        run("b", label, x0 + 44, y0 + 47, size, attrs=f' fill="{c["paper"]}"'),
+        '<g class="arrow">' + run("b", BUTTON_TEXT[-1], arrow_x, y0 + 47, size, attrs=f' fill="{c["paper"]}"') + "</g>",
         "</svg>",
     ]
     return "\n".join(out) + "\n"

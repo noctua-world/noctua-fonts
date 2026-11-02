@@ -11,7 +11,7 @@
 
 <h3 align="center">A monospace for terminals, editors and code.</h3>
 
-<p align="center">
+<p align="justify">
   Noctua Iosevka is a custom build of <a href="https://github.com/be5invis/Iosevka">Iosevka</a>:
   135 real faces in nine weights, five widths and three slopes, none of them synthesized. Its
   Normal width is 600 units, the 0.6&nbsp;em of JetBrains Mono, so every glyph has room to be
